@@ -4,7 +4,7 @@ CC = g++
 CFLAGS =	-O2 -g -Wall -fmessage-length=0
 
 # define any directories containing header files other than /usr/include
-INCLUDES = -I "C:\Local\Eclipse\workspace\SimpleBuildingSimulator\include\EIGENDIR"
+INCLUDES = -I "./include/EIGENDIR"
 
 SRCS = SimpleBuildingSimulator.cpp Building.cpp Weather.cpp ControlBox.cpp Occupancy.cpp
 
