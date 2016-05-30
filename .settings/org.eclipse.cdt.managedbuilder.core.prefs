@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+environment/buildEnvironmentInclude/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/CPATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/CPATH/operation=remove
+environment/buildEnvironmentInclude/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/CPLUS_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/CPLUS_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/C_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/C_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/append=true
+environment/buildEnvironmentInclude/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/appendContributed=true
+environment/buildEnvironmentLibrary/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/LIBRARY_PATH/delimiter=;
+environment/buildEnvironmentLibrary/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/LIBRARY_PATH/operation=remove
+environment/buildEnvironmentLibrary/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/append=true
+environment/buildEnvironmentLibrary/cdt.managedbuild.toolchain.gnu.mingw.base.1548604463/appendContributed=true
