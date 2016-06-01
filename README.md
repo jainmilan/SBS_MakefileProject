@@ -4,6 +4,15 @@
 
 **Run On Linux:**
 - Clone the Repository: `git clone https://github.com/milanjain81/SBS_MakefileProject.git`
+- Install AMPL (if installed skip this step):
+  - 
+- Install AMPL API (if installed skip this step):
+  - 
+- Link binaries of AMPL API
+  - Type `sudo nano /etc/ld.so.conf` on your terminal and press `Enter`
+  - Write path of directory having AMPL API libraries: `AMPL_Folder/AMPL_API_Folder/lib`
+  - Press `Ctrl+O` and then `Enter`
+  - Type `sudo ldconfig`
 - `make clean`
 - `make all`
 - `./SimpleBuildingSimulator`
