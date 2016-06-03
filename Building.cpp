@@ -122,7 +122,7 @@ float Building::GetMixedAirTemperature(Eigen::MatrixXf TR1, Eigen::MatrixXf T_ex
 	return MixedAirTemperature;
 }
 
-float Building::GetAHUPower(float MixedAirTemperature, Eigen::MatrixXf O, float SAT_Value, Eigen::MatrixXf SAV_Zones) {
+float Building::GetAHUPower(float MixedAirTemperature, Eigen::MatrixXf SPOT_CurrentState, float SAT_Value, Eigen::MatrixXf SAV_Zones) {
 	float AHUPower = 0.0f;
 
 	// Properties of Air
@@ -143,7 +143,7 @@ float Building::GetAHUPower(float MixedAirTemperature, Eigen::MatrixXf O, float 
 	float HeatingPower = SAV_Zones.sum() * (CoefficientHeatingPower*(SupplyAirTemperature - T_c));
 	float CoolingPower = SAV_Zones.sum() * (CoefficientCoolingPower*(MixedAirTemperature - T_c));
 	float FanPower = CoefficientFanPower * SAV_Zones.sum();
-	float SPOTPower = Q_s * O.sum();
+	float SPOTPower = Q_s * SPOT_CurrentState.sum();
 
 	AHUPower = HeatingPower + CoolingPower + FanPower + SPOTPower;
 
@@ -234,7 +234,7 @@ void Building::Simulate(uint32 duration, uint16 time_step, int control_type) {
 		(0.581f *  Eigen::MatrixXf::Zero(1, total_rooms)) - (5.4668f *  Eigen::MatrixXf::Ones(1, total_rooms));
 
 	MixedAirTemperature.row(k) << GetMixedAirTemperature(TR1.row(k), T_ext.row(k));
-	PowerAHU.row(k) << GetAHUPower(MixedAirTemperature.row(k).value(), O.row(k), CV.SAT_Value, CV.SAV_Zones);
+	PowerAHU.row(k) << GetAHUPower(MixedAirTemperature.row(k).value(), CV.SPOT_CurrentState.cast<float>(), CV.SAT_Value, CV.SAV_Zones);
 
 	// Print Initial Values
 /*	std::cout << T << std::endl;
@@ -308,7 +308,7 @@ void Building::Simulate(uint32 duration, uint16 time_step, int control_type) {
 			(0.581f *  Eigen::MatrixXf::Zero(1, total_rooms)) - (5.4668f *  Eigen::MatrixXf::Ones(1, total_rooms));
 
 		MixedAirTemperature.row(k+1) << GetMixedAirTemperature(TR1.row(k+1), T_ext.row(k+1));
-		PowerAHU.row(k+1) << GetAHUPower(MixedAirTemperature.row(k+1).value(), O.row(k), CV.SAT_Value, CV.SAV_Zones);
+		PowerAHU.row(k+1) << GetAHUPower(MixedAirTemperature.row(k+1).value(), CV.SPOT_CurrentState.cast<float>(), CV.SAT_Value, CV.SAV_Zones);
 	}
 
 	// Print Final Values

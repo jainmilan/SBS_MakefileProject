@@ -146,6 +146,7 @@ int main()
 
 	dc.Simulate(duration, time_step, control_type);
 
+
 	system("pause");
 	return 0;
 }

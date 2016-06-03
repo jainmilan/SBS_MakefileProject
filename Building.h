@@ -74,7 +74,7 @@ namespace SimpleBuildingSimulator
 		Eigen::MatrixXf Create_CoRC_CiR1T_Matrix(uint16 time_step);
 
 		float GetMixedAirTemperature(Eigen::MatrixXf TR1, Eigen::MatrixXf T_ext);
-		float GetAHUPower(float MixedAirTemperature, Eigen::MatrixXf O, float SAT_Value, Eigen::MatrixXf SAV_Zones);
+		float GetAHUPower(float MixedAirTemperature, Eigen::MatrixXf SPOT_CurrentState, float SAT_Value, Eigen::MatrixXf SAV_Zones);
 	};
 } // namespace SimpleBuildingSimulator
 
