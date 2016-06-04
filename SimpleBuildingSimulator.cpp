@@ -80,15 +80,18 @@ int main()
 	scanf("%d", &update);
 
 	if (update == 1) {
-		printf("Enter Control Type (1 - AlwaysOn, 2 - Reactive) : ");
+		printf("Enter Control Type (1 - AlwaysOn, 2 - Reactive, 3 - MPC) : ");
 		scanf("%d", &control_type);
 	}
 
-	if (control_type == 2) {
+	if (control_type == 1) {
+		printf("Updated: SPOT Always On \n");
+	}
+	else if (control_type == 1) {
 		printf("Updated: Reactive Control \n");
 	}
 	else {
-		printf("Updated: SPOT Always On \n");
+		printf("Updated: MPC Control \n");
 	}
 
 	/*

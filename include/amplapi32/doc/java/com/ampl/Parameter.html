@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Parameter &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/ampl.ico"/>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../../index.html" />
+    <link rel="up" title="Java API reference" href="../../reference.html" />
+    <link rel="next" title="Set" href="Set.html" />
+    <link rel="prev" title="ObjectiveInstance" href="ObjectiveInstance.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Set.html" title="Set"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ObjectiveInstance.html" title="ObjectiveInstance"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" accesskey="U">Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Parameter</a><ul>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ObjectiveInstance.html"
+                        title="previous chapter">ObjectiveInstance</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Set.html"
+                        title="next chapter">Set</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/com/ampl/Parameter.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="parameter">
+<h1>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="com.ampl.Parameter">
+public class <code class="descname">Parameter</code> extends <a class="reference internal" href="Entity.html#com.ampl.Entity" title="com.ampl.Entity">Entity</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>&gt;<a class="headerlink" href="#com.ampl.Parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an AMPL parameter. The values can be Double or String (in case of symbolic parameters).</p>
+<p>Data can be assigned to the parameter using the methods <a class="reference internal" href="#com.ampl.Parameter.set(Object, double)" title="com.ampl.Parameter.set(Object, double)"><code class="xref java java-ref docutils literal"><span class="pre">set</span></code></a>, <a class="reference internal" href="Set.html#com.ampl.Set.setValues(Object)" title="com.ampl.Set.setValues(Object)"><code class="xref java java-ref docutils literal"><span class="pre">setValues</span></code></a> directly from objects of this class or using <a class="reference internal" href="AMPL.html#com.ampl.AMPL.setData(DataFrame)" title="com.ampl.AMPL.setData(DataFrame)"><code class="xref java java-ref docutils literal"><span class="pre">AMPL.setData</span></code></a> and a <a class="reference internal" href="DataFrame.html#com.ampl.DataFrame" title="com.ampl.DataFrame"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame</span></code></a> object.</p>
+</dd></dl>
+
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="com.ampl.Parameter.get()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a> <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.get()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of a scalar parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if this parameter is not scalar.</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.get(Object)">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> key</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.get(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value corresponding to key. The value will be a string or a double if the parameter is symbolic, a double otherwise. See <a class="reference internal" href="../../class-structure.html#secaccessinstancesandvalues"><span>Access to instances and values</span></a> for further information on how the key can be specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> &#8211; The key to be found</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if trying to access an instance with the wrong number of keys (see <a class="reference internal" href="Entity.html#com.ampl.Entity.indexarity()" title="com.ampl.Entity.indexarity()"><code class="xref java java-ref docutils literal"><span class="pre">Entity.indexarity</span></code></a>)</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL interpreter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The value of the parameter for the corresponding key (String or double) or <code class="docutils literal"><span class="pre">null</span></code> if the specified key is not found</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.get(Tuple)">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple">Tuple</a><em> key</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.get(Tuple)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value corresponding to key (passed as a Tuple). The value will be a string or a double if the parameter is symbolic, a double otherwise. See <a class="reference internal" href="../../class-structure.html#secaccessinstancesandvalues"><span>Access to instances and values</span></a> for further information on how the key can be specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> &#8211; The key (as a tuple) to be found</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if trying to access an instance with the wrong number of keys (see <a class="reference internal" href="Entity.html#com.ampl.Entity.indexarity()" title="com.ampl.Entity.indexarity()"><code class="xref java java-ref docutils literal"><span class="pre">Entity.indexarity</span></code></a>)</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL interpreter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The value of the parameter for the corresponding key (String or double) or <code class="docutils literal"><span class="pre">null</span></code> if the specified key is not found</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.hasDefault()">
+public boolean <code class="descname">hasDefault</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.hasDefault()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the parameter has a default initial value. In case of the following AMPL code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>param a;
+param b default a;
+</pre></div>
+</div>
+<p>the function will return true for parameter <code class="docutils literal"><span class="pre">b</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the parameter has a default initial value. Please note that if the parameter has a default expression which refers to another parameter which value is not defined, this will return true.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.isSymbolic()">
+public boolean <code class="descname">isSymbolic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.isSymbolic()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the parameter is symbolic (aka can store strings)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the parameter is symbolic</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.set(Object, double)">
+public void <code class="descname">set</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> index</em>, double<em> value</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.set(Object, double)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a value to the parameter at the specified index, equivalent to the AMPL code</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>let par[index] := value;
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>index</strong> &#8211; Index (key) of instance to be set, can be a <a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple"><code class="xref java java-ref docutils literal"><span class="pre">Tuple</span></code></a> or an array for multidimensional parameters.</li>
+<li><strong>value</strong> &#8211; Value to set.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; If called on a scalar parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.set(Object, String)">
+public void <code class="descname">set</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> index</em>, <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> value</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.set(Object, String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a string to the parameter at the specified index, equivalent to the AMPL code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>let par[index] := value;
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>index</strong> &#8211; Index (key) of instance to be set, can be a <a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple"><code class="xref java java-ref docutils literal"><span class="pre">Tuple</span></code></a> or an array for multidimensional parameters.</li>
+<li><strong>value</strong> &#8211; Value to set.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; If called on a scalar parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.set(double)">
+public void <code class="descname">set</code><span class="sig-paren">(</span>double<em> value</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.set(double)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of a scalar parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if this parameter is not scalar.</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.set(String)">
+public void <code class="descname">set</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a><em> value</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.set(String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of a scalar parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the entity is not scalar.</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.setValues(Object[], double[])">
+public void <code class="descname">setValues</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[]<em> indices</em>, double[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.setValues(Object[], double[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign the (double) values to the parameter instances with the specified indices, equivalent to the AMPL code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>let {i in indices} par[i] := values[i];
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>indices</strong> &#8211; Index (key) of instance to be set. Each item in the array can be a <a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple"><code class="xref java java-ref docutils literal"><span class="pre">Tuple</span></code></a> or an array of objects, in case of multidimensional array.</li>
+<li><strong>values</strong> &#8211; Values to set.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; If called on a scalar parameter</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the dimension of some of the indices does not match the dimension of the indices of the parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.setValues(Object[], Object[])">
+public void <code class="descname">setValues</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[]<em> indices</em>, <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.setValues(Object[], Object[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign the values (string or double) to the parameter instances with the specified indices, equivalent to the AMPL code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>let {i in indices} par[i] := values[i];
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>indices</strong> &#8211; Index (key) of instance to be set. Each item in the array can be a <a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple"><code class="xref java java-ref docutils literal"><span class="pre">Tuple</span></code></a> or an array of objects, in case of multidimensional array.</li>
+<li><strong>values</strong> &#8211; Values to set.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; If called on a scalar parameter</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; If called with some string values on a non symbolic parameter or if the dimension of some of the indices does not match the dimension of the indices of the parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.setValues(double[][], boolean)">
+public void <code class="descname">setValues</code><span class="sig-paren">(</span>double[][]<em> values</em>, boolean<em> transpose</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.setValues(double[][], boolean)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign the specified values to a 2-d parameter, using the two dimensions as two indices.</p>
+<p>For example, the <span class="math">\(m \times n\)</span> matrix: <span class="math">\(A = \left( \begin{array}{cccc} a_{11} &amp; a_{12} &amp; ... &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; ... &amp; a_{2n} \\ ... &amp; ... &amp; ... &amp; ... \\ a_{m1} &amp; a_{m2} &amp; ... &amp; a_{mn} \end{array} \right)\)</span></p>
+<p>can be assigned to the AMPL parameter: <code class="docutils literal"><span class="pre">param</span> <span class="pre">A</span> <span class="pre">{1..m,</span> <span class="pre">1..n};</span></code> with the statement <code class="docutils literal"><span class="pre">setValues(A,</span> <span class="pre">false)</span></code>.</p>
+<p>As an example, to assign the matrix: <span class="math">\(A = \left( \begin{array}{cccc} 11 &amp; 12 \\ 21 &amp; 22 \\ 31 &amp; 32 \end{array} \right)\)</span></p>
+<p>to the AMPL paramater: <code class="docutils literal"><span class="pre">param</span> <span class="pre">A{1..3,</span> <span class="pre">1..2};</span></code> we can use the following code.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ampl.eval(&quot;param a{1..3, 1..2};&quot;);
+Parameter a = ampl.getParameter(&quot;a&quot;);
+double[][] values = new double[3][2];
+for (int i = 0; i &lt; 3; i++)
+        for (int j = 0; j &lt; 2; j++)
+            values[i][j] = (i+1) * 10 + (j+1);
+a.setValues(values, false);
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>values</strong> &#8211; Values to be assigned</li>
+<li><strong>transpose</strong> &#8211; True to transpose the values in the matrix</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; If the method is called on a parameter which is not two-dimensional</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; If the passed array of values is not rectangular or if the sizes of &#8216;values&#8217; do not correspond to the sizes of the underlying indices</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.setValues(Object)">
+public void <code class="descname">setValues</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.setValues(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign the specified values to this parameter, assigning them to the parameter in the same order as the indices in the entity.</p>
+<p>The number of values in the array must be of the same size of the parameter, as this function will try to assign all values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>values</strong> &#8211; Values to be assigned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; If multiple values are assigned to a scalar parameter, if the size of the <code class="docutils literal"><span class="pre">values</span></code> array is not equal to the size (number of instances) of the parameter or if trying to assign a string to a non symbolic parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Parameter.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Parameter.toString()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representation of this parameter. Equivalent to the AMPL statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>show parameterName;
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Set.html" title="Set"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ObjectiveInstance.html" title="ObjectiveInstance"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" >Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

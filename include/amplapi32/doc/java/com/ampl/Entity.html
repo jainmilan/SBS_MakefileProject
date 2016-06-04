@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Entity &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/ampl.ico"/>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../../index.html" />
+    <link rel="up" title="Java API reference" href="../../reference.html" />
+    <link rel="next" title="EntityList" href="EntityList.html" />
+    <link rel="prev" title="Tuple" href="Tuple.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="EntityList.html" title="EntityList"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Tuple.html" title="Tuple"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" accesskey="U">Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Entity</a><ul>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Tuple.html"
+                        title="previous chapter">Tuple</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="EntityList.html"
+                        title="next chapter">EntityList</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/com/ampl/Entity.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="entity">
+<h1>Entity<a class="headerlink" href="#entity" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="com.ampl.Entity">
+public abstract class <code class="descname">Entity</code>&lt;T&gt;<a class="headerlink" href="#com.ampl.Entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>An AMPL entity such as a parameter or a variable. An entity can either represent a single instance of an AMPL algebraic entity or, if the corresponding declaration has an indexing expression, a mapping from keys to instances. In the derived classes, it has methods to access instance-level properties which can be used in case the represented entity is scalar. To gain access to all the values in an entity (for all instances and all suffixes for that entities), use <a class="reference internal" href="Set.html#com.ampl.Set.getValues()" title="com.ampl.Set.getValues()"><code class="xref java java-ref docutils literal"><span class="pre">getValues</span></code></a>.</p>
+</dd></dl>
+
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="com.ampl.Entity.entrySet()">
+public <a class="reference internal" href="Set.html#com.ampl.Set" title="com.ampl.Set">Set</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html" title="java.util.Map">Map</a>.Entry&lt;<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>, T&gt;&gt; <code class="descname">entrySet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.entrySet()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a set view of this entity. Each entry in the set contains the key (value of the indices) and the corresponding instance. For a scalar entity, a set with just one entry is returned, which has a null key and the only instance as value.</p>
+<p>The following example prints indices and values of the variable <code class="docutils literal"><span class="pre">Buy</span></code> indexed over the set <code class="docutils literal"><span class="pre">FOOD</span></code> (taken from the <a class="reference external" href="http://www.ampl.com/BOOK/CHAPTERS/05-tut2.pdf">diet model</a>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>for(Map.Entry&lt;Object, VariableInstance&gt; e: ampl.getVariable(&quot;Buy&quot;).entrySet()) {
+        Object food = e.getKey();
+        VariableInstance buy = e.getValue();
+        System.out.format(&quot;%s %g%n&quot;, food, buy.value());
+}
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An unmodifiable set containing all the entries of this entity.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.get()">
+public abstract T <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.get()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance corresponding to a scalar entity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the entity is not scalar.</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL interpreter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The corresponding instance.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.get(Object)">
+public abstract T <code class="descname">get</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> key</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.get(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance corresponding to the specified key. See <a class="reference internal" href="../../class-structure.html#secaccessinstancesandvalues"><span>Access to instances and values</span></a> for further information on how the key can be specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> &#8211; Key of the instance to be found.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if trying to access an instance with the wrong number of keys (see <a class="reference internal" href="#com.ampl.Entity.indexarity()" title="com.ampl.Entity.indexarity()"><code class="xref java java-ref docutils literal"><span class="pre">Entity.indexarity</span></code></a>)</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL interpreter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The instance corresponding to the key, or <code class="docutils literal"><span class="pre">null</span></code> if the specified key is not found.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.get(Tuple)">
+public abstract T <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple">Tuple</a><em> key</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.get(Tuple)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance corresponding to the specified tuple. See <a class="reference internal" href="../../class-structure.html#secaccessinstancesandvalues"><span>Access to instances and values</span></a> for further information on how the key can be specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> &#8211; Key (in form of Tuple) of the instance to be found.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if trying to access an instance with the wrong number of keys (see <a class="reference internal" href="#com.ampl.Entity.indexarity()" title="com.ampl.Entity.indexarity()"><code class="xref java java-ref docutils literal"><span class="pre">Entity.indexarity</span></code></a>)</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL interpreter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The instance corresponding to the key, or <code class="docutils literal"><span class="pre">null</span></code> if the specified key is not found.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.getIndexingSets()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a>[] <code class="descname">getIndexingSets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.getIndexingSets()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL string representation of the sets on which this entity is indexed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The string representation of the indexing sets for this entity or an empty array if the entity is scalar</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.getIndices()">
+public <a class="reference internal" href="Set.html#com.ampl.Set" title="com.ampl.Set">Set</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>&gt; <code class="descname">getIndices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.getIndices()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the keys in this entity. Not modifiable as a collection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">All the keys currently in the entity.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.getInstances()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html" title="java.util.Collection">Collection</a>&lt;T&gt; <code class="descname">getInstances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.getInstances()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all instances in this entity. Not modifiable as a collection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">All instances currently generated for this entity.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.getValues()">
+public <a class="reference internal" href="DataFrame.html#com.ampl.DataFrame" title="com.ampl.DataFrame">DataFrame</a> <code class="descname">getValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.getValues()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the principal values of this entity as a <a class="reference internal" href="DataFrame.html#com.ampl.DataFrame" title="com.ampl.DataFrame"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame</span></code></a>. For variables and objectives it returns their suffix <code class="docutils literal"><span class="pre">val</span></code> for parameters it returns their values for constraints it returns the suffix <code class="docutils literal"><span class="pre">dual</span></code> for sets it returns all the members of the set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">All instances</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.getValues(String)">
+public <a class="reference internal" href="DataFrame.html#com.ampl.DataFrame" title="com.ampl.DataFrame">DataFrame</a> <code class="descname">getValues</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a>...<em> suffixes</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.getValues(String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the specified values for this entity as a DataFrame object. The valid strings are all AMPL built-in suffixes for the entity under consideration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>suffixes</strong> &#8211; A list of suffixes to be returned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the specified suffix does not exist.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A <a class="reference internal" href="DataFrame.html#com.ampl.DataFrame" title="com.ampl.DataFrame"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame</span></code></a> object with a column for each indexing set and a column for each one of the specified suffixes.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.hasIndexing()">
+public boolean <code class="descname">hasIndexing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.hasIndexing()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether this entity is indexed over any set. Equivalent to testing whether <a class="reference internal" href="#com.ampl.Entity.indexarity()" title="com.ampl.Entity.indexarity()"><code class="xref java java-ref docutils literal"><span class="pre">Entity.indexarity</span></code></a> is greater than zero.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the entity is not scalar (is indexed over a set)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.indexarity()">
+public int <code class="descname">indexarity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.indexarity()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the indexarity of this entity (sum of the dimensions of the indexing sets). This value indicates how many elements are to be passed to the method <a class="reference internal" href="#com.ampl.Entity.get(Tuple)" title="com.ampl.Entity.get(Tuple)"><code class="xref java java-ref docutils literal"><span class="pre">Entity.get</span></code></a> in order to access an instance of this entity.</p>
+<p>See the following AMPL examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>var x;               # indexarity = 0
+var y {1..2};        # indexarity = 1
+var z {1..2,3..4};   # indexarity = 2
+var zz {{(1, 2)}};   # indexarity = 2
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The sum of the dimensions of the indexing sets or 0 if the entity is not indexed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.isScalar()">
+public boolean <code class="descname">isScalar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.isScalar()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether this entity is scalar. Equivalent to testing whether <a class="reference internal" href="#com.ampl.Entity.indexarity()" title="com.ampl.Entity.indexarity()"><code class="xref java java-ref docutils literal"><span class="pre">Entity.indexarity</span></code></a> is equal to zero.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the entity is scalar (not indexed over any set)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.name()">
+public final <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.name()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL name of this entity</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.numInstances()">
+public int <code class="descname">numInstances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.numInstances()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of instances in this entity</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.toString()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a string representation of this entity; for all entity types, it returns the AMPL declaration.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Entity.xref()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html" title="java.util.List">List</a>&lt;<a class="reference internal" href="#com.ampl.Entity" title="com.ampl.Entity">Entity</a>&lt;?&gt;&gt; <code class="descname">xref</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Entity.xref()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the entities which depend on this one</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="EntityList.html" title="EntityList"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Tuple.html" title="Tuple"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" >Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

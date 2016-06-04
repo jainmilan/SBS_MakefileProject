@@ -1,0 +1,152 @@
+.. java:import:: java.util Collection
+
+.. java:import:: java.util Iterator
+
+.. java:import:: java.util Map.Entry
+
+Set
+===
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public class Set extends Entity<SetInstance> implements java.lang.Iterable<Object>
+
+   Represents an AMPL set. In case of not indexed sets, this class exposes functionalities of a Java Set for accessing its elements. The members of the set can be strings, double numbers or :java:ref:`tuples <Tuple>`.
+
+   All these methods throw an :java:ref:`UnsupportedOperationException` if called for an indexed set.
+
+   In case of indexed sets, use the method :java:ref:`Set.get` to obtain the objects of type :java:ref:`SetInstance`, from which to access all properties (see section :ref:`secAccessInstancesAndValues` for further information on how to access set instances).
+
+   Data can be assigned to the set using the methods :java:ref:`Set.setValues`, or using :java:ref:`AMPL.setData` and an object of class :java:ref:`DataFrame`.
+
+Methods
+-------
+
+.. java:method:: public int arity()
+   :outertype: Set
+
+   The dimension of s, or number of components in each member of this set
+
+.. java:method:: public boolean contains(Object o)
+   :outertype: Set
+
+   Check contents.
+
+   See :java:ref:`SetInstance.contains`.
+
+   Valid only for not indexed sets.
+
+   :param o: Object to be searched
+   :return: True if the object is present
+
+.. java:method:: public boolean containsAll(Collection<? extends Object> c)
+   :outertype: Set
+
+   Check if the sets contains all the elements in the collection c. Each element in the collection can be a double, a String, a Tuple or an array. In case of arrays, each array is considered as a Tuple.
+
+   See :java:ref:`SetInstance.containsAll`.
+
+   Valid only for not indexed sets.
+
+   :param c: The collection containing the elements to find.
+
+.. java:method:: @Override public SetInstance get()
+   :outertype: Set
+
+   Get the set instance (for not indexed sets)
+
+   :throws UnsupportedOperationException: if the set is indexed
+   :throws IllegalStateException: If the entity has been deleted in the underlying AMPL interpreter.
+
+.. java:method:: @Override public final SetInstance get(Object... key)
+   :outertype: Set
+
+   Get the set instance corresponding to the specified key. See :ref:`secAccessInstancesAndValues` for further information on how the key can be specified.
+
+   :throws IllegalArgumentException: if trying to access an instance with the wrong number of keys (see :java:ref:`Entity.indexarity`)
+   :throws IllegalStateException: if the entity has been deleted in the underlying AMPL interpreter
+   :return: The instance corresponding to the specified key. Null if the specified key is not present.
+
+.. java:method:: @Override public final SetInstance get(Tuple key)
+   :outertype: Set
+
+   Get the set instance corresponding to the specified key (passed as a Tuple). See :ref:`secAccessInstancesAndValues` for further information on how the key can be specified.
+
+   :param key: The indexing tuple of the instance to be found
+   :throws IllegalArgumentException: if trying to access an instance with the wrong number of keys (see :java:ref:`Entity.indexarity`)
+   :throws IllegalStateException: if the entity has been deleted in the underlying AMPL interpreter
+   :return: The instance corresponding to the specified key. Null if the specified key is not present.
+
+.. java:method:: @Override @Deprecated public DataFrame getValues(String... suffixes)
+   :outertype: Set
+
+   Operation not supported for sets
+
+.. java:method:: @Override @Deprecated public DataFrame getValues()
+   :outertype: Set
+
+   Operation not supported for sets
+
+.. java:method:: public boolean isEmpty()
+   :outertype: Set
+
+   Return true if the set is empty.
+
+   Valid only for not indexed sets.
+
+.. java:method:: @Override public Iterator<Object> iterator()
+   :outertype: Set
+
+   If the set is not indexed, get the iterator for this set, allowing easy access to its elements, as in:
+
+   .. parsed-literal::
+
+      ampl.eval("set A := {'a', 'b', 3};");
+      for (Object o : ampl.getSet("A")) {
+          // ...
+      }
+
+   :throws UnsupportedOperationException: if used on an indexed set
+
+.. java:method:: public void setValues(Object... objects)
+   :outertype: Set
+
+   Assign values to the this set.
+
+   See :java:ref:`SetInstance.setValues` for the usage instructions.
+
+.. java:method:: public int size()
+   :outertype: Set
+
+   Get the size of the set (number of elements) (valid only for not indexed sets)
+
+   :throws UnsupportedOperationException: if used on an indexed set
+
+.. java:method:: public Object[] toArray()
+   :outertype: Set
+
+   Convert this set to an array.
+
+   Valid only for not indexed sets.
+
+.. java:method:: public <T> T[] toArray(T[] a)
+   :outertype: Set
+
+   Returns an array containing all of the elements in this set; the runtime type of the returned array is that of the specified array. If the set fits in the specified array, it is returned therein. Otherwise, a new array is allocated with the runtime type of the specified array and the size of this set.
+
+   If this set fits in the specified array with room to spare (i.e., the array has more elements than this set), the element in the array immediately following the end of the set is set to null. This is useful in determining the length of this set only if the caller knows that this set does not contain any null elements.
+
+   Valid only for not indexed sets.
+
+   :param a: An array of the desired type
+
+.. java:method:: @Override public String toString()
+   :outertype: Set
+
+   String representation of the set. Equivalent to the AMPL statement
+
+   .. parsed-literal::
+
+      show setName;
+

@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ObjectiveInstance &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../index.html" />
+    <link rel="up" title="C++ API reference" href="../reference.html" />
+    <link rel="next" title="Parameter" href="parameter.html" />
+    <link rel="prev" title="Objective" href="objective.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="parameter.html" title="Parameter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="objective.html" title="Objective"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" accesskey="U">C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="objective.html"
+                        title="previous chapter">Objective</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="parameter.html"
+                        title="next chapter">Parameter</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/classes/objectiveinstance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="objectiveinstance">
+<span id="ref-objectiveinstance"></span><h1>ObjectiveInstance<a class="headerlink" href="#objectiveinstance" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4ampl17ObjectiveInstanceE">
+<span id="ampl::ObjectiveInstance"></span><span class="target" id="amplapiclassampl_1_1_objective_instance"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">ObjectiveInstance</code><a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstanceE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an objective instance. </p>
+<p>All AMPL suffixes for an objective are available through methods with the same name in this class. See <a class="reference external" href="http://www.ampl.com/NEW/suffbuiltin.html">http://www.ampl.com/NEW/suffbuiltin.html</a> for a list of the available suffixes. </p>
+<p>All the accessors in this class throw an std::runtime_error if the instance has been deleted in the underlying <a class="reference internal" href="ampl.html#amplapiclassampl_1_1_a_m_p_l"><span>AMPL</span></a> interpreter. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance5valueEv">
+<span id="ampl::ObjectiveInstance::value"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1ab4da317475aca4149781f5d817e5921f"></span>double <code class="descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance5valueEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the objective instance. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance7astatusEv">
+<span id="ampl::ObjectiveInstance::astatus"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1a40b0a4224b4b7c08513e9841f2f148c5"></span>std::string <code class="descname">astatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance7astatusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the AMPL status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance7sstatusEv">
+<span id="ampl::ObjectiveInstance::sstatus"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1a5831131b824d9ebee97429c6e8073cfa"></span>std::string <code class="descname">sstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance7sstatusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the solver status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance8exitcodeEv">
+<span id="ampl::ObjectiveInstance::exitcode"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1afe273dca0d74a995b006fb4dd38874e3"></span>int <code class="descname">exitcode</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance8exitcodeEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exit code returned by solver after most recent solve with this objective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance7messageEv">
+<span id="ampl::ObjectiveInstance::message"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1a94626422f5f11915356ccd6e88fad722"></span>std::string <code class="descname">message</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance7messageEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result message returned by solver after most recent solve with this objective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance6resultEv">
+<span id="ampl::ObjectiveInstance::result"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1a0dcd4877c89f2ce2b40fef0f11d845e5"></span>std::string <code class="descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance6resultEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result string returned by solver after most recent solve with this objective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance4dropEv">
+<span id="ampl::ObjectiveInstance::drop"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1a4ddb51d2d7ef506d43568f3b9ef79660"></span>void <code class="descname">drop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance4dropEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop this objective instance. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance7restoreEv">
+<span id="ampl::ObjectiveInstance::restore"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1a78f00af46d8bb484473bd9cb4a31fed2"></span>void <code class="descname">restore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance7restoreEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore this objective instance (if it had been dropped, no effect otherwise) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl17ObjectiveInstance12minimizationEv">
+<span id="ampl::ObjectiveInstance::minimization"></span><span class="target" id="amplapiclassampl_1_1_objective_instance_1aa35a9b7dc87d45118eceefe1f1518ccc"></span>bool <code class="descname">minimization</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl17ObjectiveInstance12minimizationEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sense of this objective. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if minimize, false if maximize </dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="parameter.html" title="Parameter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="objective.html" title="Objective"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" >C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

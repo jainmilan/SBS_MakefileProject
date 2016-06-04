@@ -8,14 +8,6 @@
 #ifndef BUILDING_H_
 #define BUILDING_H_
 
-#include<stdio.h>
-#include<iostream>
-
-#include "defs.h"
-#include "Weather.h"
-#include "ControlBox.h"
-#include "Occupancy.h"
-
 #include<Eigen/Dense>
 
 namespace SimpleBuildingSimulator
@@ -25,27 +17,42 @@ namespace SimpleBuildingSimulator
 	public:
 		Building();
 		~Building();
+
 		struct Room
 		{
 			/* Thermal Capacities */
 			uint16 C = 2000;			// Thermal Capacity of Room (kJ/K)
 			uint16 C_ = 200;			// Thermal Capacity of SPOT Region (kJ/K)
 
-										/* Heat Transfer Coefficients */
+			/* Heat Transfer Coefficients */
 			float alpha_o = 0.048f;		// Heat Transfer Coefficient for Outside (kJ/K.s)
 			float alpha_r = 0.1425f;	// Heat Transfer Coefficient for Regions (kJ/K.s)
 
-										/* Heat Loads */
+			/* Heat Loads */
 			float Q_l = 0.1f;			// Heat Load Due to Lightening and Equipments (kW)
 			float Q_h = 0.1f;			// Heat Load Due to Presence of Occupants (kW)
 			float Q_s = 0.7f;			// Heat Load of SPOT Unit (kW)
-		};
+
+			float fan_coef = 0.094f;
+		} CommonRoom;
 
 		struct Air
 		{
 			float density = 1.225f;
 			float specific_heat = 1.003f;
-		};
+		} CommonAir;
+
+		struct PMV_Model {
+			float P1 = 0.2466f;
+			float P2 = 1.4075f;
+			float P3 = 0.581f;
+			float P4 = 5.4668f;
+		} PMV_Params;
+
+		struct AHU {
+			float HeatingEfficiency = 0.9f;
+			float CoolingEfficiency = 0.9f;
+		} CommonAHU;
 
 		uint8 get_num_zones() { return num_zones_; }
 		uint8 get_num_rooms() { return num_rooms_; }
