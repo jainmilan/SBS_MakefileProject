@@ -1,0 +1,83 @@
+.. java:import:: java.io File
+
+.. java:import:: java.io IOException
+
+.. java:import:: java.net URISyntaxException
+
+.. java:import:: java.util HashMap
+
+.. java:import:: java.util Map
+
+.. java:import:: com.ampl AMPL.GetEntity
+
+Environment
+===========
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public class Environment
+
+   This class provides access to the environment variables and provides facilities to specify where to load the underlying AMPL interpreter.
+
+Fields
+------
+
+.. java:field:: public static final String PATH
+   :outertype: Environment
+
+   Get the platform dependent name of the \ ``path``\  environment variable. To append a directory to current list of system paths, follow the snippet below:
+
+   .. parsed-literal::
+
+      Environment e = new Environment();
+      String paths = e.getMap().get(Environment.PATH);
+      e.getMap().put(Environment.PATH, paths +  java.io.File.pathSeparatorChar + "/mynewpath");
+
+   Note that changing the paths in this way has effect only until the underlying AMPL process is started (in the :java:ref:`AMPL` class constructor)
+
+Constructors
+------------
+
+.. java:constructor:: public Environment()
+   :outertype: Environment
+
+   Default constructor, just copies the values of the current system environment variables. Expects the AMPL binary in a directory included in the system paths list or in the default position (which is APIJARLOCATION/ampl)
+
+.. java:constructor:: public Environment(String binDir)
+   :outertype: Environment
+
+   Permits the user to specify a custom location for the AMPL executable.
+
+   :param binDir: Directory to search the AMPL executable in
+
+Methods
+-------
+
+.. java:method:: @Deprecated public void addToPath(String directory)
+   :outertype: Environment
+
+   Add the specified directory to the system path (for AMPL interpreter subprocess environment) Note that it has no effect after the AMPL interpreter is constructed.
+
+   :param directory: Directory to be appended
+
+.. java:method:: public String getBinDir()
+   :outertype: Environment
+
+   Returns the directory containing the overriding AMPL executable directory.
+
+.. java:method:: public Map<String, String> getMap()
+   :outertype: Environment
+
+   Get the inner map of environment variables
+
+.. java:method:: public void setBinDir(String exePath)
+   :outertype: Environment
+
+   Sets the directory in which the AMPL executable is located. Does not perform any check regarding whether the AMPL executable in there is working or not.
+
+   :param exePath: Path to the AMPL executable (without file name)
+
+.. java:method:: public String toString()
+   :outertype: Environment
+

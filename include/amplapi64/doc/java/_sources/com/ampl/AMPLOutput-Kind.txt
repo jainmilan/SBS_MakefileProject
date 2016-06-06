@@ -1,0 +1,99 @@
+AMPLOutput.Kind
+===============
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public enum Kind
+   :outertype: AMPLOutput
+
+   Stores the type of this output
+
+Enum Constants
+--------------
+
+.. java:field:: public static final AMPLOutput.Kind BREAK
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``break``, displayed when an operation is interrupted with SIGINT
+
+.. java:field:: public static final AMPLOutput.Kind CD
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``cd``, returned by the ``cd`` function.
+
+.. java:field:: public static final AMPLOutput.Kind DISPLAY
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``display``, returned by the ``display`` function.
+
+.. java:field:: public static final AMPLOutput.Kind EXIT
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``exit``, returned as last message from AMPL before exiting the interpreter
+
+.. java:field:: public static final AMPLOutput.Kind EXPAND
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``expand``, returned by the ``expand`` function.
+
+.. java:field:: public static final AMPLOutput.Kind LOAD
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``load``, returned by the ``load`` function when loading a library
+
+.. java:field:: public static final AMPLOutput.Kind MISC
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``misc``
+
+.. java:field:: public static final AMPLOutput.Kind OPTION
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``option``, returned by the ``option`` function when getting the value of an option
+
+.. java:field:: public static final AMPLOutput.Kind PRINT
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``print``, returned by the ``print`` function when printing values from AMPL command line
+
+.. java:field:: public static final AMPLOutput.Kind PROMPT
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``prompt1``, normal AMPL prompt
+
+.. java:field:: public static final AMPLOutput.Kind SHELL_MESSAGE
+   :outertype: AMPLOutput.Kind
+
+   Messages from the command ``shell``
+
+.. java:field:: public static final AMPLOutput.Kind SHELL_OUTPUT
+   :outertype: AMPLOutput.Kind
+
+   Output of the AMPL command ``shell``
+
+.. java:field:: public static final AMPLOutput.Kind SHOW
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``show``, returned by the ``show`` function
+
+.. java:field:: public static final AMPLOutput.Kind SOLVE
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``solve``, returned by the ``solve`` function, contains the solver message
+
+.. java:field:: public static final AMPLOutput.Kind WAITING
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``prompt2``, returned when incomplete statements are interpreted
+
+.. java:field:: public static final AMPLOutput.Kind WRITE_TABLE
+   :outertype: AMPLOutput.Kind
+
+   Messages from the command ``write table``
+
+.. java:field:: public static final AMPLOutput.Kind XREF
+   :outertype: AMPLOutput.Kind
+
+   AMPL Kind: ``xref``, returned by the ``xref`` function.
+

@@ -1,0 +1,658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Entity &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../index.html" />
+    <link rel="up" title="C++ API reference" href="../reference.html" />
+    <link rel="next" title="EntityMap" href="entitymap.html" />
+    <link rel="prev" title="BasicVariant" href="variant.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="entitymap.html" title="EntityMap"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="variant.html" title="BasicVariant"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" accesskey="U">C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="variant.html"
+                        title="previous chapter">BasicVariant</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="entitymap.html"
+                        title="next chapter">EntityMap</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/classes/entity.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="entity">
+<span id="ref-entity"></span><h1>Entity<a class="headerlink" href="#entity" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4ampl6EntityE">
+<span id="ampl::Entity"></span><span class="target" id="amplapiclassampl_1_1_entity"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">Entity</code><a class="headerlink" href="#_CPPv2N4ampl6EntityE" title="Permalink to this definition">¶</a></dt>
+<dd><p>An AMPL entity such as a parameter or a variable. </p>
+<p>An entity can either represent a single instance of an AMPL algebraic entity or, if the corresponding declaration has an indexing expression, a mapping from keys to instances. In the derived classes, it has methods to access instance-level properties which can be used in case the represented entity is scalar. </p>
+<p>To gain access to all the values in an entity (for all instances and all suffixes for that entities), use the function AMPL::getValues(). </p>
+<p>The algebraic entities which currenty have an equivalent class in the API are: <ul class="simple">
+<li>Variables (see <a class="reference internal" href="variable.html#amplapiclassampl_1_1_variable"><span>ampl::Variable</span></a>) </li>
+<li>Constraints (see <a class="reference internal" href="constraint.html#amplapiclassampl_1_1_constraint"><span>ampl::Constraint</span></a>) </li>
+<li>Objectives (see <a class="reference internal" href="objective.html#amplapiclassampl_1_1_objective"><span>ampl::Objective</span></a>) </li>
+<li>Sets (see <a class="reference internal" href="set.html#amplapiclassampl_1_1_set"><span>ampl::Set</span></a>) </li>
+<li>Parameters (see <a class="reference internal" href="parameter.html#amplapiclassampl_1_1_parameter"><span>ampl::Parameter</span></a>) </li>
+</ul>
+</p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity4nameEv">
+<span id="ampl::Entity::name"></span><span class="target" id="amplapiclassampl_1_1_entity_1a2f0a09128ff3df535f9a2b13c9677f58"></span>std::string <code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity4nameEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of this entity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity10indexarityEv">
+<span id="ampl::Entity::indexarity"></span><span class="target" id="amplapiclassampl_1_1_entity_1aa5e5ea207d6ab3fa49bf085d97c73d74"></span>int <code class="descname">indexarity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity10indexarityEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Get the indexarity of this entity (sum of the dimensions of the indexing
+sets).
+This value indicates the arity of the Tuple to be passed to the method
+Entity::get() in order to access an instance of this entity.
+See the following %AMPL examples:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span>var x;               # indexarity = 0
+var y {1..2};        # indexarity = 1
+var z {1..2,3..4};   # indexarity = 2
+var zz {{(1, 2)}};   # indexarity = 2
+</pre></div>
+</div>
+ <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The sum of the dimensions of the indexing sets or 0 if the entity is not indexed </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity8isScalarEv">
+<span id="ampl::Entity::isScalar"></span><span class="target" id="amplapiclassampl_1_1_entity_1a582d4f07f54b37fb3dd9e107167d7bf8"></span>bool <code class="descname">isScalar</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity8isScalarEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether this entity is scalar. </p>
+<p>Equivalent to testing whether indexarity() is equal to zero. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True if the entity is scalar (not indexed over any set) </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity12numInstancesEv">
+<span id="ampl::Entity::numInstances"></span><span class="target" id="amplapiclassampl_1_1_entity_1a1d7d505b931801fa62019209b47964ff"></span>std::size_t <code class="descname">numInstances</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity12numInstancesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of instances in this entity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity15getIndexingSetsEv">
+<span id="ampl::Entity::getIndexingSets"></span><span class="target" id="amplapiclassampl_1_1_entity_1acb1e6734106fbe4454cfbaf6866b9815"></span>StringArray <code class="descname">getIndexingSets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity15getIndexingSetsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL string representation of the sets on which this entity is indexed. </p>
+<p>The obtained vector can be modified without any effect to the entity.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The string representation of the indexing sets for this entity or an empty array if the entity is scalar </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity9getValuesEv">
+<span id="ampl::Entity::getValues"></span><span class="target" id="amplapiclassampl_1_1_entity_1a3c9844fd589eb8754da7cbf69adc9f74"></span><a class="reference internal" href="dataframe.html#_CPPv2N4ampl9DataFrameE" title="ampl::DataFrame">DataFrame</a> <code class="descname">getValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity9getValuesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Get the principal values of this entity as a DataFrame. The specific returned
+value depends on the
+type of entity (see list below).</p>
+<dl class="docutils">
+<dt>For:</dt>
+<dd><ul class="first last simple">
+<li>Variables and Objectives it returns the suffix <code class="docutils literal"><span class="pre">val</span></code></li>
+<li>Parameters it returns their values</li>
+<li>Constraints it returns the suffix <code class="docutils literal"><span class="pre">dual</span></code></li>
+<li>Sets it returns all the members of the set. Note that it does not</li>
+<li>apply to indexed sets. See SetInstance::getValues</li>
+</ul>
+</dd>
+</dl>
+ <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="dataframe.html#amplapiclassampl_1_1_data_frame"><span>DataFrame</span></a> containing the values for all instances </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity9getValuesE10StringArgs">
+<span id="ampl::Entity::getValues__StringArgs"></span><span class="target" id="amplapiclassampl_1_1_entity_1ade0ab9f4a60c2a32d7bc69d26d969095"></span><a class="reference internal" href="dataframe.html#_CPPv2N4ampl9DataFrameE" title="ampl::DataFrame">DataFrame</a> <code class="descname">getValues</code><span class="sig-paren">(</span>StringArgs <em>suffixes</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity9getValuesE10StringArgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the specified suffixes value for all instances in a <a class="reference internal" href="dataframe.html#amplapiclassampl_1_1_data_frame"><span>DataFrame</span></a>. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="dataframe.html#amplapiclassampl_1_1_data_frame"><span>DataFrame</span></a> containing the specified values </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">suffixes</span></code> - <p>Suffixes to get </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity9setValuesE9DataFrame">
+<span id="ampl::Entity::setValues__DataFrame"></span><span class="target" id="amplapiclassampl_1_1_entity_1a35ab35d690e555fba172a774040e46a7"></span>void <code class="descname">setValues</code><span class="sig-paren">(</span><a class="reference internal" href="dataframe.html#_CPPv2N4ampl9DataFrameE" title="ampl::DataFrame">DataFrame</a> <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl6Entity9setValuesE9DataFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Set the values of this entiy to the correponding values of a
+DataFrame indexed over the same sets (or a subset). 
+This function assigns the values in the first data column of 
+the passed dataframe to the entity the function is called from.
+In particular, the statement:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">.</span><span class="n">setValues</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">getValues</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>is semantically equivalent to the %AMPL statement:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">{</span><span class="n">s</span> <span class="n">in</span> <span class="n">S</span><span class="p">}</span> <span class="n">x</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">:=</span> <span class="n">y</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
+</pre></div>
+</div>
+ <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">data</span></code> - <p>The data to set the entity to </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity8toStringEv">
+<span id="ampl::Entity::toString"></span><span class="target" id="amplapiclassampl_1_1_entity_1a24a8bd10cbe8c510a8e68655b5279b56"></span>std::string <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity8toStringEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representation of this entity (its declaration) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">class</em> I&gt;</dt>
+<dt id="_CPPv2N4ampl6Entity6EntityE11BasicEntityI1IE">
+<span id="ampl::Entity::Entity__BasicEntity:I:"></span><span class="target" id="amplapiclassampl_1_1_entity_1ae217f535e911624d0d24111ed6c847d3"></span><code class="descname">Entity</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4ampl11BasicEntityE" title="ampl::BasicEntity">BasicEntity</a>&lt;I&gt; <em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl6Entity6EntityE11BasicEntityI1IE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor to allow implicit conversion. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="amplapiclassampl_1_1_entity_1a963e990965decd9131218651f2e7fba0"></span><em class="property">friend </em><code class="descname">ampl::Entity::AMPL</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="amplapiclassampl_1_1_entity_1ac3cf826bc43b8ab4740915b5c60e7166"></span><em class="property">friend </em><code class="descname">ampl::Entity::DataFrame</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="amplapiclassampl_1_1_entity_1a2bf44e409ef2e93e32e605e877f09518"></span><em class="property">friend </em><code class="descname">ampl::Entity::EntityArgs</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="amplapiclassampl_1_1_entity_1aea90763cbe6c91bbcd6e9bf0d66dc500"></span><em class="property">friend </em><code class="descname">ampl::Entity::Instance</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="amplapiclassampl_1_1_basic_entity"></span><em class="property">template </em>&lt;class <em>InstanceClass</em>&gt;</dt>
+<dt id="_CPPv2N4ampl11BasicEntityE">
+<span id="ampl::BasicEntity"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">BasicEntity</code><a class="headerlink" href="#_CPPv2N4ampl11BasicEntityE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Infrastructure class to enable the inheriting classes type-safe access to instances. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Instance access</p>
+<p>Methods to access the instances which are part of this <a class="reference internal" href="#amplapiclassampl_1_1_entity"><span>Entity</span></a> </p>
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getEv">
+<span id="ampl::BasicEntity::get"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a585ebebb1e8a3c049609a6597b94fc22"></span>InstanceClass <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance corresponding to a scalar entity. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The corresponding instance. </dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">runtime_error</span></code> - <p>if the entity has been deleted in the underlying AMPL interpreter </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">logic_error</span></code> - <p>if the entity is not scalar </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntityixE8TupleRef">
+<span id="ampl::BasicEntity::subscript-operator__TupleRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a06229841ee63e892eb77d5bc24324642"></span>InstanceClass <code class="descname">operator[]</code><span class="sig-paren">(</span><a class="reference internal" href="tuple.html#_CPPv2N4ampl8TupleRefE" title="ampl::TupleRef">TupleRef</a> <em>index</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntityixE8TupleRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE8TupleRef">
+<span id="ampl::BasicEntity::get__TupleRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a9d4f132d57c7fe69dc7f9afb9d1dae63"></span>InstanceClass <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="tuple.html#_CPPv2N4ampl8TupleRefE" title="ampl::TupleRef">TupleRef</a> <em>index</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE8TupleRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance with the specified index. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The corresponding instance </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">index</span></code> - <p>The tuple specifying the index </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">out_of_range</span></code> - <p>if an instance with the specified index does not exist </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">runtime_error</span></code> - <p>if the entity has been deleted in the underlying AMPL interpreter </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">logic_error</span></code> - <p>if the entity is scalar </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntityixE10VariantRef">
+<span id="ampl::BasicEntity::subscript-operator__VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a666b0edadea35cfbba55308ac7c3b0b7"></span>InstanceClass <code class="descname">operator[]</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntityixE10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE10VariantRef">
+<span id="ampl::BasicEntity::get__VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a4e998ee61c31c7ec1d62f875074448db"></span>InstanceClass <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef">
+<span id="ampl::BasicEntity::get__VariantRef.VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a90e3cb172084a45595c996a41c9a72f2"></span>InstanceClass <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v2</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef10VariantRef">
+<span id="ampl::BasicEntity::get__VariantRef.VariantRef.VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1af9069276864f177388a830bc59675d0d"></span>InstanceClass <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v2</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v3</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef10VariantRef10VariantRef">
+<span id="ampl::BasicEntity::get__VariantRef.VariantRef.VariantRef.VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a7b593ea55e96f1710889de63454259f7"></span>InstanceClass <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v2</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v3</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v4</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef10VariantRef10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance with the specified index. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The corresponding instance </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">v1</span></code> - <p>The VariantRef specifying the first element of the indexing tuple </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">v2</span></code> - <p>The VariantRef specifying the second element of the indexing tuple </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">v3</span></code> - <p>The VariantRef specifying the third element of the indexing tuple </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">v4</span></code> - <p>The VariantRef specifying the fourth element of the indexing tuple </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">out_of_range</span></code> - <p>if an instance with the specified index does not exist </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">runtime_error</span></code> - <p>if the entity has been deleted in the underlying AMPL interpreter </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">logic_error</span></code> - <p>if the entity is scalar </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv2N4ampl11BasicEntity8iteratorE">
+<span id="ampl::BasicEntity::iterator"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1af07a6d71c9f2a1cf30569f1410ea1607"></span><em class="property">typedef </em>internal::CountedIterator&lt;internal::EntityWrapper&lt;InstanceClass&gt;&gt; <code class="descname">iterator</code><a class="headerlink" href="#_CPPv2N4ampl11BasicEntity8iteratorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator for entities, represented by an iterator pointing to elements of type std::pair&lt;TupleRef, InstanceClass&gt; </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity5beginEv">
+<span id="ampl::BasicEntity::begin"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a0b89cd57bdfcd659b42d612fa8c90640"></span><a class="reference internal" href="constraint.html#_CPPv2N4ampl11BasicEntity8iteratorE" title="ampl::BasicEntity::iterator">iterator</a> <code class="descname">begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity5beginEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an iterator pointing to the first instance in this entity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3endEv">
+<span id="ampl::BasicEntity::end"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a8f0d7daeedaaa8e4d155ac09af78299d"></span><a class="reference internal" href="constraint.html#_CPPv2N4ampl11BasicEntity8iteratorE" title="ampl::BasicEntity::iterator">iterator</a> <code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3endEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an iterator pointing after the last instance in this entity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity4findE8TupleRef">
+<span id="ampl::BasicEntity::find__TupleRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1abba6291f5bc3ebc399cb7cff8c194832"></span><a class="reference internal" href="constraint.html#_CPPv2N4ampl11BasicEntity8iteratorE" title="ampl::BasicEntity::iterator">iterator</a> <code class="descname">find</code><span class="sig-paren">(</span><a class="reference internal" href="tuple.html#_CPPv2N4ampl8TupleRefE" title="ampl::TupleRef">TupleRef</a> <em>t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity4findE8TupleRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches the current entity for an instance with the specified index. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>an iterator to the wanted entity if found, otherwise an iterator to <a class="reference internal" href="variable.html#amplapiclassampl_1_1_basic_entity_1a8f0d7daeedaaa8e4d155ac09af78299d"><span>BasicEntity::end</span></a>. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity11BasicEntityEPN8internal10EntityBaseE">
+<span id="ampl::BasicEntity::BasicEntity__internal::EntityBaseP"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a7ee51c7cebe296fc54faf8df8aef3de4"></span><code class="descname">BasicEntity</code><span class="sig-paren">(</span>internal::EntityBase *<em>entity</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl11BasicEntity11BasicEntityEPN8internal10EntityBaseE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor allowing cross conversions. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity4nameEv">
+<span id="ampl::Entity::name"></span><span class="target" id="amplapiclassampl_1_1_entity_1a2f0a09128ff3df535f9a2b13c9677f58"></span>std::string <code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity4nameEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of this entity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity10indexarityEv">
+<span id="ampl::Entity::indexarity"></span><span class="target" id="amplapiclassampl_1_1_entity_1aa5e5ea207d6ab3fa49bf085d97c73d74"></span>int <code class="descname">indexarity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity10indexarityEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Get the indexarity of this entity (sum of the dimensions of the indexing
+sets).
+This value indicates the arity of the Tuple to be passed to the method
+Entity::get() in order to access an instance of this entity.
+See the following %AMPL examples:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span>var x;               # indexarity = 0
+var y {1..2};        # indexarity = 1
+var z {1..2,3..4};   # indexarity = 2
+var zz {{(1, 2)}};   # indexarity = 2
+</pre></div>
+</div>
+ <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The sum of the dimensions of the indexing sets or 0 if the entity is not indexed </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity8isScalarEv">
+<span id="ampl::Entity::isScalar"></span><span class="target" id="amplapiclassampl_1_1_entity_1a582d4f07f54b37fb3dd9e107167d7bf8"></span>bool <code class="descname">isScalar</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity8isScalarEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether this entity is scalar. </p>
+<p>Equivalent to testing whether indexarity() is equal to zero. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True if the entity is scalar (not indexed over any set) </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity12numInstancesEv">
+<span id="ampl::Entity::numInstances"></span><span class="target" id="amplapiclassampl_1_1_entity_1a1d7d505b931801fa62019209b47964ff"></span>std::size_t <code class="descname">numInstances</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity12numInstancesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of instances in this entity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity15getIndexingSetsEv">
+<span id="ampl::Entity::getIndexingSets"></span><span class="target" id="amplapiclassampl_1_1_entity_1acb1e6734106fbe4454cfbaf6866b9815"></span>StringArray <code class="descname">getIndexingSets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity15getIndexingSetsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL string representation of the sets on which this entity is indexed. </p>
+<p>The obtained vector can be modified without any effect to the entity.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The string representation of the indexing sets for this entity or an empty array if the entity is scalar </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity9getValuesEv">
+<span id="ampl::Entity::getValues"></span><span class="target" id="amplapiclassampl_1_1_entity_1a3c9844fd589eb8754da7cbf69adc9f74"></span><a class="reference internal" href="dataframe.html#_CPPv2N4ampl9DataFrameE" title="ampl::DataFrame">DataFrame</a> <code class="descname">getValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity9getValuesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Get the principal values of this entity as a DataFrame. The specific returned
+value depends on the
+type of entity (see list below).</p>
+<dl class="docutils">
+<dt>For:</dt>
+<dd><ul class="first last simple">
+<li>Variables and Objectives it returns the suffix <code class="docutils literal"><span class="pre">val</span></code></li>
+<li>Parameters it returns their values</li>
+<li>Constraints it returns the suffix <code class="docutils literal"><span class="pre">dual</span></code></li>
+<li>Sets it returns all the members of the set. Note that it does not</li>
+<li>apply to indexed sets. See SetInstance::getValues</li>
+</ul>
+</dd>
+</dl>
+ <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="dataframe.html#amplapiclassampl_1_1_data_frame"><span>DataFrame</span></a> containing the values for all instances </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity9getValuesE10StringArgs">
+<span id="ampl::Entity::getValues__StringArgs"></span><span class="target" id="amplapiclassampl_1_1_entity_1ade0ab9f4a60c2a32d7bc69d26d969095"></span><a class="reference internal" href="dataframe.html#_CPPv2N4ampl9DataFrameE" title="ampl::DataFrame">DataFrame</a> <code class="descname">getValues</code><span class="sig-paren">(</span>StringArgs <em>suffixes</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity9getValuesE10StringArgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the specified suffixes value for all instances in a <a class="reference internal" href="dataframe.html#amplapiclassampl_1_1_data_frame"><span>DataFrame</span></a>. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="dataframe.html#amplapiclassampl_1_1_data_frame"><span>DataFrame</span></a> containing the specified values </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">suffixes</span></code> - <p>Suffixes to get </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity9setValuesE9DataFrame">
+<span id="ampl::Entity::setValues__DataFrame"></span><span class="target" id="amplapiclassampl_1_1_entity_1a35ab35d690e555fba172a774040e46a7"></span>void <code class="descname">setValues</code><span class="sig-paren">(</span><a class="reference internal" href="dataframe.html#_CPPv2N4ampl9DataFrameE" title="ampl::DataFrame">DataFrame</a> <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl6Entity9setValuesE9DataFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Set the values of this entiy to the correponding values of a
+DataFrame indexed over the same sets (or a subset). 
+This function assigns the values in the first data column of 
+the passed dataframe to the entity the function is called from.
+In particular, the statement:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">.</span><span class="n">setValues</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">getValues</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>is semantically equivalent to the %AMPL statement:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">{</span><span class="n">s</span> <span class="n">in</span> <span class="n">S</span><span class="p">}</span> <span class="n">x</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">:=</span> <span class="n">y</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
+</pre></div>
+</div>
+ <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">data</span></code> - <p>The data to set the entity to </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl6Entity8toStringEv">
+<span id="ampl::Entity::toString"></span><span class="target" id="amplapiclassampl_1_1_entity_1a24a8bd10cbe8c510a8e68655b5279b56"></span>std::string <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl6Entity8toStringEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representation of this entity (its declaration) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N4ampl10EntityArgsE">
+<span id="ampl::EntityArgs"></span><span class="target" id="amplapiclassampl_1_1_entity_args"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">EntityArgs</code><a class="headerlink" href="#_CPPv2N4ampl10EntityArgsE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a list of entities, to be passed as arguments to various API functions. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl10EntityArgs10EntityArgsE6Entity">
+<span id="ampl::EntityArgs::EntityArgs__Entity"></span><span class="target" id="amplapiclassampl_1_1_entity_args_1a14d2fbc8b0783262c18a6cca79886da2"></span><code class="descname">EntityArgs</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg0</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl10EntityArgs10EntityArgsE6Entity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl10EntityArgs10EntityArgsE6Entity6Entity">
+<span id="ampl::EntityArgs::EntityArgs__Entity.Entity"></span><span class="target" id="amplapiclassampl_1_1_entity_args_1afc68ee352e4449d1218a71b3547bd911"></span><code class="descname">EntityArgs</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg0</em>, <a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg1</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl10EntityArgs10EntityArgsE6Entity6Entity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl10EntityArgs10EntityArgsE6Entity6Entity6Entity">
+<span id="ampl::EntityArgs::EntityArgs__Entity.Entity.Entity"></span><span class="target" id="amplapiclassampl_1_1_entity_args_1a988d39acc5a4d59a3222375be44c0d71"></span><code class="descname">EntityArgs</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg0</em>, <a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg1</em>, <a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg2</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl10EntityArgs10EntityArgsE6Entity6Entity6Entity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl10EntityArgs10EntityArgsE6Entity6Entity6Entity6Entity">
+<span id="ampl::EntityArgs::EntityArgs__Entity.Entity.Entity.Entity"></span><span class="target" id="amplapiclassampl_1_1_entity_args_1a5926bb970160e77cd22d84bf545134e6"></span><code class="descname">EntityArgs</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg0</em>, <a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg1</em>, <a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg2</em>, <a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>arg3</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl10EntityArgs10EntityArgsE6Entity6Entity6Entity6Entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor from entities. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">arg0</span></code> - <p>First entity </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">arg1</span></code> - <p>Second entity </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">arg2</span></code> - <p>Third entity </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">arg3</span></code> - <p>Fourth entity </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl10EntityArgs10EntityArgsEA_K6EntityNSt6size_tE">
+<span id="ampl::EntityArgs::EntityArgs__EntityCA.std::s"></span><span class="target" id="amplapiclassampl_1_1_entity_args_1ad1c56b96bd8776a07978060fe3c650d7"></span><code class="descname">EntityArgs</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <em>args</em>[], std::size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl10EntityArgs10EntityArgsEA_K6EntityNSt6size_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor from an array of entities. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">args</span></code> - <p>An array of entities </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">size</span></code> - <p>Size of the array </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl10EntityArgs7getArgsEv">
+<span id="ampl::EntityArgs::getArgs"></span><span class="target" id="amplapiclassampl_1_1_entity_args_1a9b295674749a681d4cf4bcdab60aba5c"></span><em class="property">const</em> internal::EntityBase **<code class="descname">getArgs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl10EntityArgs7getArgsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get access to the represented entities. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl10EntityArgs4sizeEv">
+<span id="ampl::EntityArgs::size"></span><span class="target" id="amplapiclassampl_1_1_entity_args_1a343777abc1143586f1991f9e6f252c90"></span>std::size_t <code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl10EntityArgs4sizeEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of represented entities. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="entitymap.html" title="EntityMap"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="variant.html" title="BasicVariant"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" >C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

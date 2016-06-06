@@ -1,0 +1,744 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>DataFrame &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/ampl.ico"/>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../../index.html" />
+    <link rel="up" title="Java API reference" href="../../reference.html" />
+    <link rel="next" title="Environment" href="Environment.html" />
+    <link rel="prev" title="AMPLOutput" href="AMPLOutput.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Environment.html" title="Environment"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="AMPLOutput.html" title="AMPLOutput"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" accesskey="U">Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">DataFrame</a><ul>
+<li><a class="reference internal" href="#constructors">Constructors</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="AMPLOutput.html"
+                        title="previous chapter">AMPLOutput</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Environment.html"
+                        title="next chapter">Environment</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/com/ampl/DataFrame.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dataframe">
+<h1>DataFrame<a class="headerlink" href="#dataframe" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="com.ampl.DataFrame">
+public class <code class="descname">DataFrame</code> implements <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Iterable.html" title="java.lang.Iterable">Iterable</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[]&gt;<a class="headerlink" href="#com.ampl.DataFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>A DataFrame object, used to communicate data to and from the AMPL entities. An object of this class can be used to do the following tasks:</p>
+<ul class="simple">
+<li>Assign values to AMPL entities (once the DataFrame is populated, use the <a class="reference internal" href="AMPL.html#com.ampl.AMPL.setData(DataFrame)" title="com.ampl.AMPL.setData(DataFrame)"><code class="xref java java-ref docutils literal"><span class="pre">AMPL.setData</span></code></a> to assign its values to the modelling entities in its columns)</li>
+<li>Get values from AMPL, decoupling the values from the AMPL entities they originate from (via <a class="reference internal" href="Entity.html#com.ampl.Entity.getValues(String)" title="com.ampl.Entity.getValues(String)"><code class="xref java java-ref docutils literal"><span class="pre">Entity.getValues</span></code></a>)</li>
+</ul>
+<p>A DataFrame object can be created in various ways.</p>
+<ul class="simple">
+<li>Create a skeleton via <a class="reference internal" href="#com.ampl.DataFrame.DataFrame(Entity)" title="com.ampl.DataFrame.DataFrame(Entity)"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.DataFrame(int</span> <span class="pre">numberOfIndexColumns,</span> <span class="pre">String...</span> <span class="pre">headers)</span></code></a>, specifiying manually the number of indexing columns and the column headers.</li>
+<li>Get column names (and number of indexing columns) from entities of the API, using the constructor <a class="reference internal" href="#com.ampl.DataFrame.DataFrame(Entity)" title="com.ampl.DataFrame.DataFrame(Entity)"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.DataFrame(Entity...</span> <span class="pre">headers)</span></code></a>.</li>
+<li>Get values from AMPL, decoupling the values from the AMPL entities they originate from (via <a class="reference internal" href="Entity.html#com.ampl.Entity.getValues(String)" title="com.ampl.Entity.getValues(String)"><code class="xref java java-ref docutils literal"><span class="pre">Entity.getValues</span></code></a>)</li>
+</ul>
+<p>Populating a DataFrame object can be done adding row by row to a pre-existing skeleton via <a class="reference internal" href="#com.ampl.DataFrame.addRow(Object)" title="com.ampl.DataFrame.addRow(Object)"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.addRow</span></code></a>, setting whole columns of a pre-existing skeleton via <a class="reference internal" href="#com.ampl.DataFrame.setColumn(Object, double[])" title="com.ampl.DataFrame.setColumn(Object, double[])"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.setColumn</span></code></a> or adding columns (including indexing columns) via <a class="reference internal" href="#com.ampl.DataFrame.addColumn(Object, long[])" title="com.ampl.DataFrame.addColumn(Object, long[])"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.addColumn</span></code></a>.</p>
+<p>Modifying a DataFrame object can be done via <a class="reference internal" href="#com.ampl.DataFrame.setColumn(Object, double[])" title="com.ampl.DataFrame.setColumn(Object, double[])"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.setColumn</span></code></a> or, item by item, via <a class="reference internal" href="#com.ampl.DataFrame.setValue(Object)" title="com.ampl.DataFrame.setValue(Object)"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.setValue</span></code></a>.</p>
+<p>Accessing data in a DataFrame can be done row by row using <a class="reference internal" href="#com.ampl.DataFrame.getRow(Object)" title="com.ampl.DataFrame.getRow(Object)"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.getRow</span></code></a> or by column via <a class="reference internal" href="#com.ampl.DataFrame.getColumn(Object)" title="com.ampl.DataFrame.getColumn(Object)"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.getColumn</span></code></a>. Automated casting of columns is provided via <a class="reference internal" href="#com.ampl.DataFrame.getColumnAsDoubles(Object)" title="com.ampl.DataFrame.getColumnAsDoubles(Object)"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.getColumnAsDoubles</span></code></a> and <a class="reference internal" href="#com.ampl.DataFrame.getColumnAsStrings(Object)" title="com.ampl.DataFrame.getColumnAsStrings(Object)"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.getColumnAsStrings</span></code></a>.</p>
+</dd></dl>
+
+<div class="section" id="constructors">
+<h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
+<dl class="constructor">
+<dt id="com.ampl.DataFrame.DataFrame(Entity)">
+public <code class="descname">DataFrame</code><span class="sig-paren">(</span><a class="reference internal" href="Entity.html#com.ampl.Entity" title="com.ampl.Entity">Entity</a>&lt;?&gt;...<em> headers</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.DataFrame(Entity)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new DataFrame with the specified entities as column headers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>headers</strong> &#8211; The columns headers to be used; since they are AMPL entities, sets are automatically considered indices and have to be placed first in the constructor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><strong>IllegalArgumentException</strong> &#8211; if sets are not put first while using this constructor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="constructor">
+<dt id="com.ampl.DataFrame.DataFrame(int, String)">
+public <code class="descname">DataFrame</code><span class="sig-paren">(</span>int<em> numberOfIndexColumns</em>, <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a>...<em> headers</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.DataFrame(int, String)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new DataFrame where the specified number of columns are an index and with the specified strings as column headers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>numberOfIndexColumns</strong> &#8211; Number of columns to be considered as index for this table (&gt;=0)</li>
+<li><strong>headers</strong> &#8211; The columns headers to be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><strong>IllegalArgumentException</strong> &#8211; If a non-valid number of keys is specified</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="com.ampl.DataFrame.addColumn(Object)">
+public void <code class="descname">addColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.addColumn(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new (empty) column to the DataFrame. Data can then be reassigned with <a class="reference internal" href="#com.ampl.DataFrame.setColumn(Object, double[])" title="com.ampl.DataFrame.setColumn(Object, double[])"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame.setColumn</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; The header for the new column to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; If a column with the same name exists already or if a set column is added after a data column has been added already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.addColumn(Object, Collection)">
+public void <code class="descname">addColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em>, <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html" title="java.util.Collection">Collection</a>&lt;?&gt;<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.addColumn(Object, Collection)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new column to the dataframe, with the corresponding data. *</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; The header for the new column to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the size of <code class="docutils literal"><span class="pre">values</span></code> is not the same as the number of indices in the DataFrame, if a column with the same name exists already or if a set column is added after a data column has been added already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.addColumn(Object, T[])">
+public &lt;T&gt; void <code class="descname">addColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em>, T[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.addColumn(Object, T[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new column to the dataframe, with the corresponding data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; The header for the new column to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame, if a column with the same name exists already or if a set column is added after a data column has been added already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.addColumn(Object, int[])">
+public void <code class="descname">addColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em>, int[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.addColumn(Object, int[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new column to the dataframe, with the corresponding data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; The header for the new column to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame, if a column with the same name exists already or if a set column is added after a data column has been added already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.addColumn(Object, double[])">
+public void <code class="descname">addColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em>, double[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.addColumn(Object, double[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new column to the dataframe, with the corresponding data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; The header for the new column to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame, if a column with the same name exists already or if a set column is added after a data column has been added already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.addColumn(Object, long[])">
+public void <code class="descname">addColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em>, long[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.addColumn(Object, long[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new column to the dataframe, with the corresponding data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; The header for the new column to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame, if a column with the same name exists already or if a set column is added after a data column has been added already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.addColumn(Object, float[])">
+public void <code class="descname">addColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em>, float[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.addColumn(Object, float[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new column to the dataframe, with the corresponding data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; The header for the new column to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame, if a column with the same name exists already or if a set column is added after a data column has been added already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.addRow(Object)">
+public void <code class="descname">addRow</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> items</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.addRow(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a row to the current tables. The first <code class="docutils literal"><span class="pre">numberOfIndexColumns</span></code> columns (decided at object creation time) are treated as indices</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> &#8211; Items of the row to be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the number of items in the row is not equal to the number of columns, if a row is added to a DataFrame with no indices or if a row with the same indices exists already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getColumn(Object)">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[] <code class="descname">getColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getColumn(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data corresponding to the specified column</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; Column to be returned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Data corresponding to the column, null if the specified column does not exist.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getColumnAsDoubles(Object)">
+public double[] <code class="descname">getColumnAsDoubles</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getColumnAsDoubles(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data corresponding to the specified column as an array of double numbers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; Column to be returned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Data corresponding to the column, null if the specified column does not exist.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getColumnAsStrings(Object)">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a>[] <code class="descname">getColumnAsStrings</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> header</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getColumnAsStrings(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data corresponding to the specified column as an array of strings</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> &#8211; Column to be returned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; If the header specified does not correspond to any column</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Data corresponding to the column, null if the specified column does not exist.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getHeaders()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a>[] <code class="descname">getHeaders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getHeaders()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the column headers of this DataFrame</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Header names</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getNumCols()">
+public int <code class="descname">getNumCols</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getNumCols()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of columns in the table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Number of columns</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getNumIndices()">
+public int <code class="descname">getNumIndices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getNumIndices()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of indices in the table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Number of indices</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getNumRows()">
+public int <code class="descname">getNumRows</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getNumRows()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of rows in the table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Number of rows</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getRow(Object)">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[] <code class="descname">getRow</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> index</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getRow(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the specified row (by values of the indexing columns)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>index</strong> &#8211; Indices for the row</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; If the number of indices specified is wrong for the DataFrame</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The specified row, or &#8216;null&#8217; if the row was not found</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.getRowByIndex(int)">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[] <code class="descname">getRowByIndex</code><span class="sig-paren">(</span>int<em> index</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.getRowByIndex(int)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the specified row</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>index</strong> &#8211; 0-based numeric index</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IndexOutOfBoundsException.html" title="java.lang.IndexOutOfBoundsException"><strong>IndexOutOfBoundsException</strong></a> &#8211; If the index is &lt; 0 or greater than the number of rows in the DataFrame.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.iterator()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html" title="java.util.Iterator">Iterator</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[]&gt; <code class="descname">iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.iterator()" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.setColumn(Object, int[])">
+public void <code class="descname">setColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> column</em>, int[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.setColumn(Object, int[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set (all) the values for a specific column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column</strong> &#8211; Column identifier</li>
+<li><strong>values</strong> &#8211; Values to be assigned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame or if a column with the same name exists already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.setColumn(Object, float[])">
+public void <code class="descname">setColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> column</em>, float[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.setColumn(Object, float[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set (all) the values for a specific column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column</strong> &#8211; Column identifier</li>
+<li><strong>values</strong> &#8211; Values to be assigned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame or if a column with the same name exists already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.setColumn(Object, double[])">
+public void <code class="descname">setColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> column</em>, double[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.setColumn(Object, double[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set (all) the values for a specific column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column</strong> &#8211; Column identifier</li>
+<li><strong>values</strong> &#8211; Values to be assigned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame or if a column with the same name exists already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.setColumn(Object, long[])">
+public void <code class="descname">setColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> column</em>, long[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.setColumn(Object, long[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set (all) the values for a specific column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column</strong> &#8211; Column identifier</li>
+<li><strong>values</strong> &#8211; Values to be assigned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame or if a column with the same name exists already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.setColumn(Object, T[])">
+public &lt;T&gt; void <code class="descname">setColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> column</em>, T[]<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.setColumn(Object, T[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set (all) the values for a specific column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column</strong> &#8211; Column identifier</li>
+<li><strong>values</strong> &#8211; Values to be assigned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame or if a column with the same name exists already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.setColumn(Object, Collection)">
+public void <code class="descname">setColumn</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> column</em>, <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html" title="java.util.Collection">Collection</a>&lt;?&gt;<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.setColumn(Object, Collection)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set (all) the values for a specific column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column</strong> &#8211; Column identifier</li>
+<li><strong>values</strong> &#8211; Values to be assigned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the cardinality of values is not the same as the number of indices in the DataFrame or if a column with the same name exists already.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.setMatrix(Object, Object)">
+public void <code class="descname">setMatrix</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> values</em>, <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> indices</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.setMatrix(Object, Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the multidimensional array <code class="docutils literal"><span class="pre">values</span></code> as data column for this DataFrame, and all the vectors in <code class="docutils literal"><span class="pre">indices</span></code> as indices values.</p>
+<p>For example, the code snippet (which does not include the arrays initialization):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>double[][][][] fourdimensions = new double[][][][] {...};
+String[] firstIndex = new String[]{...};
+String[] secondIndex = new String[]{...};
+String[] thirdIndex = new String[]{...};
+String[] fourthIndex = new String[]{...};
+setMatrix(fourdimensions, firstIndex, secondIndex, thirdIndex, fourthIndex);
+</pre></div>
+</div>
+<p>is valid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>values</strong> &#8211; A multidimensional array, can be either <code class="docutils literal"><span class="pre">double[]..[]</span></code>, <code class="docutils literal"><span class="pre">String[]..[]</span></code> or <code class="docutils literal"><span class="pre">Object[]..[]</span></code>. The arrays can be anything from 1 to 6 dimensional. Items in <code class="docutils literal"><span class="pre">Object</span></code> arrays are converted to AMPL datatypes, so any numeric type is converted to double, anything else to String.</li>
+<li><strong>indices</strong> &#8211; Vectors containing the indices values for each dimension of the <code class="docutils literal"><span class="pre">values</span></code> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; If the number of indices is not equal to the arity of the values array, or if the arity is not supported.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.setValue(Object)">
+public void <code class="descname">setValue</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> values</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.setValue(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a single value in the DataFrame object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>values</strong> &#8211; The first objects are the row indices, followed by the column index, and finally by the value to be assigned</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if the specified column or row is not in the dataframe or if the number of arguments is wrong</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.DataFrame.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.DataFrame.toString()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a tabular string representation of the dataframe object</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Environment.html" title="Environment"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="AMPLOutput.html" title="AMPLOutput"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" >Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

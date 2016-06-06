@@ -19,7 +19,7 @@ TARGET = SimpleBuildingSimulator
 ALL = $(TARGET)
 
 $(TARGET):	$(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(TARGET) $(OBJS) $(LFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(TARGET) $(OBJS) $(LFLAGS) $(LIBS) -Wl,-rpath="./include/amplapi32/bin"
 
 SimpleBuildingSimulator.o: SimpleBuildingSimulator.cpp defs.h Building.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c SimpleBuildingSimulator.cpp

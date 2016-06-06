@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Environment &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../index.html" />
+    <link rel="up" title="C++ API reference" href="../reference.html" />
+    <link rel="next" title="ErrorHandler" href="errorhandler.html" />
+    <link rel="prev" title="DataFrame" href="dataframe.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="errorhandler.html" title="ErrorHandler"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dataframe.html" title="DataFrame"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" accesskey="U">C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dataframe.html"
+                        title="previous chapter">DataFrame</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="errorhandler.html"
+                        title="next chapter">ErrorHandler</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/classes/environment.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="environment">
+<span id="ref-environment"></span><h1>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4ampl11EnvironmentE">
+<span id="ampl::Environment"></span><span class="target" id="amplapiclassampl_1_1_environment"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">Environment</code><a class="headerlink" href="#_CPPv2N4ampl11EnvironmentE" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class provides access to the environment variables and provides facilities to specify where to load the underlying AMPL interpreter. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv2N4ampl11Environment8iteratorE">
+<span id="ampl::Environment::iterator"></span><span class="target" id="amplapiclassampl_1_1_environment_1a8bf315688490d8fa83b39e2394e6b9d8"></span><em class="property">typedef </em>internal::CountedIterator&lt;internal::EnvironmentIterator&gt; <code class="descname">iterator</code><a class="headerlink" href="#_CPPv2N4ampl11Environment8iteratorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator for the map. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment11EnvironmentEv">
+<span id="ampl::Environment::Environment"></span><span class="target" id="amplapiclassampl_1_1_environment_1a7065e45d7498ba9cce32d148f81721da"></span><code class="descname">Environment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl11Environment11EnvironmentEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Default constructor</p>
+ </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment11EnvironmentERK11Environment">
+<span id="ampl::Environment::Environment__EnvironmentCR"></span><span class="target" id="amplapiclassampl_1_1_environment_1ad1a0dfd40adc782549a5c1ac94f58c0a"></span><code class="descname">Environment</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4ampl11Environment11EnvironmentEv" title="ampl::Environment::Environment">Environment</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl11Environment11EnvironmentERK11Environment" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Copy constructor</p>
+ </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11EnvironmentaSERK11Environment">
+<span id="ampl::Environment::assign-operator__EnvironmentCR"></span><span class="target" id="amplapiclassampl_1_1_environment_1a5c3613c84245c94bfe07ca41292ce45e"></span><a class="reference internal" href="#_CPPv2N4ampl11Environment11EnvironmentEv" title="ampl::Environment::Environment">Environment</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4ampl11Environment11EnvironmentEv" title="ampl::Environment::Environment">Environment</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl11EnvironmentaSERK11Environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assignment operator. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment11EnvironmentEN3fmt10CStringRefE">
+<span id="ampl::Environment::Environment__fmt::CStringRef"></span><span class="target" id="amplapiclassampl_1_1_environment_1acc62b32cebd549afe2d51940085148e2"></span><code class="descname">Environment</code><span class="sig-paren">(</span>fmt::CStringRef <em>binaryDirectory</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl11Environment11EnvironmentEN3fmt10CStringRefE" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Constructor with ability to select the location of the %AMPL binary.
+Note that if this constructor is used, the automatic lookup for an AMPL
+executable
+will not be executed.
+param binaryDirectory The directory in which look for the %AMPL Binary</p>
+ </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11EnvironmentD0Ev">
+<span id="ampl::Environment::~Environment"></span><span class="target" id="amplapiclassampl_1_1_environment_1a65900a58ab6fac70e85fcb3faeb575f5"></span><code class="descname">~Environment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl11EnvironmentD0Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment3putEN3fmt10CStringRefEN3fmt10CStringRefE">
+<span id="ampl::Environment::put__fmt::CStringRef.fmt::CStringRef"></span><span class="target" id="amplapiclassampl_1_1_environment_1a49a011fcb27f31c4fb4acddeabf4aa09"></span>void <code class="descname">put</code><span class="sig-paren">(</span>fmt::CStringRef <em>name</em>, fmt::CStringRef <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl11Environment3putEN3fmt10CStringRefEN3fmt10CStringRefE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an environment variable to the environment, or change its value if already defined. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of the environment variable </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">value</span></code> - <p>value to be assigned </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment9setBinDirEN3fmt10CStringRefE">
+<span id="ampl::Environment::setBinDir__fmt::CStringRef"></span><span class="target" id="amplapiclassampl_1_1_environment_1a621183bf081ed90be7dbb77182f5825b"></span>void <code class="descname">setBinDir</code><span class="sig-paren">(</span>fmt::CStringRef <em>binaryDirectory</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl11Environment9setBinDirEN3fmt10CStringRefE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="set.html#amplapiclassampl_1_1_set"><span>Set</span></a> the location where AMPLAPI will search for the AMPL executable. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">binaryDirectory</span></code> - <p>Directory </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment9getBinDirEv">
+<span id="ampl::Environment::getBinDir"></span><span class="target" id="amplapiclassampl_1_1_environment_1a4e0d055757aa3207a7d4f6592412e1cb"></span>std::string <code class="descname">getBinDir</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11Environment9getBinDirEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the location where AMPLAPI will search for the AMPL executable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment8toStringEv">
+<span id="ampl::Environment::toString"></span><span class="target" id="amplapiclassampl_1_1_environment_1a079f4fd2c13dbe144cd19677dbfb9f61"></span>std::string <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11Environment8toStringEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><p>Print all variables in the map</p>
+ </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment5beginEv">
+<span id="ampl::Environment::begin"></span><span class="target" id="amplapiclassampl_1_1_environment_1ad31051693604a4a633e6bf16a5156bce"></span><a class="reference internal" href="#_CPPv2N4ampl11Environment8iteratorE" title="ampl::Environment::iterator">iterator</a> <code class="descname">begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11Environment5beginEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator pointing to the first environment variable in the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment3endEv">
+<span id="ampl::Environment::end"></span><span class="target" id="amplapiclassampl_1_1_environment_1ac7966656aa51e9b79ba624610cc1007f"></span><a class="reference internal" href="#_CPPv2N4ampl11Environment8iteratorE" title="ampl::Environment::iterator">iterator</a> <code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11Environment3endEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator pointing to the past-the-end element in the map: </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11Environment4findEN3fmt10CStringRefE">
+<span id="ampl::Environment::find__fmt::CStringRef"></span><span class="target" id="amplapiclassampl_1_1_environment_1abe572c0dc5cecbf011ff1f889d177a97"></span><a class="reference internal" href="#_CPPv2N4ampl11Environment8iteratorE" title="ampl::Environment::iterator">iterator</a> <code class="descname">find</code><span class="sig-paren">(</span>fmt::CStringRef <em>name</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11Environment4findEN3fmt10CStringRefE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches the current object for an environment variable called name and returns an iterator to it if found, otherwise it returns an iterator to <a class="reference internal" href="#amplapiclassampl_1_1_environment_1ac7966656aa51e9b79ba624610cc1007f"><span>Environment::end</span></a>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="errorhandler.html" title="ErrorHandler"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dataframe.html" title="DataFrame"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" >C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

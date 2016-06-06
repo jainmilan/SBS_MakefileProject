@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ObjectiveInstance &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/ampl.ico"/>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../../index.html" />
+    <link rel="up" title="Java API reference" href="../../reference.html" />
+    <link rel="next" title="Parameter" href="Parameter.html" />
+    <link rel="prev" title="Objective" href="Objective.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Parameter.html" title="Parameter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Objective.html" title="Objective"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" accesskey="U">Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ObjectiveInstance</a><ul>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Objective.html"
+                        title="previous chapter">Objective</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Parameter.html"
+                        title="next chapter">Parameter</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/com/ampl/ObjectiveInstance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="objectiveinstance">
+<h1>ObjectiveInstance<a class="headerlink" href="#objectiveinstance" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="com.ampl.ObjectiveInstance">
+public class <code class="descname">ObjectiveInstance</code> extends <a class="reference internal" href="Instance.html#com.ampl.Instance" title="com.ampl.Instance">Instance</a>&lt;<a class="reference internal" href="Objective.html#com.ampl.Objective" title="com.ampl.Objective">Objective</a>&gt;<a class="headerlink" href="#com.ampl.ObjectiveInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an objective instance.</p>
+<p>All AMPL suffixes for an objective are available through methods with the same name in this class. See <a class="reference external" href="http://www.ampl.com/NEW/suffbuiltin.html">http://www.ampl.com/NEW/suffbuiltin.html</a> for a list of the available suffixes.</p>
+<p>All the accessors in this class throw a <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><code class="xref java java-ref docutils literal"><span class="pre">IllegalStateException</span></code></a> if the instance has been deleted in the underlying AMPL interpreter.</p>
+</dd></dl>
+
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.astatus()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">astatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.astatus()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the AMPL status</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.drop()">
+public void <code class="descname">drop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.drop()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop this objective instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.exitcode()">
+public int <code class="descname">exitcode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.exitcode()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exit code returned by solver after most recent solve with this objective</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.message()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.message()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result message returned by solver after most recent solve with this objective</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.restore()">
+public void <code class="descname">restore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.restore()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore this objective instance (if it had been dropped, no effect otherwise)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.result()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.result()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result string returned by solver after most recent solve with this objective</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.sstatus()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">sstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.sstatus()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the solver status</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.toString()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representation of this instance. Returns the equivalent to the AMPL statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>expand instanceName;
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ObjectiveInstance.value()">
+public double <code class="descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ObjectiveInstance.value()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the objective instance</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Parameter.html" title="Parameter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Objective.html" title="Objective"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" >Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

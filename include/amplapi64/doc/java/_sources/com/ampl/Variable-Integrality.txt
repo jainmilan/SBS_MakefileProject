@@ -1,0 +1,29 @@
+Variable.Integrality
+====================
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public enum Integrality
+   :outertype: Variable
+
+   An integrality restriction.
+
+Enum Constants
+--------------
+
+.. java:field:: public static final Variable.Integrality BINARY
+   :outertype: Variable.Integrality
+
+   Binary variable
+
+.. java:field:: public static final Variable.Integrality CONTINUOUS
+   :outertype: Variable.Integrality
+
+   Continuous variable
+
+.. java:field:: public static final Variable.Integrality INTEGER
+   :outertype: Variable.Integrality
+
+   Integer variable
+

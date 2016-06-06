@@ -66,7 +66,7 @@ var PMV {2..duration+1, 1..total_rooms};					# PMV
 var Fan_Speed {1..duration, 1..total_rooms} >= 0;			# Fan Speed
 
 # Objective
-minimize total_energy : sum {t in 1..duration} (
+minimize total_power : sum {t in 1..duration} (
 							( SAV[t] * Coefficient_Heating_Power * ( SAT[t] - T_Cooling_Unit[t] ) ) + 
 							( SAV[t] * Coefficient_Cooling_Power * ( T_Mixing_Unit[t] - T_Cooling_Unit[t] ) ) + 
 							( Coefficient_Fan_Power * ( SAV[t] ^ 2 ) )

@@ -1,0 +1,162 @@
+.. java:import:: java.lang.reflect Method
+
+.. java:import:: java.util ArrayList
+
+.. java:import:: java.util Collection
+
+.. java:import:: java.util Collections
+
+.. java:import:: java.util LinkedHashMap
+
+.. java:import:: java.util List
+
+.. java:import:: java.util Map
+
+.. java:import:: java.util Set
+
+Entity
+======
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public abstract class Entity<T>
+
+   An AMPL entity such as a parameter or a variable. An entity can either represent a single instance of an AMPL algebraic entity or, if the corresponding declaration has an indexing expression, a mapping from keys to instances. In the derived classes, it has methods to access instance-level properties which can be used in case the represented entity is scalar. To gain access to all the values in an entity (for all instances and all suffixes for that entities), use :java:ref:`getValues`.
+
+Methods
+-------
+
+.. java:method:: public Set<Map.Entry<Object, T>> entrySet()
+   :outertype: Entity
+
+   Get a set view of this entity. Each entry in the set contains the key (value of the indices) and the corresponding instance. For a scalar entity, a set with just one entry is returned, which has a null key and the only instance as value.
+
+   The following example prints indices and values of the variable ``Buy`` indexed over the set ``FOOD`` (taken from the `diet model <http://www.ampl.com/BOOK/CHAPTERS/05-tut2.pdf>`_):
+
+   .. parsed-literal::
+
+      for(Map.Entry<Object, VariableInstance> e: ampl.getVariable("Buy").entrySet()) {
+              Object food = e.getKey();
+              VariableInstance buy = e.getValue();
+              System.out.format("%s %g%n", food, buy.value());
+      }
+
+   :return: An unmodifiable set containing all the entries of this entity.
+
+.. java:method:: public abstract T get()
+   :outertype: Entity
+
+   Get the instance corresponding to a scalar entity.
+
+   :throws UnsupportedOperationException: if the entity is not scalar.
+   :throws IllegalStateException: if the entity has been deleted in the underlying AMPL interpreter
+   :return: The corresponding instance.
+
+.. java:method:: public abstract T get(Object... key)
+   :outertype: Entity
+
+   Get the instance corresponding to the specified key. See :ref:`secAccessInstancesAndValues` for further information on how the key can be specified.
+
+   :param key: Key of the instance to be found.
+   :throws IllegalArgumentException: if trying to access an instance with the wrong number of keys (see :java:ref:`Entity.indexarity`)
+   :throws IllegalStateException: if the entity has been deleted in the underlying AMPL interpreter
+   :return: The instance corresponding to the key, or ``null`` if the specified key is not found.
+
+.. java:method:: public abstract T get(Tuple key)
+   :outertype: Entity
+
+   Get the instance corresponding to the specified tuple. See :ref:`secAccessInstancesAndValues` for further information on how the key can be specified.
+
+   :param key: Key (in form of Tuple) of the instance to be found.
+   :throws IllegalArgumentException: if trying to access an instance with the wrong number of keys (see :java:ref:`Entity.indexarity`)
+   :throws IllegalStateException: if the entity has been deleted in the underlying AMPL interpreter
+   :return: The instance corresponding to the key, or ``null`` if the specified key is not found.
+
+.. java:method:: public String[] getIndexingSets()
+   :outertype: Entity
+
+   Get the AMPL string representation of the sets on which this entity is indexed.
+
+   :return: The string representation of the indexing sets for this entity or an empty array if the entity is scalar
+
+.. java:method:: public Set<Object> getIndices()
+   :outertype: Entity
+
+   Get all the keys in this entity. Not modifiable as a collection.
+
+   :return: All the keys currently in the entity.
+
+.. java:method:: public Collection<T> getInstances()
+   :outertype: Entity
+
+   Get all instances in this entity. Not modifiable as a collection
+
+   :return: All instances currently generated for this entity.
+
+.. java:method:: public DataFrame getValues()
+   :outertype: Entity
+
+   Get the principal values of this entity as a :java:ref:`DataFrame`. For variables and objectives it returns their suffix \ ``val``\  for parameters it returns their values for constraints it returns the suffix \ ``dual``\  for sets it returns all the members of the set
+
+   :return: All instances
+
+.. java:method:: public DataFrame getValues(String... suffixes)
+   :outertype: Entity
+
+   Get all the specified values for this entity as a DataFrame object. The valid strings are all AMPL built-in suffixes for the entity under consideration.
+
+   :param suffixes: A list of suffixes to be returned
+   :throws IllegalArgumentException: if the specified suffix does not exist.
+   :return: A :java:ref:`DataFrame` object with a column for each indexing set and a column for each one of the specified suffixes.
+
+.. java:method:: @Deprecated public boolean hasIndexing()
+   :outertype: Entity
+
+   Check whether this entity is indexed over any set. Equivalent to testing whether :java:ref:`Entity.indexarity` is greater than zero.
+
+   :return: True if the entity is not scalar (is indexed over a set)
+
+.. java:method:: public int indexarity()
+   :outertype: Entity
+
+   Get the indexarity of this entity (sum of the dimensions of the indexing sets). This value indicates how many elements are to be passed to the method :java:ref:`Entity.get` in order to access an instance of this entity.
+
+   See the following AMPL examples:
+
+   .. parsed-literal::
+
+      var x;               # indexarity = 0
+      var y {1..2};        # indexarity = 1
+      var z {1..2,3..4};   # indexarity = 2
+      var zz {{(1, 2)}};   # indexarity = 2
+
+   :return: The sum of the dimensions of the indexing sets or 0 if the entity is not indexed
+
+.. java:method:: public boolean isScalar()
+   :outertype: Entity
+
+   Check whether this entity is scalar. Equivalent to testing whether :java:ref:`Entity.indexarity` is equal to zero.
+
+   :return: True if the entity is scalar (not indexed over any set)
+
+.. java:method:: public final String name()
+   :outertype: Entity
+
+   Get the AMPL name of this entity
+
+.. java:method:: public int numInstances()
+   :outertype: Entity
+
+   Get the number of instances in this entity
+
+.. java:method:: @Override public String toString()
+   :outertype: Entity
+
+   Get a string representation of this entity; for all entity types, it returns the AMPL declaration.
+
+.. java:method:: public List<Entity<?>> xref()
+   :outertype: Entity
+
+   Get all the entities which depend on this one
+
