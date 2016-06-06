@@ -47,8 +47,8 @@ param T_NoSPOT_ul;		# Temperature in No SPOT Region Upper Limit
 # Input Data
 param T_Outside {1..duration};						# Outside Temperature
 param Occupancy {1..duration, 1..total_rooms};		# Occupancy in the Room
-param T_NoSPOT_Init {1, 1..total_rooms}; 				# Initial Temperature in NoSPOT Region
-param Delta_T_SPOT_Init {1, 1..total_rooms}; 			# Initial Temperature Change in SPOT Region
+param T_NoSPOT_Init {1..total_rooms}; 				# Initial Temperature in NoSPOT Region
+param Delta_T_SPOT_Init {1..total_rooms}; 			# Initial Temperature Change in SPOT Region
 
 # Variables
 var T {1..duration, 1..total_rooms} >= 0;					# Room Temperature
@@ -76,33 +76,33 @@ minimize total_energy : sum {t in 1..duration} (
 						);
 
 # Constraints
-subject to Initialize_Delta_Temperature_In_SPOT_Region {k in 1..total_rooms}: Delta_T_SPOT[1, k] = Delta_T_SPOT_Init[1, k];
+subject to Initialize_Delta_Temperature_In_SPOT_Region {k in 1..total_rooms}: Delta_T_SPOT[1, k] = Delta_T_SPOT_Init[k];
 subject to Delta_Temperature_In_SPOT_Region {t in 1..duration, k in 1..total_rooms}:
 		Delta_T_SPOT[t+1, k] = ( CoRC_CiRT * Delta_T_SPOT[t, k] ) + ( CoSI_SCS * SPOT_Status[t, k] ) + 
 						( CoOI_OHL * Occupancy[t, k] );
 
 subject to Initialize_Temperature_In_NoSPOT_Region {k in 1..total_rooms}: T_NoSPOT[k, 1] = T_NoSPOT_Init[k];
-subject to Temperature_In_NoSPOT_Region {k in 1..total_rooms, t in 1..duration}: 
-		T_NoSPOT[k, t+1] = ( CoWI_CRT * T_NoSPOT[k, t] ) + ( CoWI_OAT * T_Outside[t] ) + 
-						( CoHI_CRT * T_NoSPOT[k, t] * ( SAV[t] / total_rooms ) ) + 
+subject to Temperature_In_NoSPOT_Region {t in 1..duration, k in 1..total_rooms}: 
+		T_NoSPOT[t+1, k] = ( CoWI_CRT * T_NoSPOT[t, k] ) + ( CoWI_OAT * T_Outside[t] ) + 
+						( CoHI_CRT * T_NoSPOT[t, k] * ( SAV[t] / total_rooms ) ) + 
 						( CoHI_SAT * SAT[t] * ( SAV[t] / total_rooms ) ) + 
-						( CoEI_OLEL * Occupancy[k, t] ) + 
-						( CoRC_CiR1T * Delta_T_SPOT[k, t] );
+						( CoEI_OLEL * Occupancy[t, k] ) + 
+						( CoRC_CiR1T * Delta_T_SPOT[t, k] );
 
 subject to Mixed_Air_Temperature {t in 1..duration}:
-		T_Mixing_Unit[t] = ( Ratio[t] * ( sum{k in 1..total_rooms} T_SPOT[k, t] ) / total_rooms  ) + 
+		T_Mixing_Unit[t] = ( Ratio[t] * ( sum{k in 1..total_rooms} T_SPOT[t, k] ) / total_rooms  ) + 
 							( 1 - Ratio[t] ) * ( T_Outside[t] );
 
-subject to PMV_Constraint {k in 1..total_rooms, t in 2..duration+1}:
-		PMV[k, t] = Occupancy[k, t-1] * ( pmv_p1 * ( T_NoSPOT[k, t] + Delta_T_SPOT[k, t] - 
-		CoRC_CiR1T * Delta_T_SPOT[k, t-1] ) + ( pmv_p3 * Fan_Speed[k, t-1] * Fan_Speed[k, t-1] ) - 
-		( pmv_p2 * Fan_Speed[k, t-1] ) - pmv_p4);
+subject to PMV_Constraint {t in 2..duration+1, k in 1..total_rooms}:
+		PMV[t, k] = Occupancy[t-1, k] * ( pmv_p1 * ( T_NoSPOT[t, k] + Delta_T_SPOT[t, k] - 
+		CoRC_CiR1T * Delta_T_SPOT[t-1, k] ) + ( pmv_p3 * Fan_Speed[t-1, k] * Fan_Speed[t-1, k] ) - 
+		( pmv_p2 * Fan_Speed[t-1, k] ) - pmv_p4);
 
-subject to PMV_lower_limit {k in 1..total_rooms, t in 2..duration+1}: PMV[k, t] >= PMV_ll;
-subject to PMV_upper_limit {k in 1..total_rooms, t in 2..duration+1}: PMV[k, t] <= PMV_ul;
+subject to PMV_lower_limit {t in 2..duration+1, k in 1..total_rooms}: PMV[t, k] >= PMV_ll;
+subject to PMV_upper_limit {t in 2..duration+1, k in 1..total_rooms}: PMV[t, k] <= PMV_ul;
 
-subject to T_NoSPOT_lower_limit {k in 1..total_rooms, t in 2..duration+1}: T_NoSPOT[k, t] >= T_NoSPOT_ll;
-subject to T_NoSPOT_upper_limit {k in 1..total_rooms, t in 2..duration+1}: T_NoSPOT[k, t] <= T_NoSPOT_ul;
+subject to T_NoSPOT_lower_limit {t in 2..duration+1, k in 1..total_rooms}: T_NoSPOT[t, k] >= T_NoSPOT_ll;
+subject to T_NoSPOT_upper_limit {t in 2..duration+1, k in 1..total_rooms}: T_NoSPOT[t, k] <= T_NoSPOT_ul;
 
 subject to SAV_lower_limit {t in 1..duration}: SAV[t] >= SAV_ll;
 subject to SAV_upper_limit {t in 1..duration}: SAV[t] <= SAV_ul;
@@ -115,9 +115,9 @@ subject to Ratio_lower_limit {t in 1..duration}: Ratio[t] <= 0.8;
 subject to T_Cooling_Unit_lower_limit_1 {t in 1..duration}: T_Cooling_Unit[t] <= SAT[t];
 subject to T_Cooling_Unit_lower_limit_2 {t in 1..duration} : T_Cooling_Unit[t] <= T_Mixing_Unit[t];
 
-subject to SPOT_Status_Constraint {k in 1..total_rooms, t in 1..duration}: SPOT_Status[k, t] <= Occupancy[k, t];
+subject to SPOT_Status_Constraint {t in 1..duration, k in 1..total_rooms}: SPOT_Status[t, k] <= Occupancy[t, k];
 
-subject to Fan_Speed_Eq_Const {k in 1..total_rooms, t in 1..duration} : Fan_Speed[k, t] = 0;
+subject to Fan_Speed_Eq_Const {t in 1..duration, k in 1..total_rooms} : Fan_Speed[t, k] = 0;
 
 ##### Yet To Implement - Need Help
 #subject to pmvlt3 {t in 2..T+1,k in  n1+1..n1+n2} :O[6*(l1-1)+l2+t-1,k]*P[k,t] >=O[6*(l1-1)+l2+t-1,k]*betalim11;

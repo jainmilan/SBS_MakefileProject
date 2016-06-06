@@ -153,9 +153,9 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
 	float T_NoSPOT_ul = 20;
 
 	// Read the model and data files.
-	std::string modelDirectory = ".\\models";
+	std::string modelDirectory = "./models";
 	try {
-		ampl.read(".\\models\\mpcmodel.mod");
+		ampl.read("./models/mpcmodel.mod");
 
 		// Initialize Parameters - Basic Parameters
 		ampl::Parameter pDuration = ampl.getParameter("duration");

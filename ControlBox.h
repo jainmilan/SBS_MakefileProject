@@ -11,7 +11,7 @@
 #include<iostream>
 
 #include "defs.h"
-#include "building.h"
+#include "Building.h"
 
 #include<Eigen/Dense>
 
