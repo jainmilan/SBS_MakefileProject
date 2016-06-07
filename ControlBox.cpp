@@ -23,7 +23,7 @@ Eigen::MatrixXf ControlBox::GetSAVMatrix(Eigen::MatrixXf SAV_Zones, int num_room
 }
 
 
-struct ControlVariables ControlBox::DefaultControl(uint8 num_zones, uint8 num_rooms) {
+struct ControlVariables ControlBox::DefaultControl(int num_zones, int num_rooms) {
 	int total_rooms = num_zones * num_rooms;
 
 	struct ControlVariables cv;
@@ -41,7 +41,7 @@ struct ControlVariables ControlBox::DefaultControl(uint8 num_zones, uint8 num_ro
 	return cv;
 }
 
-struct ControlVariables ControlBox::ReactiveControl(uint8 num_zones, uint8 num_rooms, Eigen::MatrixXf TR1,
+struct ControlVariables ControlBox::ReactiveControl(int num_zones, int num_rooms, Eigen::MatrixXf TR1,
 	Eigen::MatrixXf O, int k, Eigen::MatrixXi SPOT_PreviousState) {
 
 	int total_rooms = num_zones * num_rooms;
@@ -88,7 +88,7 @@ struct ControlVariables ControlBox::ReactiveControl(uint8 num_zones, uint8 num_r
 	return cv;
 }
 
-struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms, int duration, int time_step,
+struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms, long int duration, int time_step,
 	Building::Air air_params, Building::Room room_params, Building::AHU ahu_params, Building::PMV_Model pmv_params) {
 
 	// Initialize AMPL and Control Variables
@@ -97,22 +97,22 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms, int
 
 	// Generic Parameters
 	int tau = time_step;
-	int tinstances = duration / tau;
-	const long int total_rooms = num_zones * num_rooms;
+	long int tinstances = duration / tau;
+	int total_rooms = num_zones * num_rooms;
 
 	// Building Parameters
-	double C = room_params.C;
-	double C_ = room_params.C_;
+	float C = room_params.C;
+	float C_ = room_params.C_;
 
-	double alpha_o = room_params.alpha_o;
-	double alpha_r = room_params.alpha_r;
+	float alpha_o = room_params.alpha_o;
+	float alpha_r = room_params.alpha_r;
 
-	double Q_l = room_params.Q_l;
-	double Q_h = room_params.Q_h;
-	double Q_s = room_params.Q_s;
+	float Q_l = room_params.Q_l;
+	float Q_h = room_params.Q_h;
+	float Q_s = room_params.Q_s;
 
-	double density = air_params.density;
-	double specific_heat = air_params.specific_heat;
+	float density = air_params.density;
+	float specific_heat = air_params.specific_heat;
 
 	// Limits on Variables
 	float SAT_ll = -20;
@@ -141,7 +141,7 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms, int
 
 		// Initialize Parameters - Basic Parameters
 		ampl::Parameter pDuration = ampl.getParameter("duration");
-		double pDurationA[] = { tinstances };
+		double pDurationA[] = { (double) tinstances };
 		pDuration.setValues(pDurationA, 1);
 
 		ampl::Parameter pTotalRooms = ampl.getParameter("total_rooms");

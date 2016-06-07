@@ -17,12 +17,43 @@
 using namespace SimpleBuildingSimulator;
 
 Building::Building() {
+
+	/* Thermal Capacities */
+	CommonRoom.C = 2000;			// Thermal Capacity of Room (kJ/K)
+	CommonRoom.C_ = 200;			// Thermal Capacity of SPOT Region (kJ/K)
+
+	/* Heat Transfer Coefficients */
+	CommonRoom.alpha_o = 0.048f;	// Heat Transfer Coefficient for Outside (kJ/K.s)
+	CommonRoom.alpha_r = 0.1425f;	// Heat Transfer Coefficient for Regions (kJ/K.s)
+
+	/* Heat Loads */
+	CommonRoom.Q_l = 0.1f;			// Heat Load Due to Lightening and Equipments (kW)
+	CommonRoom.Q_h = 0.1f;			// Heat Load Due to Presence of Occupants (kW)
+	CommonRoom.Q_s = 0.7f;			// Heat Load of SPOT Unit (kW)
+
+	CommonRoom.fan_coef = 0.094f;
+
+	CommonAir.density = 1.225f;
+	CommonAir.specific_heat = 1.003f;
+
+	PMV_Params.P1 = 0.2466f;
+	PMV_Params.P2 = 1.4075f;
+	PMV_Params.P3 = 0.581f;
+	PMV_Params.P4 = 5.4668f;
+
+	CommonAHU.HeatingEfficiency = 0.9f;
+	CommonAHU.CoolingEfficiency = 0.9f;
+
+	num_zones_ = 1;
+	num_rooms_ = 1;
+	region = 0;
+
 }
 
 Building::~Building() {
 }
 
-Eigen::MatrixXf Building::Create_CoWI_CRT_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoWI_CRT_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoWI_CRT = 1 - ((CommonRoom.alpha_o * time_step) / CommonRoom.C);
@@ -33,7 +64,7 @@ Eigen::MatrixXf Building::Create_CoWI_CRT_Matrix(uint16 time_step) {
 	return CoWI_CRT_Matrix;
 }
 
-Eigen::MatrixXf Building::Create_CoWI_OAT_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoWI_OAT_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoWI_OAT = (CommonRoom.alpha_o * time_step) / CommonRoom.C;
@@ -44,7 +75,7 @@ Eigen::MatrixXf Building::Create_CoWI_OAT_Matrix(uint16 time_step) {
 	return CoWI_OAT_Matrix;
 }
 
-Eigen::MatrixXf Building::Create_CoHI_CRT_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoHI_CRT_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoHI_CRT = (-1 * time_step * CommonAir.density
@@ -56,7 +87,7 @@ Eigen::MatrixXf Building::Create_CoHI_CRT_Matrix(uint16 time_step) {
 	return CoHI_CRT_Matrix;
 }
 
-Eigen::MatrixXf Building::Create_CoHI_SAT_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoHI_SAT_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoHI_SAT = (time_step * CommonAir.density * CommonAir.specific_heat)
@@ -68,7 +99,7 @@ Eigen::MatrixXf Building::Create_CoHI_SAT_Matrix(uint16 time_step) {
 	return CoHI_SAT_Matrix;
 }
 
-Eigen::MatrixXf Building::Create_CoEI_OLEL_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoEI_OLEL_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoEI_OLEL = (time_step * CommonRoom.Q_l) / (CommonRoom.C);
@@ -79,7 +110,7 @@ Eigen::MatrixXf Building::Create_CoEI_OLEL_Matrix(uint16 time_step) {
 	return CoEI_OLEL_Matrix;
 }
 
-Eigen::MatrixXf Building::Create_CoOI_OHL_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoOI_OHL_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoOI_OHL = (time_step * CommonRoom.Q_h) / (CommonRoom.C_);
@@ -90,7 +121,7 @@ Eigen::MatrixXf Building::Create_CoOI_OHL_Matrix(uint16 time_step) {
 	return CoOI_OHL_Matrix;
 }
 
-Eigen::MatrixXf Building::Create_CoSI_SCS_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoSI_SCS_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoSI_SCS = (time_step * CommonRoom.Q_s) / (CommonRoom.C_);
@@ -101,7 +132,7 @@ Eigen::MatrixXf Building::Create_CoSI_SCS_Matrix(uint16 time_step) {
 	return CoSI_SCS_Matrix;
 }
 
-Eigen::MatrixXf Building::Create_CoRC_CiRT_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoRC_CiRT_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoRC_CiRT = 1 - ((time_step * CommonRoom.alpha_r) / (CommonRoom.C_));
@@ -112,7 +143,7 @@ Eigen::MatrixXf Building::Create_CoRC_CiRT_Matrix(uint16 time_step) {
 	return CoRC_CiRT_Matrix;
 }
 
-Eigen::MatrixXf Building::Create_CoRC_CiR1T_Matrix(uint16 time_step) {
+Eigen::MatrixXf Building::Create_CoRC_CiR1T_Matrix(int time_step) {
 	int total_rooms = num_zones_ * num_rooms_;
 
 	float CoRC_CiR1T = (time_step * CommonRoom.alpha_r)
@@ -170,8 +201,8 @@ float Building::GetAHUPower(float MixedAirTemperature,
 
 	return AHUPower;
 }
-void Building::Simulate(uint32 duration, uint16 time_step, int control_type) {
-	int n = (duration / time_step) + 1;
+void Building::Simulate(long int duration, int time_step, int control_type) {
+	long int n = (duration / time_step) + 1;
 
 	int total_rooms = num_zones_ * num_rooms_;
 

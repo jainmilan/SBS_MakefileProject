@@ -27,12 +27,12 @@ class ControlBox {
 public:
 	ControlBox();
 	~ControlBox();
-	struct ControlVariables DefaultControl(uint8 num_zones, uint8 num_rooms);
-	struct ControlVariables ReactiveControl(uint8 num_zones, uint8 num_rooms,
+	struct ControlVariables DefaultControl(int num_zones, int num_rooms);
+	struct ControlVariables ReactiveControl(int num_zones, int num_rooms,
 			Eigen::MatrixXf TR1, Eigen::MatrixXf O, int k,
 			Eigen::MatrixXi SPOT_PreviousState);
 	struct ControlVariables MPCControl(int num_zones, int num_rooms,
-			int duration, int time_step, Building::Air air_params,
+			long int duration, int time_step, Building::Air air_params,
 			Building::Room room_params, Building::AHU ahu_params,
 			Building::PMV_Model pmv_params);
 private:

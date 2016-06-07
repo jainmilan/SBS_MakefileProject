@@ -20,12 +20,12 @@ int main()
 	/* Initialize Building */
 	Building dc;
 
-	uint8 num_zones = dc.get_num_zones();
-	uint8 num_rooms = dc.get_num_rooms();
+	int num_zones = dc.get_num_zones();
+	int num_rooms = dc.get_num_rooms();
 
 	int update = 0;
 
-	printf("DEFAULT: \n Number of Zones = %hhu \n Number of Rooms = %hhu \n", num_zones, num_rooms);
+	printf("DEFAULT: \n Number of Zones = %d \n Number of Rooms = %d \n", num_zones, num_rooms);
 
 	printf("Do you want to change? (1-Yes, 0-No): ");
 	scanf("%d", &update);
@@ -34,35 +34,35 @@ int main()
 		printf("WARNING: Number should lie between 0-255. Otherwise, Unexpected Results\n");
 
 		printf("Enter Number of Zones : ");
-		scanf("%hhu", &num_zones);
+		scanf("%d", &num_zones);
 		dc.set_num_zones(num_zones);
 
 		printf("Enter Number of Rooms : ");
-		scanf("%hhu", &num_rooms);
+		scanf("%d", &num_rooms);
 		dc.set_num_rooms(num_rooms);
 	}
 
 	num_zones = dc.get_num_zones();
 	num_rooms = dc.get_num_rooms();
 
-	printf("UPDATED: \n Number of Zones = %hhu \n Number of Rooms = %hhu \n", num_zones, num_rooms);
+	printf("UPDATED: \n Number of Zones = %d \n Number of Rooms = %d \n", num_zones, num_rooms);
 
 	/* Initialize Simulation Details */
-	uint16 MIN2SEC = 60;
-	uint32 duration = 120000;
-	uint16 time_step = 600;
+	int MIN2SEC = 60;
+	long int duration = 120000;
+	int time_step = 600;
 
-	printf("DEFAULT: \n Duration = %u \n Time Step = %hu \n", duration, time_step);
+	printf("DEFAULT: \n Duration = %ld \n Time Step = %d \n", duration, time_step);
 
 	printf("Do you want to change? (1-Yes, 0-No): ");
 	scanf("%d", &update);
 
 	if (update == 1) {
 		printf("Enter Simulation Duration (in seconds) : ");
-		scanf("%u", &duration);
+		scanf("%ld", &duration);
 
 		printf("Enter Time Step (in seconds) : ");
-		scanf("%hu", &time_step);
+		scanf("%d", &time_step);
 	}
 
 	if ((time_step/MIN2SEC)/duration > 1) {
@@ -70,7 +70,7 @@ int main()
 		return 0;
 	}
 
-	printf("UPDATED: \n Duration = %u \n Time Step = %hu \n", duration, time_step);
+	printf("UPDATED: \n Duration = %ld \n Time Step = %d \n", duration, time_step);
 
 	int control_type = 1;
 

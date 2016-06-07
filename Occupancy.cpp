@@ -17,8 +17,8 @@ Occupants::~Occupants()
 {
 }
 
-Eigen::MatrixXi Occupants::GetOccupancyForecast(uint32 duration, uint16 time_step, uint8 num_zones, uint8 num_rooms) {
-	int n = (duration / time_step) + 1;
+Eigen::MatrixXi Occupants::GetOccupancyForecast(long int duration, int time_step, int num_zones, int num_rooms) {
+	long int n = (duration / time_step) + 1;
 	int total_rooms = num_zones * num_rooms;
 
 	Eigen::MatrixXi occupancy = Eigen::MatrixXi::Ones(n, total_rooms);
