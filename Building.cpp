@@ -10,6 +10,7 @@
 #include "Building.h"
 #include "ControlBox.h"
 #include "Occupancy.h"
+#include "WriteOutput.h"
 
 #include<stdio.h>
 #include<iostream>
@@ -23,12 +24,12 @@ Building::Building() {
 	CommonRoom.C_ = 200;			// Thermal Capacity of SPOT Region (kJ/K)
 
 	/* Heat Transfer Coefficients */
-	CommonRoom.alpha_o = 0.048f;	// Heat Transfer Coefficient for Outside (kJ/K.s)
-	CommonRoom.alpha_r = 0.1425f;	// Heat Transfer Coefficient for Regions (kJ/K.s)
+	CommonRoom.alpha_o = 0.048f;// Heat Transfer Coefficient for Outside (kJ/K.s)
+	CommonRoom.alpha_r = 0.1425f;// Heat Transfer Coefficient for Regions (kJ/K.s)
 
 	/* Heat Loads */
-	CommonRoom.Q_l = 0.1f;			// Heat Load Due to Lightening and Equipments (kW)
-	CommonRoom.Q_h = 0.1f;			// Heat Load Due to Presence of Occupants (kW)
+	CommonRoom.Q_l = 0.1f;	// Heat Load Due to Lightening and Equipments (kW)
+	CommonRoom.Q_h = 0.1f;		// Heat Load Due to Presence of Occupants (kW)
 	CommonRoom.Q_s = 0.7f;			// Heat Load of SPOT Unit (kW)
 
 	CommonRoom.fan_coef = 0.094f;
@@ -383,5 +384,10 @@ void Building::Simulate(long int duration, int time_step, int control_type) {
 
 	//std::cout << PPV << std::endl;
 	//std::cout << MixedAirTemperature << std::endl;
+
+	WriteOutput writer;
+	writer.WriteOutputCSV(duration, time_step, num_zones_, num_rooms_, T, TR1,
+			TR2, DeltaTR1, DeltaTR2, PPV, MixedAirTemperature, PowerAHU, O,
+			T_ext, SPOT_State, CommonRoom, CommonAHU, CommonAir, PMV_Params);
 }
 
