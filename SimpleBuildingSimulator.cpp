@@ -94,62 +94,9 @@ int main()
 		printf("Updated: MPC Control \n");
 	}
 
-	/*
-	Eigen::MatrixXf m1 = dc.Create_CoWI_CRT_Matrix(time_step);
-	std::cout << m1 << std::endl;
-	printf("\n");
-
-	Eigen::MatrixXf m2 = dc.Create_CoWI_OAT_Matrix(time_step);
-	std::cout << m2 << std::endl;
-	printf("\n");
-
-	Eigen::MatrixXf m3 = dc.Create_CoHI_CRT_Matrix(time_step);
-	std::cout << m3 << std::endl;
-	printf("\n");
-
-	Eigen::MatrixXf m4 = dc.Create_CoHI_SAT_Matrix(time_step);
-	std::cout << m4 << std::endl;
-	printf("\n");
-
-	Eigen::MatrixXf m5 = dc.Create_CoEI_OLEL_Matrix(time_step);
-	std::cout << m5 << std::endl;
-	printf("\n");
-
-	Eigen::MatrixXf m6 = dc.Create_CoOI_OHL_Matrix(time_step);
-	std::cout << m6 << std::endl;
-	printf("\n");
-
-	Eigen::MatrixXf m7 = dc.Create_CoSI_SCS_Matrix(time_step);
-	std::cout << m7 << std::endl;
-	printf("\n");
-
-	Eigen::MatrixXf m8 = dc.Create_CoRC_CiRT_Matrix(time_step);
-	std::cout << m8 << std::endl;
-	printf("\n");
-
-	Eigen::MatrixXf m9 = dc.Create_CoRC_CiR1T_Matrix(time_step);
-	std::cout << m9 << std::endl;
-	printf("\n");
-
-	Weather forecast;
-	Eigen::MatrixXf m10 = forecast.GetWeatherForecast(duration, time_step, num_zones, num_rooms);
-	std::cout << m10 << std::endl;
-	printf("\n");
-
-	Occupants occupancy;
-	Eigen::MatrixXi m11 = occupancy.GetOccupancyForecast(duration, time_step, num_zones, num_rooms);
-	std::cout << m11 << std::endl;
-	printf("\n");
-
-	SPOT spot;
-	Eigen::MatrixXi m12 = spot.GetSPOTForecast(duration, time_step, num_zones, num_rooms);
-	std::cout << m12 << std::endl;
-	printf("\n");
-	*/
-
 	dc.Simulate(duration, time_step, control_type);
 
-
+	printf("Simulation Complete");
 	system("pause");
 	return 0;
 }

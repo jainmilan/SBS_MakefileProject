@@ -319,7 +319,8 @@ void Building::Simulate(long int duration, int time_step, int control_type) {
 			break;
 		case 3:
 			CV = cb.MPCControl(num_zones_, num_rooms_, duration, time_step,
-					CommonAir, CommonRoom, CommonAHU, PMV_Params);
+					CommonAir, CommonRoom, CommonAHU, PMV_Params, T_ext, O,
+					TR2.row(0), DeltaTR1.row(k));
 			break;
 		default:
 			break;
