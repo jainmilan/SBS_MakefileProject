@@ -123,14 +123,14 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
 	float specific_heat = air_params.specific_heat;
 
 	// Limits on Variables
-	float SAT_ll = -20;
-	float SAT_ul = 20;
+	float SAT_ll = 12;
+	float SAT_ul = 35;
 
-	float SAV_ll = 0;
-	float SAV_ul = 0;
+	float SAV_ll = 0.236;
+	float SAV_ul = 4;
 
-	float PMV_ll = -5;
-	float PMV_ul = 5;
+	float PMV_ll = -0.29;
+	float PMV_ul = 0.23;
 
 	float T_ll = -20;
 	float T_ul = 20;
