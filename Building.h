@@ -15,6 +15,10 @@ namespace SimpleBuildingSimulator
 	class Building
 	{
 	public:
+		int num_zones_;			// Number of VAV zones in the building
+		int num_rooms_;			// Number of rooms in the building
+		bool region;				// If True implies SPOT is ON else OFF
+
 		Building();
 		~Building();
 
@@ -60,12 +64,8 @@ namespace SimpleBuildingSimulator
 		void set_num_zones(int num_zones) { num_zones_ = num_zones; }
 		void set_num_rooms(int num_rooms) { num_rooms_ = num_rooms; }
 
-		void Simulate(long int duration, int time_step, int control_type);
+		void Simulate(long int duration, int time_step, int control_type, char* csvfile);
 	private:
-		int num_zones_;			// Number of VAV zones in the building
-		int num_rooms_;			// Number of rooms in the building
-		bool region;				// If True implies SPOT is ON else OFF
-
 		Eigen::MatrixXf Create_CoWI_CRT_Matrix(int time_step);
 		Eigen::MatrixXf Create_CoWI_OAT_Matrix(int time_step);
 

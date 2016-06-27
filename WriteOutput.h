@@ -24,7 +24,7 @@ public:
 			Eigen::MatrixXf Occupancy, Eigen::MatrixXf T_ext,
 			Eigen::MatrixXi SPOT_State, Building::Room CommonRoom,
 			Building::AHU CommonAHU, Building::Air CommonAir,
-			Building::PMV_Model PMV_Params);
+			Building::PMV_Model PMV_Params, char *filename);
 private:
 
 };

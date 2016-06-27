@@ -25,13 +25,13 @@ void WriteOutput::WriteOutputCSV(long int duration, int time_step,
 		Eigen::MatrixXf PowerAHU, Eigen::MatrixXf Occupancy,
 		Eigen::MatrixXf T_ext, Eigen::MatrixXi SPOT_State,
 		Building::Room CommonRoom, Building::AHU CommonAHU,
-		Building::Air CommonAir, Building::PMV_Model PMV_Params) {
+		Building::Air CommonAir, Building::PMV_Model PMV_Params, char *filename) {
 
 	long int tinstances = duration / time_step;
 	int total_rooms = num_zones * num_rooms;
 
 	std::ofstream myfile;
-	myfile.open("output/simulation.csv");
+	myfile.open(filename);
 
 	/* Input Parameters of the Simulation */
 	myfile << "# Number of Zones: " << num_zones << "\n";

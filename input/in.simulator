@@ -1,0 +1,31 @@
+building:{
+	zones:1,
+	rooms:1,
+	duration:14400,
+	timestep:600,
+	control:3,
+	ahu:{
+		heff:0.9,
+		ceff:0.9
+	},
+	room:{
+		C:2000,
+		CSPOT:200,
+		alphao:0.048,
+		alphar:0.1425,
+		Ql:0.1,
+		Qh:0.1,
+		Qs:0.7,
+		fancoef:0.094
+	},
+	air:{
+		density:1.225,
+		spheat:1.003
+	},
+	pmv:{
+		p1:0.2466,
+		p2:1.4075,
+		p3:0.581,
+		p4:5.4668
+	}
+}

@@ -17,6 +17,10 @@
 
 using namespace SimpleBuildingSimulator;
 
+//int C, int C_, float alpha_o, float alpha_r, float Q_l, float Q_h, float Q_s,
+//float fan_coef, float density, float specific_heat, float P1, float P2, float P3, float P4,
+//float HeatingEfficiency, float CoolingEfficiency
+
 Building::Building() {
 
 	/* Thermal Capacities */
@@ -202,7 +206,7 @@ float Building::GetAHUPower(float MixedAirTemperature,
 
 	return AHUPower;
 }
-void Building::Simulate(long int duration, int time_step, int control_type) {
+void Building::Simulate(long int duration, int time_step, int control_type, char *csvfile) {
 	long int n = (duration / time_step) + 1;
 
 	int total_rooms = num_zones_ * num_rooms_;
@@ -389,6 +393,6 @@ void Building::Simulate(long int duration, int time_step, int control_type) {
 	WriteOutput writer;
 	writer.WriteOutputCSV(duration, time_step, num_zones_, num_rooms_, T, TR1,
 			TR2, DeltaTR1, DeltaTR2, PPV, MixedAirTemperature, PowerAHU, O,
-			T_ext, SPOT_State, CommonRoom, CommonAHU, CommonAir, PMV_Params);
+			T_ext, SPOT_State, CommonRoom, CommonAHU, CommonAir, PMV_Params, csvfile);
 }
 
