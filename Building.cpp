@@ -49,6 +49,9 @@ Building::Building() {
 	CommonAHU.HeatingEfficiency = 0.9f;
 	CommonAHU.CoolingEfficiency = 0.9f;
 
+	CommonErrors.err_bparams = 0.02;
+	CommonErrors.err_text = 0.02;
+
 	num_zones_ = 1;
 	num_rooms_ = 1;
 	region = 0;
@@ -212,8 +215,9 @@ void Building::Simulate(long int duration, int time_step, int control_type, char
 	int total_rooms = num_zones_ * num_rooms_;
 
 	Weather forecast;
+	std::cout << CommonErrors.err_text;
 	Eigen::MatrixXf T_ext = forecast.GetWeatherForecast(duration, time_step,
-			num_zones_, num_rooms_);
+			num_zones_, num_rooms_, CommonErrors.err_text);
 
 	Occupants occupancy;
 	Eigen::MatrixXf O = occupancy.GetOccupancyForecast(duration, time_step,

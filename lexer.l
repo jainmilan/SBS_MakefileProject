@@ -40,6 +40,9 @@
 "p3" 				{ return P3; }
 "p4" 				{ return P4; }
 
+"bparams" 			{ return BPARAMS; }
+"text" 				{ return TEXT; }
+
 [a-zA-Z0-9]+      	{ yylval.sval = strdup(yytext); return STRING; }
 [\n]				{ ++line_num; return ENDL; }
 

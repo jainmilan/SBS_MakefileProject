@@ -1,4 +1,4 @@
-datafile = 'C:\Local\Eclipse\workspace\SimpleBuildingSimulator\output\simulation.csv'
+datafile = 'C:\Local\Eclipse\workspace\SimpleBuildingSimulator\output\simulation_160628145058.csv'
 
 set terminal wxt size 1300, 800
 set multiplot layout 3, 1

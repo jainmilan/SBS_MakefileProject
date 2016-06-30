@@ -55,6 +55,9 @@
 %token P3
 %token P4
 
+%token BPARAMS
+%token TEXT
+
 %token <ival> INT
 %token <fval> FLOAT
 %token <sval> STRING
@@ -105,6 +108,8 @@ body_line:
 	| P2 ':' FLOAT							{ dc.PMV_Params.P2 = $3; }
 	| P3 ':' FLOAT							{ dc.PMV_Params.P3 = $3; }
 	| P4 ':' FLOAT							{ dc.PMV_Params.P4 = $3; }
+	| BPARAMS ':' FLOAT						{ dc.CommonErrors.err_bparams = $3; }
+	| TEXT ':' FLOAT						{ dc.CommonErrors.err_text = $3; }
 	| STRING ':' STRING						{ cout << $1 << ": " << $3 << endl; }
 	;
 	
@@ -154,7 +159,7 @@ int main( int argc, char *argv[] ) {
 		strcat(csvfile, buffer);
 		strcat(csvfile, ".csv");
      	
-     	cout << filename << endl;
+     	cout << csvfile << endl;
 		dc.Simulate(duration, time_step, control_type, csvfile);
 	}
 }

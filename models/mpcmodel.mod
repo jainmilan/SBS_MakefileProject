@@ -1,6 +1,11 @@
 # Basic Parameters
 param duration;
 param total_rooms;
+param Nhorizon;
+param Time_IH;
+param buffer1;
+param buffer2;
+param SAT_Prev;
 
 # Paramters for objective function
 param Coefficient_Heating_Power;
@@ -119,14 +124,20 @@ subject to SPOT_Status_Constraint {t in 1..duration, k in 1..total_rooms}: SPOT_
 
 subject to Fan_Speed_Eq_Const {t in 1..duration, k in 1..total_rooms} : Fan_Speed[t, k] = 0;
 
+If Time_IH = 0 then buffer1 = 1;
+If Time_IH > 0 then buffer1 = 0;
+If Time_IH = 0 then buffer2 = 1;
+If Time_IH > 0 then buffer2 = Time_IH;
+
+subject to IPCons1 {i in 0..(Nhorizon - 1), j in 1..5}: buffer1 * SAT[6*i + 1] = buffer1 * SAT[6*i + j + 1];
+subject to IPCons2 {j in 0..(5 - Time_IH)}: Time_IH * SAT[1] = Time_IH * SAT[1 + j];
+subject to IPCons3 {i in 0..(Nhorizon - 2), j in 1..5}: Time_IH * SAT[6*(i+1) - Time_IH + 1] = SAT[6*(i+1) - Time_IH + j + 1];
+subject to IPCons4 {i in (Nhorizon - 1)..(Nhorizon - 1), j in 0..(buffer2 - 1)}: 
+				Time_IH * SAT[6*(i+1) - buffer2 + 1] = Time_IH * SAT[6*(i+1) - buffer2 + 1 + j];
+subject to IPCons5: Time_IH * SAT[1] = Time_IH * SAT_Prev;
+
 ##### Yet To Implement - Need Help
 #subject to pmvlt3 {t in 2..T+1,k in  n1+1..n1+n2} :O[6*(l1-1)+l2+t-1,k]*P[k,t] >=O[6*(l1-1)+l2+t-1,k]*betalim11;
 #subject to pmvlt4 {t in 2..T+1,k in n1+1..n1+n2} :O[6*(l1-1)+l2+t-1,k]*P[k,t] <=O[6*(l1-1)+l2+t-1,k]*betalim12;
-
-#subject to ipcons1 {i in 0..(N-1),j in 1..5}:bf1*u[6*i+1]=bf1*u[6*i+j+1];
-#subject to ipcons2 {j in 0..(5-l2)}:l2*u[1]=l2*u[1+j];
-#subject to ipcons3 {i in 0..(N-2), j in 1..5}:l2*u[6*(i+1)-l2+1]=l2*u[6*(i+1)-l2+j+1];
-#subject to ipcons4 {i in (N-1)..(N-1),j in 0..(bf3-1)}:l2*u[6*(i+1)-bf3+1]=l2*u[6*(i+1)-bf3+1+j];
-#subject to ipcons5 :l2*u[1]=l2*U;
 
 #subject to voclt {t in 1..T} : (sum{k in I}O[6*(l1-1)+l2+t,k])*v[t] >= (sum{k in I}O[6*(l1-1)+l2+t,k])*volim1;

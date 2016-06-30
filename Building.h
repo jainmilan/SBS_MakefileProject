@@ -58,6 +58,11 @@ namespace SimpleBuildingSimulator
 			float CoolingEfficiency;
 		} CommonAHU;
 
+		struct Errors {
+			float err_bparams;
+			float err_text;
+		} CommonErrors;
+
 		int get_num_zones() { return num_zones_; }
 		int get_num_rooms() { return num_rooms_; }
 
