@@ -6,9 +6,9 @@ CFLAGS = -O2 -g -Wall -fmessage-length=0
 # define any directories containing header files other than /usr/include
 INCLUDES = -I "./include/EIGENDIR" -I "./include/amplapi32/include"
 
-SRCS = SimpleBuildingSimulator.cpp Building.cpp Weather.cpp ControlBox.cpp Occupancy.cpp WriteOutput.cpp
+SRCS = SimpleBuildingSimulator.cpp Building.cpp Weather.cpp ControlBox.cpp Occupancy.cpp WriteOutput.cpp ReadInput.cpp
 
-OBJS = Building.o Weather.o ControlBox.o Occupancy.o WriteOutput.o
+OBJS = Building.o Weather.o ControlBox.o Occupancy.o WriteOutput.o ReadInput.o
 
 LFLAGS = -L "./include/amplapi32/lib" 
 
@@ -42,6 +42,9 @@ ControlBox.o: ControlBox.cpp ControlBox.h defs.h
 Occupancy.o: Occupancy.cpp Occupancy.h defs.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c Occupancy.cpp
 
+ReadInput.o: ReadInput.cpp ReadInput.h defs.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c ReadInput.cpp
+
 WriteOutput.o: WriteOutput.cpp WriteOutput.h defs.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c WriteOutput.cpp
 
@@ -49,3 +52,6 @@ all: $(TARGET)
 
 clean:
 	rm -f $(OBJS) $(TARGET) lex.yy.c simulator parser.tab.c parser.tab.h 
+	
+version:
+	$(CC) --version

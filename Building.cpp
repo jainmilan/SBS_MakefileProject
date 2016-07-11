@@ -14,6 +14,7 @@
 
 #include<stdio.h>
 #include<iostream>
+#include <fstream>
 
 using namespace SimpleBuildingSimulator;
 
@@ -55,7 +56,8 @@ Building::Building() {
 	num_zones_ = 1;
 	num_rooms_ = 1;
 	region = 0;
-
+	weather_file = "input/Jan34.csv";
+	occupancy_file = "input/Occupancy.csv";
 }
 
 Building::~Building() {
@@ -209,19 +211,45 @@ float Building::GetAHUPower(float MixedAirTemperature,
 
 	return AHUPower;
 }
-void Building::Simulate(long int duration, int time_step, int control_type, char *csvfile) {
+void Building::Simulate(time_t &start_t, time_t &stop_t, int time_step, int control_type, char *csvfile) {
+	Weather weather;
+	Occupants occupancy;
+
+	DF_FLOAT df_weather;
+	weather.ParseWeatherData(df_weather, weather_file, start_t, stop_t, time_step, 1);
+
+	DF_INT df_occupancy;
+	occupancy.ParseOccupancyData(df_occupancy, occupancy_file, start_t, stop_t, time_step, 1);
+
+	long int duration = stop_t - start_t;
 	long int n = (duration / time_step) + 1;
 
 	int total_rooms = num_zones_ * num_rooms_;
 
-	Weather forecast;
-	std::cout << CommonErrors.err_text;
-	Eigen::MatrixXf T_ext = forecast.GetWeatherForecast(duration, time_step,
-			num_zones_, num_rooms_, CommonErrors.err_text);
+	DF_OUTPUT df[n];
+	size_t j = 0;
 
-	Occupants occupancy;
-	Eigen::MatrixXf O = occupancy.GetOccupancyForecast(duration, time_step,
-			num_zones_, num_rooms_).cast<float>();
+	for (time_t i = start_t; i <= stop_t; i = i + time_step) {
+		df[j].t = i;
+		df[j].weather = df_weather[i];
+		df[j].occ = df_occupancy[i];
+		j = j + 1;
+	}
+
+	// Write to Test File
+	std::ofstream mf;
+	mf.open("test.csv");
+
+	for (size_t j = 0; j < n; j++) {
+		mf << df[j].t << "," << df[j].weather << "," << df[j].occ << "\n";
+	}
+
+	// Test Print
+	std::cout << start_t << "\t" << stop_t << "\n";
+	mf.close();
+
+	Eigen::MatrixXf T_ext = weather.GetWeatherMatrix(df, n, total_rooms);
+	Eigen::MatrixXf O = occupancy.GetOccupancyMatrix(df, n, total_rooms).cast<float>();
 
 	/* Building Parameters For HVAC Impact*/
 
@@ -301,20 +329,6 @@ void Building::Simulate(long int duration, int time_step, int control_type, char
 	MixedAirTemperature.row(k) << GetMixedAirTemperature(TR1.row(k), T_ext.row(k));
 	PowerAHU.row(k) << GetAHUPower(MixedAirTemperature.row(k).value(), CV.SPOT_CurrentState.cast<float>(), CV.SAT_Value, CV.SAV_Zones);
 
-	// Print Initial Values
-	/*	std::cout << T << std::endl;
-	 std::cout << TR1 << std::endl;
-	 std::cout << TR2 << std::endl;
-
-	 std::cout << DeltaTR1 << std::endl;
-	 std::cout << DeltaTR2 << std::endl;
-
-	 std::cout << PPV << std::endl;
-	 std::cout << MixedAirTemperature << std::endl;
-	 */
-
-	//std::cout << CV.SAV_Matrix << std::endl;
-	//std::cout << SPOT_State << std::endl;
 	for (k = 0; k < n - 1; k++) {
 
 		switch (control_type) {
@@ -381,18 +395,6 @@ void Building::Simulate(long int duration, int time_step, int control_type, char
 		MixedAirTemperature.row(k+1) << GetMixedAirTemperature(TR1.row(k+1), T_ext.row(k+1));
 		PowerAHU.row(k+1) << GetAHUPower(MixedAirTemperature.row(k+1).value(), CV.SPOT_CurrentState.cast<float>(), CV.SAT_Value, CV.SAV_Zones);
 	}
-
-	// Print Final Values
-
-	//std::cout << SPOT_State << std::endl;
-	//std::cout << TR1 << std::endl;
-	//std::cout << TR2 << std::endl;
-
-	//std::cout << DeltaTR1 << std::endl;
-	//std::cout << DeltaTR2 << std::endl;
-
-	//std::cout << PPV << std::endl;
-	//std::cout << MixedAirTemperature << std::endl;
 
 	WriteOutput writer;
 	writer.WriteOutputCSV(duration, time_step, num_zones_, num_rooms_, T, TR1,

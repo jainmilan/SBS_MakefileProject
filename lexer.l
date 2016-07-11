@@ -18,7 +18,9 @@
 "zones"				{ return ZONES; }
 "rooms"				{ return ROOMS; }
 
-"duration"			{ return DURATION; }
+"start"				{ return START; }
+"stop"	     		{ return STOP; }
+"horizon"			{ return HORIZON; }
 "timestep" 			{ return TIMESTEP; }
 "control" 			{ return CONTROL; }
 
@@ -43,7 +45,7 @@
 "bparams" 			{ return BPARAMS; }
 "text" 				{ return TEXT; }
 
-[a-zA-Z0-9]+      	{ yylval.sval = strdup(yytext); return STRING; }
+[a-zA-Z0-9]+    	{ yylval.sval = strdup(yytext); return STRING; }
 [\n]				{ ++line_num; return ENDL; }
 
 %%

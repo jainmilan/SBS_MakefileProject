@@ -1,9 +1,22 @@
 %{
+	#ifndef _XOPEN_SOURCE
+	#define _XOPEN_SOURCE
+	#endif
+	
 	#include <cstdio>
-	#include <time.h>
+	#include <ctime>
 	#include <iostream>
+	#include <fstream>
+	#include <vector>
+	#include <string>
+	#include <stdlib.h>
+	#include <sstream>
+	
+	#include "defs.h"
 	#include "Building.h"
-
+	#include "Weather.h"
+	#include "Occupancy.h"
+	
 	using namespace SimpleBuildingSimulator;
 	using namespace Eigen;
 	using namespace std;
@@ -17,10 +30,13 @@
 	
 	/* Initialize Building */
 	Building dc;
-	
-	int time_step, control_type;
-	long int duration; 
-	int MIN2SEC = 60;
+	Weather weather;
+	Occupants occupancy;
+
+	int time_step, control_type, horizon, start, stop;
+	time_t start_t, stop_t;
+	string start_str, stop_str; 
+	int MIN2SEC = 60;	
 %}
 
 %union {
@@ -34,7 +50,9 @@
 %token ZONES
 %token ROOMS
 
-%token DURATION
+%token START
+%token STOP
+%token HORIZON
 %token TIMESTEP
 %token CONTROL
 
@@ -89,7 +107,9 @@ body_lines:
 body_line:
 	ZONES ':' INT							{ dc.num_zones_ = $3; }
 	| ROOMS ':' INT							{ dc.num_rooms_ = $3; }
-	| DURATION ':' INT						{ duration = $3; }
+	| START ':' STRING						{ start_str = string($3); }
+	| STOP ':' STRING						{ stop_str = string($3); }
+	| HORIZON ':' INT						{ horizon = $3; }
 	| TIMESTEP ':' INT						{ time_step = $3; }
 	| CONTROL ':' INT						{ control_type = $3; }
 	| HEFF ':' FLOAT						{ dc.CommonAHU.HeatingEfficiency = $3; }
@@ -160,7 +180,20 @@ int main( int argc, char *argv[] ) {
 		strcat(csvfile, ".csv");
      	
      	cout << csvfile << endl;
-		dc.Simulate(duration, time_step, control_type, csvfile);
+		
+		struct tm tm = {0};
+		
+		cout << start_str << "\t" << stop_str << "\n";
+		if (strptime(start_str.c_str(), "%Y%m%dT%H%M", &tm)) {
+			start_t = mktime(&tm);
+		}
+		
+		if (strptime(stop_str.c_str(), "%Y%m%dT%H%M", &tm)) {
+			stop_t = mktime(&tm);
+		}
+		dc.Simulate(start_t, stop_t, time_step, control_type, csvfile);
+
+	    return 0;
 	}
 }
 

@@ -1,11 +1,11 @@
 building:{
 	zones:1,
 	rooms:1,
-	start:20150111T0000,
-	stop:20160221T2300,
-	horizon:4,
+	start:201606141030,
+	stop: 201606161030,
+	horizon: 4,
 	timestep:600,
-	control:2,
+	control:3,
 	ahu:{
 		heff:0.9,
 		ceff:0.9
