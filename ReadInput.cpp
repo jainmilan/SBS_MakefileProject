@@ -48,11 +48,11 @@ std::vector<std::string> ReadCSV::csv_read_row(std::istream &in, char delimiter)
         {
             if(in.peek()=='\n') { in.get(); }
             row.push_back( ss.str() );
-            return row;
         }
         else
         {
             ss << c;
         }
     }
+    return row;
 }

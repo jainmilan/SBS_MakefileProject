@@ -15,12 +15,15 @@ namespace SimpleBuildingSimulator {
 	class Occupants
 	{
 	public:
-		Occupants();
-		~Occupants();
-		Eigen::MatrixXi GetOccupancyForecast(long int duration, int time_step, int num_zones, int num_rooms);
-		void ParseOccupancyData(DF_INT& theData, std::string filename, time_t &start_t, time_t &end_t,
-						int time_step, int skip_lines);
-		Eigen::MatrixXf GetOccupancyMatrix(DF_OUTPUT df[], long int n, int total_rooms);
+		Occupants();		// Constructor
+		~Occupants();		// Destructor
+		/* Test Function */
+		MAT_INT GetOccupancyForecast(long int duration, int time_step, int num_zones, int num_rooms);
+		/* Parse Occupancy Data File */
+		void ParseOccupancyData(DF_INT& theData, const std::string& filename, time_t &start_t, time_t &end_t,
+						const int& time_step, const int& skip_lines);
+		/* Convert Dataframe to Matrix for Computation */
+		MAT_FLOAT GetOccupancyMatrix(DF_OUTPUT df[], const long int& n, const int& total_rooms);
 	private:
 
 	};

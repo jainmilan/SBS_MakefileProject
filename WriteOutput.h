@@ -9,6 +9,8 @@
 #define WRITEOUTPUT_H_
 
 #include "Building.h"
+
+#include <string>
 #include <Eigen\Dense>
 
 namespace SimpleBuildingSimulator {
@@ -24,7 +26,7 @@ public:
 			Eigen::MatrixXf Occupancy, Eigen::MatrixXf T_ext,
 			Eigen::MatrixXi SPOT_State, Building::Room CommonRoom,
 			Building::AHU CommonAHU, Building::Air CommonAir,
-			Building::PMV_Model PMV_Params, char *filename);
+			Building::PMV_Model PMV_Params, std::string filename);
 private:
 
 };

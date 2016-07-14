@@ -29,11 +29,11 @@ Occupants::~Occupants()
 {
 }
 
-Eigen::MatrixXi Occupants::GetOccupancyForecast(long int duration, int time_step, int num_zones, int num_rooms) {
+MAT_INT Occupants::GetOccupancyForecast(long int duration, int time_step, int num_zones, int num_rooms) {
 	long int n = duration;
 	int total_rooms = num_zones * num_rooms;
 
-	Eigen::MatrixXi occupancy = Eigen::MatrixXi::Ones(n, total_rooms);
+	MAT_INT occupancy = MAT_INT::Ones(n, total_rooms);
 
 	return occupancy;
 }
@@ -52,8 +52,8 @@ Eigen::MatrixXi Occupants::GetOccupancyForecast(long int duration, int time_step
  * 5. Sampling Rate
  * 6. Number of Initial Lines to Skip
  */
-void Occupants::ParseOccupancyData(DF_INT& theData, std::string filename, time_t &start_t, time_t &end_t,
-		int time_step, int skip_lines) {
+void Occupants::ParseOccupancyData(DF_INT& theData, const std::string& filename, time_t &start_t, time_t &end_t,
+		const int& time_step, const int& skip_lines) {
 
 	ReadCSV csv;													// Call CSV Reader
 
@@ -111,21 +111,31 @@ void Occupants::ParseOccupancyData(DF_INT& theData, std::string filename, time_t
 	    } // End of If Statement Validating 2-Columns
     } // End of While Loop
 
-    if (ptr < end_t) {						// Update end point
+    /*if (ptr < end_t) {						// Update end point
     	end_t = ptr;
-    }
+    }*/
     theData[ptr] = last_freading;			// Include end point
     in.close();
 } // End of ParseWeatherData
 
-Eigen::MatrixXf Occupants::GetOccupancyMatrix(DF_OUTPUT df[], long int n, int total_rooms) {
-	Eigen::MatrixXf occupancy = Eigen::MatrixXf::Ones(n, total_rooms);
-	for (size_t i = 0; i < n; i++) {
-		for (size_t j = 0; j < total_rooms; j++) {
-			occupancy(i, j) = df[i].weather;
+/* GetOccupancyMatrix() converts data parsed from input file to Matrix
+ * for easy computations. Input to the function are:
+ * 1. df - Output data frame
+ * 2. n - Total duration of simulation
+ * 3. total_rooms - Total number of rooms in the building
+ */
+MAT_FLOAT Occupants::GetOccupancyMatrix(DF_OUTPUT df[], const long int& n, const int& total_rooms) {
+
+	// Create Matrix Object
+	MAT_FLOAT occupancy = MAT_FLOAT::Ones(n, total_rooms);
+
+	// Assign value from the data frame to the Matrix
+	for (size_t i = 0; i < (size_t) n; i++) {
+		for (size_t j = 0; j < (size_t) total_rooms; j++) {
+			occupancy(i, j) = df[i].occ;
 		}
 	}
-	return occupancy;
+	return occupancy;	// Return Matrix
 }
 
 

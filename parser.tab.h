@@ -46,32 +46,38 @@ extern int yydebug;
   enum yytokentype
   {
     ENDL = 258,
-    ZONES = 259,
-    ROOMS = 260,
-    DURATION = 261,
-    TIMESTEP = 262,
-    CONTROL = 263,
-    HEFF = 264,
-    CEFF = 265,
-    C = 266,
-    CSPOT = 267,
-    ALPHAO = 268,
-    ALPHAR = 269,
-    QL = 270,
-    QH = 271,
-    QS = 272,
-    FANCOEF = 273,
-    DENSITY = 274,
-    SPHEAT = 275,
-    P1 = 276,
-    P2 = 277,
-    P3 = 278,
-    P4 = 279,
-    BPARAMS = 280,
-    TEXT = 281,
-    INT = 282,
-    FLOAT = 283,
-    STRING = 284
+    FILEPATH = 259,
+    ZONES = 260,
+    ROOMS = 261,
+    START = 262,
+    STOP = 263,
+    HORIZON = 264,
+    TIMESTEP = 265,
+    CONTROL = 266,
+    HEFF = 267,
+    CEFF = 268,
+    C = 269,
+    CSPOT = 270,
+    ALPHAO = 271,
+    ALPHAR = 272,
+    QL = 273,
+    QH = 274,
+    QS = 275,
+    FANCOEF = 276,
+    DENSITY = 277,
+    SPHEAT = 278,
+    P1 = 279,
+    P2 = 280,
+    P3 = 281,
+    P4 = 282,
+    INWFILE = 283,
+    INOFILE = 284,
+    OUTFILE = 285,
+    BPARAMS = 286,
+    TEXT = 287,
+    INT = 288,
+    FLOAT = 289,
+    STRING = 290
   };
 #endif
 
@@ -80,13 +86,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 26 "parser.y" /* yacc.c:1909  */
+#line 46 "parser.y" /* yacc.c:1909  */
 
 	int ival;
 	float fval;
 	char *sval;
 
-#line 90 "parser.tab.h" /* yacc.c:1909  */
+#line 96 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

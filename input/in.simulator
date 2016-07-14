@@ -1,37 +1,42 @@
 building:{
-	zones:1,
-	rooms:1,
-	start:20150111T0000,
-	stop:20160221T2300,
-	horizon:4,
-	timestep:600,
-	control:2,
-	ahu:{
-		heff:0.9,
-		ceff:0.9
+	zones:1,							/* Number of Zones */ 
+	rooms:1,							/* Number of Rooms */
+	start:20160101T0000,				/* Start Time (Format: yyyymmddThhmm) */
+	stop:20160131T2300,					/* Stop Time (Format: yyyymmddThhmm) */
+	horizon:4,							/* Horizon for simulation */
+	time_step:600,						/* Time Step */
+	control:2,							/* Control Type: 1 (No Control), 2 (Reactive), 3 (MPC) */
+	ahu:{						
+		h_eff:0.9,						/* Heating Efficiency */
+		c_eff:0.9						/* Cooling Efficiency */
 	},
 	room:{
-		C:2000,
-		CSPOT:200,
-		alphao:0.048,
-		alphar:0.1425,
-		Ql:0.1,
-		Qh:0.1,
-		Qs:0.7,
-		fancoef:0.094
+		C:2000,							/* Thermal Capacity of Room - kJ/K */
+		C_SPOT:200,						/* Thermal Capacity of SPOT Region - kJ/K */
+		alpha_o:0.048,					/* Heat Transfer Coefficient for Outside (kJ/K.s) */
+		alpha_r:0.1425,					/* Heat Transfer Coefficient for Regions (kJ/K.s) */
+		Q_l:0.1,						/* Heat Load Due to Lightening and Equipments (kW) */
+		Q_h:0.1,						/* Heat Load Due to Presence of Occupants (kW) */
+		Q_s:0.7,						/* Heat Load of SPOT Unit (kW) */
+		fan_coef:0.094
 	},
 	air:{
-		density:1.225,
-		spheat:1.003
+		density:1.225,					/* Density of Air - kg/m3 */
+		sp_heat:1.003					/* Specific Heat Capacity of Air - J/Kg-K*/
 	},
 	pmv:{
-		p1:0.2466,
-		p2:1.4075,
-		p3:0.581,
-		p4:5.4668
+		p1:0.2466,						/* PMV Parameter - 1st Coefficient */
+		p2:1.4075,						/* PMV Parameter - 2nd Coefficient */
+		p3:0.581,						/* PMV Parameter - 3rd Coefficient */
+		p4:5.4668						/* PMV Parameter - 4th Coefficient */
 	},
 	error:{
-		bparams:0.02,
-		text:0.02
+		b_params:0.02,					/* Error in Building Parameters */
+		t_ext:0.02						/* Error in Weather Forecast */ 
+	},
+	files:{
+		input_wthr:Jan34,				/* Input Weather File Name */
+		input_occ:Occupancy,			/* Input Occupancy File Name */
+		output:Sim1						/* Output File Name */
 	}
 }

@@ -9,54 +9,47 @@ ControlBox::ControlBox() {
 ControlBox::~ControlBox() {
 }
 
-Eigen::MatrixXf ControlBox::GetSAVMatrix(Eigen::MatrixXf SAV_Zones,
-		int num_rooms, int total_rooms) {
-	Eigen::MatrixXf SAV_Zones_Rep = SAV_Zones.replicate(1, num_rooms);
+MAT_FLOAT ControlBox::GetSAVMatrix(MAT_FLOAT SAV_Zones, int num_rooms, int total_rooms) {
+	MAT_FLOAT SAV_Zones_Rep = SAV_Zones.replicate(1, num_rooms);
 
 	Eigen::VectorXf SAV_Matrix_Diagonal(
 			Eigen::Map<Eigen::VectorXf>(SAV_Zones_Rep.data(),
 					SAV_Zones_Rep.cols() * SAV_Zones_Rep.rows()));
 
-	Eigen::MatrixXf SAVMatrix = Eigen::MatrixXf::Zero(total_rooms, total_rooms);
+	MAT_FLOAT SAVMatrix = MAT_FLOAT::Zero(total_rooms, total_rooms);
 	SAVMatrix = SAV_Matrix_Diagonal.asDiagonal();
 
 	return SAVMatrix;
 }
 
-struct ControlVariables ControlBox::DefaultControl(int num_zones,
-		int num_rooms) {
-	int total_rooms = num_zones * num_rooms;
-
+struct ControlVariables ControlBox::DefaultControl(const int& total_rooms, const PARAMS& ParamsIn) {
 	struct ControlVariables cv;
 
 	cv.SAT_Value = 30;
 
-	cv.SAT = Eigen::MatrixXf::Ones(1, total_rooms) * cv.SAT_Value;
+	cv.SAT = MAT_FLOAT::Ones(1, total_rooms) * cv.SAT_Value;
 
-	cv.SAV_Zones = Eigen::MatrixXf::Ones(num_zones, 1) * 0.05f;
+	cv.SAV_Zones = MAT_FLOAT::Ones(ParamsIn.CommonBuilding.num_zones_, 1) * 0.05f;
 
-	cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, num_rooms, total_rooms);
+	cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
 
-	cv.SPOT_CurrentState = Eigen::MatrixXi::Ones(1, total_rooms);
+	cv.SPOT_CurrentState = MAT_INT::Ones(1, total_rooms);
 
 	return cv;
 }
 
-struct ControlVariables ControlBox::ReactiveControl(int num_zones,
-		int num_rooms, Eigen::MatrixXf TR1, Eigen::MatrixXf O, int k,
-		Eigen::MatrixXi SPOT_PreviousState) {
-
-	int total_rooms = num_zones * num_rooms;
+struct ControlVariables ControlBox::ReactiveControl(const int& total_rooms, MAT_FLOAT TR1, MAT_FLOAT O,
+		int k, MAT_INT SPOT_PreviousState, const PARAMS& ParamsIn) {
 
 	struct ControlVariables cv;
 
 	cv.SAT_Value = 30;
 
-	cv.SAT = Eigen::MatrixXf::Ones(1, total_rooms) * cv.SAT_Value;
+	cv.SAT = MAT_FLOAT::Ones(1, total_rooms) * cv.SAT_Value;
 
-	cv.SAV_Zones = Eigen::MatrixXf::Ones(num_zones, 1) * 0.05f;
+	cv.SAV_Zones = MAT_FLOAT::Ones(ParamsIn.CommonBuilding.num_zones_, 1) * 0.05f;
 
-	cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, num_rooms, total_rooms);
+	cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
 
 	cv.SPOT_CurrentState = SPOT_PreviousState;
 
@@ -92,12 +85,8 @@ struct ControlVariables ControlBox::ReactiveControl(int num_zones,
 	return cv;
 }
 
-struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
-		long int duration, int time_step, Building::Air air_params,
-		Building::Room room_params, Building::AHU ahu_params,
-		Building::PMV_Model pmv_params, Eigen::MatrixXf T_Outside,
-		Eigen::MatrixXf Occupancy, Eigen::MatrixXf TNoSPOTInit,
-		Eigen::MatrixXf DeltaTSPOTInit) {
+struct ControlVariables ControlBox::MPCControl(const long int& tinstances, const int& time_step, MAT_FLOAT T_Outside,
+		MAT_FLOAT Occupancy, MAT_FLOAT TNoSPOTInit,	MAT_FLOAT DeltaTSPOTInit, const PARAMS& ParamsIn) {
 
 	// Initialize AMPL and Control Variables
 	ampl::AMPL ampl;
@@ -105,22 +94,21 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
 
 	// Generic Parameters
 	int tau = time_step;
-	long int tinstances = duration / tau;
-	int total_rooms = num_zones * num_rooms;
+	int total_rooms = ParamsIn.CommonBuilding.num_zones_ * ParamsIn.CommonBuilding.num_rooms_;
 
 	// Building Parameters
-	float C = room_params.C;
-	float C_ = room_params.C_;
+	float C = ParamsIn.CommonRoom.C;
+	float C_ = ParamsIn.CommonRoom.C_;
 
-	float alpha_o = room_params.alpha_o;
-	float alpha_r = room_params.alpha_r;
+	float alpha_o = ParamsIn.CommonRoom.alpha_o;
+	float alpha_r = ParamsIn.CommonRoom.alpha_r;
 
-	float Q_l = room_params.Q_l;
-	float Q_h = room_params.Q_h;
-	float Q_s = room_params.Q_s;
+	float Q_l = ParamsIn.CommonRoom.Q_l;
+	float Q_h = ParamsIn.CommonRoom.Q_h;
+	float Q_s = ParamsIn.CommonRoom.Q_s;
 
-	float density = air_params.density;
-	float specific_heat = air_params.specific_heat;
+	float density = ParamsIn.CommonAir.density;
+	float specific_heat = ParamsIn.CommonAir.specific_heat;
 
 	// Limits on Variables
 	float SAT_ll = 12;
@@ -159,18 +147,18 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
 		// Initialize Parameters -Parameters for Objective Function
 		ampl::Parameter pCoHP = ampl.getParameter("Coefficient_Heating_Power");
 		double pCoHPv = (density * specific_heat)
-				/ ahu_params.HeatingEfficiency;
+				/ ParamsIn.CommonAHU.HeatingEfficiency;
 		double pCoHPA[] = { pCoHPv };
 		pCoHP.setValues(pCoHPA, 1);
 
 		ampl::Parameter pCoCP = ampl.getParameter("Coefficient_Cooling_Power");
 		double pCoCPv = (density * specific_heat)
-				/ ahu_params.CoolingEfficiency;
+				/ ParamsIn.CommonAHU.CoolingEfficiency;
 		double pCoCPA[] = { pCoCPv };
 		pCoCP.setValues(pCoCPA, 1);
 
 		ampl::Parameter pCoFP = ampl.getParameter("Coefficient_Fan_Power");
-		double pCoFPA[] = { room_params.fan_coef };
+		double pCoFPA[] = { ParamsIn.CommonRoom.fan_coef };
 		pCoFP.setValues(pCoFPA, 1);
 
 		ampl::Parameter pCoSP = ampl.getParameter("Coefficient_SPOT_Power");
@@ -190,12 +178,12 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
 
 		ampl::Parameter pCoHICRT = ampl.getParameter("CoHI_CRT");
 		double pCoHICRTv = (-1 * tau * density * specific_heat)
-				/ (num_rooms * C);
+				/ (ParamsIn.CommonBuilding.num_rooms_ * C);
 		double pCoHICRTA[] = { pCoHICRTv };
 		pCoHICRT.setValues(pCoHICRTA, 1);
 
 		ampl::Parameter pCoHISAT = ampl.getParameter("CoHI_SAT");
-		double pCoHISATv = (tau * density * specific_heat) / (num_rooms * C);
+		double pCoHISATv = (tau * density * specific_heat) / (ParamsIn.CommonBuilding.num_rooms_ * C);
 		double pCoHISATA[] = { pCoHISATv };
 		pCoHISAT.setValues(pCoHISATA, 1);
 
@@ -226,19 +214,19 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
 
 		// Initialize Parameters - PMV Model
 		ampl::Parameter ppmvp1 = ampl.getParameter("pmv_p1");
-		double ppmvp1A[] = { pmv_params.P1 };
+		double ppmvp1A[] = { ParamsIn.PMV_Params.P1 };
 		ppmvp1.setValues(ppmvp1A, 1);
 
 		ampl::Parameter ppmvp2 = ampl.getParameter("pmv_p2");
-		double ppmvp2A[] = { pmv_params.P2 };
+		double ppmvp2A[] = { ParamsIn.PMV_Params.P2 };
 		ppmvp2.setValues(ppmvp2A, 1);
 
 		ampl::Parameter ppmvp3 = ampl.getParameter("pmv_p3");
-		double ppmvp3A[] = { pmv_params.P3 };
+		double ppmvp3A[] = { ParamsIn.PMV_Params.P3 };
 		ppmvp3.setValues(ppmvp3A, 1);
 
 		ampl::Parameter ppmvp4 = ampl.getParameter("pmv_p4");
-		double ppmvp4A[] = { pmv_params.P4 };
+		double ppmvp4A[] = { ParamsIn.PMV_Params.P4 };
 		ppmvp4.setValues(ppmvp4A, 1);
 
 		// Initialize Parameters - Limits on Variables
@@ -348,9 +336,9 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
 		ampl::Variable vSAV = ampl.getVariable("SAV");
 		ampl::DataFrame dfSAV = vSAV.getValues();
 
-		cv.SAV_Zones = Eigen::MatrixXf::Ones(num_zones, 1)
+		cv.SAV_Zones = Eigen::MatrixXf::Ones(ParamsIn.CommonBuilding.num_zones_, 1)
 				* dfSAV.getRowByIndex(0)[1].dbl();
-		cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, num_rooms, total_rooms);
+		cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
 
 		std::cout << "SAV Values Are: " << cv.SAV_Matrix << std::endl;
 
@@ -374,8 +362,8 @@ struct ControlVariables ControlBox::MPCControl(int num_zones, int num_rooms,
 		cv.SAT_Value = 30;
 		cv.SAT = Eigen::MatrixXf::Ones(1, total_rooms) * cv.SAT_Value;
 
-		cv.SAV_Zones = Eigen::MatrixXf::Ones(num_zones, 1) * 0.05f;
-		cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, num_rooms, total_rooms);
+		cv.SAV_Zones = Eigen::MatrixXf::Ones(ParamsIn.CommonBuilding.num_zones_, 1) * 0.05f;
+		cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
 
 		cv.SPOT_CurrentState = Eigen::MatrixXi::Ones(1, total_rooms);
 
