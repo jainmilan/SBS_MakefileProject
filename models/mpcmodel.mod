@@ -1,11 +1,11 @@
 # Basic Parameters
+param response;
 param duration;
 param total_rooms;
 param Nhorizon;
 param Time_IH;
 param buffer1;
 param buffer2;
-param SAT_Prev;
 
 # Paramters for objective function
 param Coefficient_Heating_Power;
@@ -54,21 +54,22 @@ param T_Outside {1..duration};						# Outside Temperature
 param Occupancy {1..duration, 1..total_rooms};		# Occupancy in the Room
 param T_NoSPOT_Init {1..total_rooms}; 				# Initial Temperature in NoSPOT Region
 param Delta_T_SPOT_Init {1..total_rooms}; 			# Initial Temperature Change in SPOT Region
+param SAT_Prev;
 
 # Variables
-var T {1..duration, 1..total_rooms} >= 0;					# Room Temperature
-var Delta_T_SPOT {1..duration+1, 1..total_rooms} >= 0;		# Change in Temperature of SPOT Region
-var T_SPOT {1..duration, 1..total_rooms} >= 0;				# Temperature in SPOT Region
-var Delta_T_NoSPOT {1..duration+1, 1..total_rooms} >= 0;	# Change in Temperature of No SPOT Region
-var T_NoSPOT {1..duration+1, 1..total_rooms} >= 0;			# Temperature in No-SPOT Region
-var T_Mixing_Unit {1..duration} >= 0;						# Temperature from Mixing Unit
-var T_Cooling_Unit {1..duration} >= 0;						# Temperature from Cooling Unit
-var SAT {1..duration} >= 0 ;								# Supply Air Temperature
-var SAV {1..duration} >= 0 ;								# Supply Air Volume
-var SPOT_Status {1..duration, 1..total_rooms} >= 0;			# SPOT State
-var Ratio {1..duration} >= 0;								# Mixing Ratio
-var PMV {2..duration+1, 1..total_rooms};					# PMV
-var Fan_Speed {1..duration, 1..total_rooms} >= 0;			# Fan Speed
+var T {1..duration, 1..total_rooms} >= 0 default 21;				# Room Temperature
+var Delta_T_SPOT {1..duration+1, 1..total_rooms} >= 0 default 0;	# Change in Temperature of SPOT Region
+var T_SPOT {1..duration, 1..total_rooms} >= 0 default 21;			# Temperature in SPOT Region
+var Delta_T_NoSPOT {1..duration+1, 1..total_rooms} >= 0 default 0;	# Change in Temperature of No SPOT Region
+var T_NoSPOT {1..duration+1, 1..total_rooms} >= 0 default 21;		# Temperature in No-SPOT Region
+var T_Mixing_Unit {1..duration} >= 0 default 18;					# Temperature from Mixing Unit
+var T_Cooling_Unit {1..duration} >= 0 default 18;					# Temperature from Cooling Unit
+var SAT {1..duration} >= 0  default 30;								# Supply Air Temperature
+var SAV {1..duration} >= 0  default 0.5;							# Supply Air Volume
+var SPOT_Status {1..duration, 1..total_rooms} >= 0 default 0;		# SPOT State
+var Ratio {1..duration} >= 0 default 0.8;							# Mixing Ratio
+var PMV {2..duration+1, 1..total_rooms} default 0.1;				# PMV
+var Fan_Speed {1..duration, 1..total_rooms} >= 0 default 0;			# Fan Speed
 
 # Objective
 minimize total_power : sum {t in 1..duration} (
@@ -86,7 +87,7 @@ subject to Delta_Temperature_In_SPOT_Region {t in 1..duration, k in 1..total_roo
 		Delta_T_SPOT[t+1, k] = ( CoRC_CiRT * Delta_T_SPOT[t, k] ) + ( CoSI_SCS * SPOT_Status[t, k] ) + 
 						( CoOI_OHL * Occupancy[t, k] );
 
-subject to Initialize_Temperature_In_NoSPOT_Region {k in 1..total_rooms}: T_NoSPOT[k, 1] = T_NoSPOT_Init[k];
+subject to Initialize_Temperature_In_NoSPOT_Region {k in 1..total_rooms}: T_NoSPOT[1, k] = T_NoSPOT_Init[k];
 subject to Temperature_In_NoSPOT_Region {t in 1..duration, k in 1..total_rooms}: 
 		T_NoSPOT[t+1, k] = ( CoWI_CRT * T_NoSPOT[t, k] ) + ( CoWI_OAT * T_Outside[t] ) + 
 						( CoHI_CRT * T_NoSPOT[t, k] * ( SAV[t] / total_rooms ) ) + 
@@ -95,7 +96,7 @@ subject to Temperature_In_NoSPOT_Region {t in 1..duration, k in 1..total_rooms}:
 						( CoRC_CiR1T * Delta_T_SPOT[t, k] );
 
 subject to Mixed_Air_Temperature {t in 1..duration}:
-		T_Mixing_Unit[t] = ( Ratio[t] * ( sum{k in 1..total_rooms} T_SPOT[t, k] ) / total_rooms  ) + 
+		T_Mixing_Unit[t] = ( Ratio[t] * ( sum{k in 1..total_rooms} T_NoSPOT[t, k] ) / total_rooms  ) + 
 							( 1 - Ratio[t] ) * ( T_Outside[t] );
 
 subject to PMV_Constraint {t in 2..duration+1, k in 1..total_rooms}:
@@ -124,14 +125,9 @@ subject to SPOT_Status_Constraint {t in 1..duration, k in 1..total_rooms}: SPOT_
 
 subject to Fan_Speed_Eq_Const {t in 1..duration, k in 1..total_rooms} : Fan_Speed[t, k] = 0;
 
-If Time_IH = 0 then buffer1 = 1;
-If Time_IH > 0 then buffer1 = 0;
-If Time_IH = 0 then buffer2 = 1;
-If Time_IH > 0 then buffer2 = Time_IH;
-
 subject to IPCons1 {i in 0..(Nhorizon - 1), j in 1..5}: buffer1 * SAT[6*i + 1] = buffer1 * SAT[6*i + j + 1];
 subject to IPCons2 {j in 0..(5 - Time_IH)}: Time_IH * SAT[1] = Time_IH * SAT[1 + j];
-subject to IPCons3 {i in 0..(Nhorizon - 2), j in 1..5}: Time_IH * SAT[6*(i+1) - Time_IH + 1] = SAT[6*(i+1) - Time_IH + j + 1];
+subject to IPCons3 {i in 0..(Nhorizon - 2), j in 1..5}: Time_IH * SAT[6*(i+1) - Time_IH + 1] = Time_IH *SAT[6*(i+1) - Time_IH + j + 1];
 subject to IPCons4 {i in (Nhorizon - 1)..(Nhorizon - 1), j in 0..(buffer2 - 1)}: 
 				Time_IH * SAT[6*(i+1) - buffer2 + 1] = Time_IH * SAT[6*(i+1) - buffer2 + 1 + j];
 subject to IPCons5: Time_IH * SAT[1] = Time_IH * SAT_Prev;

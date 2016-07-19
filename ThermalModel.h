@@ -13,8 +13,9 @@
 namespace SimpleBuildingSimulator {
 	class ModelRachel {
 	public:
-		void SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_blk, MAT_FLOAT O_blk, const PARAMS& ParamsIn,
-				const int& time_step, const int& total_rooms, int start_idx, int step_size, const int& control_type);
+		void SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, const PARAMS& ParamsIn,
+				const int& time_step, const int& total_rooms, int time_instances, const int& control_type,
+				const int& horizon);
 
 	private:
 		// Coefficient Matrices
@@ -53,7 +54,7 @@ namespace SimpleBuildingSimulator {
 		MAT_FLOAT Create_CoRC_CiRT_Matrix(const int& time_step, const int& total_rooms, const PARAMS& ParamsIn);
 		MAT_FLOAT Create_CoRC_CiR1T_Matrix(const int& time_step, const int& total_rooms, const PARAMS& ParamsIn);
 
-		float GetMixedAirTemperature(MAT_FLOAT TR1, MAT_FLOAT T_ext);
+		float GetMixedAirTemperature(MAT_FLOAT TR1, MAT_FLOAT T_ext, float r);
 		float GetAHUPower(float MixedAirTemperature, MAT_FLOAT SPOT_CurrentState, float SAT_Value,
 				MAT_FLOAT SAV_Zones, const PARAMS& ParamsIn);
 

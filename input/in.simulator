@@ -1,11 +1,11 @@
 building:{
 	zones:1,							/* Number of Zones */ 
-	rooms:1,							/* Number of Rooms */
+	rooms:2,							/* Number of Rooms */
 	start:20160101T0000,				/* Start Time (Format: yyyymmddThhmm) */
-	stop:20160131T2300,					/* Stop Time (Format: yyyymmddThhmm) */
+	stop:20160101T0500,					/* Stop Time (Format: yyyymmddThhmm) */
 	horizon:4,							/* Horizon for simulation */
 	time_step:600,						/* Time Step */
-	control:2,							/* Control Type: 1 (No Control), 2 (Reactive), 3 (MPC) */
+	control:3,							/* Control Type: 1 (No Control), 2 (Reactive), 3 (MPC) */
 	ahu:{						
 		h_eff:0.9,						/* Heating Efficiency */
 		c_eff:0.9						/* Cooling Efficiency */
@@ -36,7 +36,7 @@ building:{
 	},
 	files:{
 		input_wthr:Jan34,				/* Input Weather File Name */
-		input_occ:Occupancy,			/* Input Occupancy File Name */
+		input_occ:Occupancy2,			/* Input Occupancy File Name */
 		output:Sim1						/* Output File Name */
 	}
 }

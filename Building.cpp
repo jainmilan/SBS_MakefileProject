@@ -84,6 +84,9 @@ Building::~Building() {
  * */
 void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 		const int& control_type, const int& horizon) {
+	// Total number of rooms to simulate
+	int total_rooms = ParamsIn.CommonBuilding.num_zones_ * ParamsIn.CommonBuilding.num_rooms_;
+
 	// Create Objects for Weather and Occupancy Class
 	Weather weather;
 	Occupants occupancy;
@@ -92,15 +95,12 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	DF_FLOAT df_weather;
 	weather.ParseWeatherData(df_weather, ParamsIn.Files.weather_file, start_t, stop_t, time_step, skip_lines);
 
-	DF_INT df_occupancy;
-	occupancy.ParseOccupancyData(df_occupancy, ParamsIn.Files.occupancy_file, start_t, stop_t, time_step, skip_lines);
+	DF_INT2 df_occupancy;
+	occupancy.ParseOccupancyData(df_occupancy, total_rooms, ParamsIn.Files.occupancy_file, start_t, stop_t, time_step, skip_lines);
 
 	// Use updated start and stop time to compute duration and number of time instances (n)
 	long int duration = stop_t - start_t;
 	long int n = (duration / time_step) + 1;
-
-	// Total number of rooms to simulate
-	int total_rooms = ParamsIn.CommonBuilding.num_zones_ * ParamsIn.CommonBuilding.num_rooms_;
 
 	// Output of the Simulation
 	DF_OUTPUT df[n];
@@ -109,7 +109,10 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	for (time_t i = start_t; i <= stop_t; i = i + time_step) {
 		df[j].t = i;						// Epoch Time
 		df[j].weather = df_weather[i];		// External Temperature
-		df[j].occ = df_occupancy[i];		// Occupancy in the Room
+		df[j].occ = new int[total_rooms];
+		for (size_t room = 0; room < (size_t) total_rooms; room++) {
+			df[j].occ[room] = df_occupancy[i][room];		// Occupancy in the Room
+		}
 		j = j + 1;
 	}
 
@@ -119,11 +122,15 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 
 	// Output File
 	for (size_t j = 0; j < (size_t) n; j++) {
-		mf << df[j].t << "," << df[j].weather << "," << df[j].occ << "\n";
+		mf << df[j].t << "," << df[j].weather;
+		for (size_t room = 0; room < (size_t) total_rooms; room++) {
+				mf << "," << df[j].occ[room];
+		}
+		mf << "\n";
 	}
 
 	// Test Print
-	std::cout << start_t << "\t" << stop_t << "\n";
+	// std::cout << start_t << "\t" << stop_t << "\n";
 	mf.close();
 
 	// Convert DataFrame format to Matrix format for computations
@@ -133,18 +140,8 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	// Simulate as per Thermal Model
 	ModelRachel MPCModel;
 
-	size_t step_size = (horizon * 60 * 60) / time_step;
-	std::cout << duration << "\n" << horizon << "\n" << n << "\n" << step_size << "\n";
-	size_t i = 0;
-	for(size_t i = 0; i < (size_t) (n - step_size); i = i + step_size) {
-		MAT_FLOAT T_ext_blk = MAT_FLOAT::Ones(step_size, 1);
-		T_ext_blk = T_ext.block(i, 0, step_size, 1);
+	MPCModel.SimulateModel(df, T_ext, O, ParamsIn, time_step, total_rooms, n, control_type, horizon);
 
-		MAT_FLOAT O_blk = MAT_FLOAT::Ones(step_size, 1);
-		O_blk = O.block(i, 0, step_size, 1);
-
-		MPCModel.SimulateModel(df, T_ext_blk, O_blk, ParamsIn, time_step, total_rooms, i, step_size, control_type);
-	}
 
 	//WriteOutput writer;
 	//writer.WriteOutputCSV(duration, time_step, num_zones_, num_rooms_, T, TR1,

@@ -1,0 +1,34 @@
+param SAT_ll := 12;
+param  SAT_ul := 35;
+param SAV_ll := 0.236;
+param SAV_ul := 4;
+param PMV_ll := -0.29;
+param PMV_ul := 0.23;
+param T_ll := -20;
+param T_ul := 20;
+param T_SPOT_ll := -20;
+param T_SPOT_ul := 20;
+param T_NoSPOT_ll := -20;
+param T_NoSPOT_ul := 20;
+#param total_rooms:=1;
+param tau:= ;
+param C := ;
+param C_:=;
+param alpha_o:=;
+param alpha_r:=;
+param Q_l:=;
+param Q_h:=;
+param Q_s:=;
+param density:=;
+param specific_heat:=;
+
+param Coefficient_Heating_Power:=;
+param Coefficient_Cooling_Power:=;
+param Coefficient_Fan_Power:=;
+param Coefficient_SPOT_Power:=; ## Need to be confirmed (Different in Rachel's Code)
+
+
+param pmv_p1;
+param pmv_p2;
+param pmv_p3;
+param pmv_p4;

@@ -83,7 +83,6 @@ void Weather::ParseWeatherData(DF_FLOAT& theData, const std::string& filename,
 		const int& skip_lines) {
 
 	ReadCSV csv;											// Call CSV Reader
-
 	std::ifstream in(filename.c_str());					// Pointer to Input File
 	if (in.fail()) {
 		std::cout << "File not found" << std::endl;
@@ -105,7 +104,7 @@ void Weather::ParseWeatherData(DF_FLOAT& theData, const std::string& filename,
 		std::vector<std::string> row = csv.csv_read_row(in, ',');// Read CSV row-wise
 		if (counter <= skip_lines - 1) {					// Skip header lines
 			counter++;
-			continue;
+    		continue;
 		}
 		if (row.size() == 2) {						// Validate two-column CSV
 			if (strptime(row[0].c_str(), "%Y-%m-%d %H:%M", &tm) == NULL) {// Unmatched datetime format
@@ -138,9 +137,9 @@ void Weather::ParseWeatherData(DF_FLOAT& theData, const std::string& filename,
 		} // End of If Statement Validating 2-Columns
 	} // End of While Loop
 
-	/*if (ptr < end_t) {						// Update end point
+	if (ptr < end_t) {						// Update end point
 		end_t = ptr;
-	}*/
+	}
 	theData[ptr] = last_freading;			// Include end point
 	in.close();
 

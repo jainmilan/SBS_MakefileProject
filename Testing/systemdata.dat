@@ -1,0 +1,35 @@
+param Nhorizon := 4;
+param SAT_ll := 12;
+param SAT_ul := 35;
+param SAV_ll := 0.236;
+param SAV_ul := 4;
+param PMV_ll := -0.29;
+param PMV_ul := 0.23;
+param T_ll := 18;
+param T_ul := 28;
+param T_SPOT_ll := 18;
+param T_SPOT_ul := 28;
+param T_NoSPOT_ll := 18;
+param T_NoSPOT_ul := 28;
+#param total_rooms:=1;
+param tau:= 600;
+param C := 2000;
+param C_:= 200;
+param alpha_o:= 0.048;
+param alpha_r:= 0.1425;
+param Q_l:=0.1;
+param Q_h:=0.1;
+param Q_s:=0.7;
+param density:=1.225;
+param specific_heat:=1.003;
+
+param HeatingEfficiency := 0.9;
+param CoolingEfficiency := 0.9;
+param Coefficient_Fan_Power := 0.094;
+param Coefficient_SPOT_Power := 0.7; ## Need to be confirmed (Different in Rachel's Code)
+
+
+param pmv_p1 := 0.2466;
+param pmv_p2 := 1.4075;
+param pmv_p3 := 0.581;
+param pmv_p4 := 5.4668;

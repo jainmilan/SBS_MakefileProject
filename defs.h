@@ -9,9 +9,9 @@
 #define DEFS_H_
 
 #include <map>
-#include<string>
+#include <string>
 #include <utility>
-#include<Eigen/Dense>
+#include <Eigen/Dense>
 
 struct dtypes{
          time_t i;
@@ -32,11 +32,12 @@ typedef unsigned long int uint32;
 typedef std::map<std::pair<time_t, std::string>, dtypes> DataFrame;
 typedef std::map<time_t, float> DF_FLOAT;
 typedef std::map<time_t, int> DF_INT;
+typedef std::map< time_t, std::map<int, int> > DF_INT2;
 
 typedef struct df_format {
 			time_t t;
 			float weather;
-			int occ;
+			int *occ;
 		} DF_OUTPUT;
 
 typedef Eigen::MatrixXf MAT_FLOAT;

@@ -52,7 +52,7 @@ MAT_INT Occupants::GetOccupancyForecast(long int duration, int time_step, int nu
  * 5. Sampling Rate
  * 6. Number of Initial Lines to Skip
  */
-void Occupants::ParseOccupancyData(DF_INT& theData, const std::string& filename, time_t &start_t, time_t &end_t,
+void Occupants::ParseOccupancyData(DF_INT2& theData, const int& total_rooms, const std::string& filename, time_t &start_t, time_t &end_t,
 		const int& time_step, const int& skip_lines) {
 
 	ReadCSV csv;													// Call CSV Reader
@@ -80,8 +80,8 @@ void Occupants::ParseOccupancyData(DF_INT& theData, const std::string& filename,
     		counter++;
     		continue;
     	}
-    	if (row.size() == 2) {													// Validate two-column CSV
-        	if (strptime(row[0].c_str(), "%Y-%m-%d %H:%M", &tm) == NULL ) {		// Unmatched datetime format
+    	if (row.size() == total_rooms + 1) {									// Validate two-column CSV
+    		if (strptime(row[0].c_str(), "%Y-%m-%d %H:%M", &tm) == NULL ) {		// Unmatched datetime format
         		std::cout << row[0] << "\n";
         		std::cout << "Error" << "\n";
         	}
@@ -100,7 +100,9 @@ void Occupants::ParseOccupancyData(DF_INT& theData, const std::string& filename,
         			counter++;
         		} else {
         			while (ptr != current_ftime) {									// Till ptr reaches current reading (Interpolation)
-        				theData[ptr] = last_freading;	// f - float denotes data type
+        				for (size_t room = 0; room < (size_t) total_rooms; room++) {
+        					theData[ptr][room] = last_freading;
+        				}
         				ptr = ptr + time_step;
         			}
         			last_ftime = current_ftime;
@@ -111,10 +113,12 @@ void Occupants::ParseOccupancyData(DF_INT& theData, const std::string& filename,
 	    } // End of If Statement Validating 2-Columns
     } // End of While Loop
 
-    /*if (ptr < end_t) {						// Update end point
+    if (ptr < end_t) {						// Update end point
     	end_t = ptr;
-    }*/
-    theData[ptr] = last_freading;			// Include end point
+    }
+	for (size_t room = 0; room < (size_t) total_rooms; room++) {
+		theData[ptr][room] = last_freading;
+	}
     in.close();
 } // End of ParseWeatherData
 
@@ -132,7 +136,7 @@ MAT_FLOAT Occupants::GetOccupancyMatrix(DF_OUTPUT df[], const long int& n, const
 	// Assign value from the data frame to the Matrix
 	for (size_t i = 0; i < (size_t) n; i++) {
 		for (size_t j = 0; j < (size_t) total_rooms; j++) {
-			occupancy(i, j) = df[i].occ;
+			occupancy(i, j) = df[i].occ[j];
 		}
 	}
 	return occupancy;	// Return Matrix

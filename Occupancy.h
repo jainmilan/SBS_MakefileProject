@@ -20,7 +20,7 @@ namespace SimpleBuildingSimulator {
 		/* Test Function */
 		MAT_INT GetOccupancyForecast(long int duration, int time_step, int num_zones, int num_rooms);
 		/* Parse Occupancy Data File */
-		void ParseOccupancyData(DF_INT& theData, const std::string& filename, time_t &start_t, time_t &end_t,
+		void ParseOccupancyData(DF_INT2& theData, const int& total_rooms, const std::string& filename, time_t &start_t, time_t &end_t,
 						const int& time_step, const int& skip_lines);
 		/* Convert Dataframe to Matrix for Computation */
 		MAT_FLOAT GetOccupancyMatrix(DF_OUTPUT df[], const long int& n, const int& total_rooms);
