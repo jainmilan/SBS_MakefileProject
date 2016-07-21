@@ -257,7 +257,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 			break;
 		case 3:
 			response = cb.MPCControl(df, step_size, time_step, T_ext_blk, O_blk, TR2.row(k-1),
-					DeltaTR1.row(k-1), ParamsIn, horizon, Time_IH, CV);
+					DeltaTR1.row(k-1), ParamsIn, horizon, Time_IH, CV, k-1);
 			break;
 		default:
 			break;

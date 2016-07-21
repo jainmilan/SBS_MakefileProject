@@ -2,7 +2,7 @@ building:{
 	zones:1,							/* Number of Zones */ 
 	rooms:2,							/* Number of Rooms */
 	start:20160101T0000,				/* Start Time (Format: yyyymmddThhmm) */
-	stop:20160101T0500,					/* Stop Time (Format: yyyymmddThhmm) */
+	stop:20160106T0240,					/* Stop Time (Format: yyyymmddThhmm) */
 	horizon:4,							/* Horizon for simulation */
 	time_step:600,						/* Time Step */
 	control:3,							/* Control Type: 1 (No Control), 2 (Reactive), 3 (MPC) */
@@ -35,8 +35,8 @@ building:{
 		t_ext:0.02						/* Error in Weather Forecast */ 
 	},
 	files:{
-		input_wthr:Jan34,				/* Input Weather File Name */
-		input_occ:Occupancy2,			/* Input Occupancy File Name */
+		input_wthr:Tempwinter1,			/* Input Weather File Name */
+		input_occ:ocpdata2,				/* Input Occupancy File Name */
 		output:Sim1						/* Output File Name */
 	}
 }

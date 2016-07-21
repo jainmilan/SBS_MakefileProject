@@ -1,5 +1,6 @@
 #include "ampl/ampl.h"
 #include <math.h>
+#include <string>
 #include "ControlBox.h"
 
 using namespace SimpleBuildingSimulator;
@@ -8,6 +9,37 @@ ControlBox::ControlBox() {
 }
 
 ControlBox::~ControlBox() {
+}
+
+std::string IntToString ( int number )
+{
+  std::ostringstream oss;
+
+  // Works just like cout
+  oss<< number;
+
+  // Return the underlying string
+  return oss.str();
+}
+
+std::string DoubleToString ( double number )
+{
+  std::ostringstream oss;
+
+  // Works just like cout
+  oss<< number;
+
+  // Return the underlying string
+  return oss.str();
+}
+
+double gen_random(double lower_limit, double upper_limit, int dec = 0) {
+	/* Random Error */
+	double ll = lower_limit * (double) (10 ^ dec);
+	double ul = upper_limit * (double) (10 ^ dec);
+
+	double rand_int = (double) (rand() % (int) (ul - ll + 1.0) + ll) / (double) (10 ^ dec);
+	return rand_int;
 }
 
 MAT_FLOAT ControlBox::GetSAVMatrix(MAT_FLOAT SAV_Zones, int num_rooms, int total_rooms) {
@@ -90,7 +122,7 @@ struct ControlVariables ControlBox::ReactiveControl(const int& total_rooms, MAT_
 
 float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const int& time_step, MAT_FLOAT T_Outside,
 		MAT_FLOAT Occupancy, MAT_FLOAT TNoSPOTInit,	MAT_FLOAT DeltaTSPOTInit, const PARAMS& ParamsIn, const int& horizon,
-		const int& Time_IH,	ControlVariables& CV) {
+		const int& Time_IH,	ControlVariables& CV, int current_index) {
 
 	// Initialize AMPL and Control Variables
 	ampl::AMPL ampl;
@@ -410,22 +442,90 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		pDeltaTSPOTInit.setValues(pDeltaTSPOTInitA, total_rooms);
 		// std::cout << "Delta_T_SPOT_Init: " << DeltaTSPOTInit << "\n";
 
-		// Resolve and display objective
-		ampl.solve();
-		ampl::Objective totalcost = ampl.getObjective("total_power");
+		int current_seed, i = 0;
 
-		//ampl::Variable result_num = ampl.getVariable("solve_result_num");
-		//ampl::DataFrame dfresult_num = result_num.getValues();
-		ampl.eval("let response := solve_result_num;");
+		/* Initial Guess */
+		for(i = 2; i < 18; i++) {
+			current_seed = i + current_index * 10;
 
-		// Get final value of response
-		ampl::Parameter response = ampl.getParameter("response");
-		res_val = response.get().dbl();
-		std::cout << res_val << "\n";
+			srand(current_seed);
+			double vDeltaTSPOTInit = gen_random(0, 4);
+			ampl.eval("let {i in 1..duration+1, j in 1..total_rooms} Delta_T_SPOT[i, j] := " + DoubleToString(vDeltaTSPOTInit) + ";");
 
-		if (res_val == 299) {
-			return res_val;
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vTNoSPOTInit = gen_random(18, 28);
+			ampl.eval("let {i in 1..duration+1, j in 1..total_rooms} T_NoSPOT[i, j] := " + DoubleToString(vTNoSPOTInit) + ";");
+
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vTMixingUnitInit = gen_random(2, 25);
+			ampl.eval("let {i in 1..duration} T_Mixing_Unit[i] := " + DoubleToString(vTMixingUnitInit) + ";");
+
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vTCoolingUnitInit = gen_random(2, 25);
+			ampl.eval("let {i in 1..duration} T_Cooling_Unit[i] := " + DoubleToString(vTCoolingUnitInit) + ";");
+
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vSATInit = gen_random(12, 35);
+			ampl.eval("let {i in 1..duration} SAT[i] := " + DoubleToString(vSATInit) + ";");
+
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vSAVInit = gen_random(0.2, 4, 1);
+			ampl.eval("let {i in 1..duration} SAV[i] := " + DoubleToString(vSAVInit) + ";");
+
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vSPOTStatusInit = gen_random(0, 1, 1);
+			ampl.eval("let {i in 1..duration, j in 1..total_rooms} SPOT_Status[i, j] := " + DoubleToString(vSPOTStatusInit) + ";");
+
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vRatioInit = gen_random(0, 0.8, 1);
+			ampl.eval("let {i in 1..duration} Ratio[i] := " + DoubleToString(vRatioInit) + ";");
+
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vPMVInit = gen_random(-0.29, 0.23, 2);
+			ampl.eval("let {i in 2..duration+1, j in 1..total_rooms} PMV[i, j] := " + DoubleToString(vPMVInit) + ";");
+
+			current_seed = current_seed + 1;
+			srand(current_seed);
+			double vFanSpeedInit = 0.0;
+			ampl.eval("let {i in 1..duration, j in 1..total_rooms} Fan_Speed[i, j] := " + DoubleToString(vFanSpeedInit) + ";");
+
+			// Resolve and display objective
+			ampl.solve();
+			ampl::Objective totalcost = ampl.getObjective("total_power");
+
+			ampl.eval("let response := solve_result_num;");
+
+			// Get final value of response
+			ampl::Parameter response = ampl.getParameter("response");
+			res_val = response.get().dbl();
+			std::cout << res_val << "\n";
+
+			if (res_val >= 199) {
+				continue;
+			}
+
+			std::cout << "vDeltaTSPOTInit: " << vDeltaTSPOTInit << "\n";
+			std::cout << "vTNoSPOTInit: " << vTNoSPOTInit << "\n";
+			std::cout << "vTMixingUnitInit: " << vTMixingUnitInit << "\n";
+			std::cout << "vTCoolingUnitInit: " << vTCoolingUnitInit << "\n";
+			std::cout << "vSATInit: " << vSATInit << "\n";
+			std::cout << "vSAVInit: " << vSAVInit << "\n";
+			std::cout << "vSPOTStatusInit: " << vSPOTStatusInit << "\n";
+			std::cout << "vRatioInit: " << vRatioInit << "\n";
+			std::cout << "vPMVInit: " << vPMVInit << "\n";
+			std::cout << "vFanSpeedInit: " << vFanSpeedInit << "\n";
+			break;
 		}
+
+		std::cout << "Selected Seed: " << current_seed << " at: " << i << "\n";
 
 		// Get final value of Supply Air Temperature (SAT)
 		ampl::Variable vSAT = ampl.getVariable("SAT");
@@ -450,37 +550,26 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		CV.SAV_Zones = Eigen::MatrixXf::Ones(ParamsIn.CommonBuilding.num_zones_, 1)
 				* (dfSAV.getRowByIndex(0)[1].dbl() / total_rooms);
 		CV.SAV_Matrix = GetSAVMatrix(CV.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
-
 		// std::cout << "SAV Values Are: " << cv.SAV_Matrix << std::endl;
 
 		// Get final value of SPOT Status
+		// std::string command = "{j in 1.." + IntToString(total_rooms) + "} SPOT_Status[1,j]";
+		// ampl::DataFrame dfSPOTStatusNew = ampl.getData(command.c_str());
+
 		ampl::Variable vSPOTStatus = ampl.getVariable("SPOT_Status");
 		ampl::DataFrame dfSPOTStatus = vSPOTStatus.getValues();
+		// std::cout << dfSPOTStatusNew.toString() << "\n";
 
-		// std::cout << dfSPOTStatus.toString() << "\n";
 		size_t nRows = dfSPOTStatus.getNumRows();
 		CV.SPOT_CurrentState = Eigen::MatrixXf::Ones(1, total_rooms);
 		for (size_t i = 0, nCols = CV.SPOT_CurrentState.cols(); i < nCols;
 				i++) {
-			CV.SPOT_CurrentState(0, i) = dfSPOTStatus.getRowByIndex(
-					i * nRows + 0)[2].dbl(); // 2 is the column of returned dataframe
+			CV.SPOT_CurrentState(0, i) = dfSPOTStatus.getRowByIndex(i)[2].dbl(); // 2 is the column of returned dataframe
 		}
-
-		// std::cout << "SPOT Status: " << cv.SPOT_CurrentState << std::endl;
-		//std::cout << "Objective Is: " << totalcost.value() << std::endl;
+		// std::cout << "SPOT Status: " << CV.SPOT_CurrentState << std::endl;
+		// std::cout << "Objective Is: " << totalcost.value() << std::endl;
 	} catch (const std::exception &exc) {
 		std::cerr << "Solver Not Working!!";
-
-		//CV.SAT_Value = 30;
-		//CV.r = 0.8;
-
-		//CV.SAT = Eigen::MatrixXf::Ones(1, total_rooms) * cv.SAT_Value;
-
-		//CV.SAV_Zones = Eigen::MatrixXf::Ones(ParamsIn.CommonBuilding.num_zones_, 1) * 0.05f;
-		//cv.SAV_Matrix = GetSAVMatrix(cv.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
-
-		//cv.SPOT_CurrentState = Eigen::MatrixXi::Ones(1, total_rooms);
-
 		std::cerr << exc.what();
 	}
 

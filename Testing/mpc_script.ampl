@@ -88,6 +88,8 @@ for {time_slot in 1..7 }
 	
 	#option presolve 0;
 	
+	#let {i in 1..duration, j in 1..total_rooms} SPOT_Status[i, j];
+	
 	option solver minos;
 	solve;
 
@@ -96,7 +98,7 @@ for {time_slot in 1..7 }
 	#print {i in 1.._ncons: _con[i].status="pre"}: _conname[i];
 	#display T_Mixing_Unit[2];
 	#display Ratio;
-	#display T_NoSPOT[2, 1];
+	#display T_NoSPOT[2];
 	#display Delta_T_SPOT[2, 1];
 	#display SPOT_Status;
 	#display SAT[1];

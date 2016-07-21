@@ -78,10 +78,10 @@ param Delta_T_SPOT_Init {1..total_rooms}; 			# Initial Temperature Change in SPO
 param SAT_Prev;
 
 # Variables
-var T {1..duration, 1..total_rooms} >= 0 default 21;				# Room Temperature
-var Delta_T_SPOT {1..duration+1, 1..total_rooms} >= 0 default 0;	# Change in Temperature of SPOT Region
-var T_SPOT {1..duration, 1..total_rooms} >= 0 default 21;			# Temperature in SPOT Region
-var Delta_T_NoSPOT {1..duration+1, 1..total_rooms} >= 0 default 0;	# Change in Temperature of No SPOT Region
+var T {1..duration, 1..total_rooms} >= 0;				# Room Temperature
+var Delta_T_SPOT {1..duration+1, 1..total_rooms} >= 0;	# Change in Temperature of SPOT Region
+var T_SPOT {1..duration, 1..total_rooms} >= 0;			# Temperature in SPOT Region
+var Delta_T_NoSPOT {1..duration+1, 1..total_rooms} >= 0;# Change in Temperature of No SPOT Region
 var T_NoSPOT {1..duration+1, 1..total_rooms} >= 0 default 21;		# Temperature in No-SPOT Region
 var T_Mixing_Unit {1..duration} >= 0 default 18;					# Temperature from Mixing Unit
 var T_Cooling_Unit {1..duration} >= 0 default 18;					# Temperature from Cooling Unit

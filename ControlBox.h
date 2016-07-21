@@ -33,7 +33,7 @@ public:
 			int k, MAT_FLOAT SPOT_PreviousState, const PARAMS& ParamsIn);
 	float MPCControl(DF_OUTPUT df[], const long int& tinstances, const int& time_step, MAT_FLOAT T_Outside,
 			MAT_FLOAT Occupancy, MAT_FLOAT TNoSPOTInit,	MAT_FLOAT DeltaTSPOTInit, const PARAMS& ParamsIn, const int& horizon,
-			const int& Time_IH,	ControlVariables& CV);
+			const int& Time_IH,	ControlVariables& CV, int current_index);
 private:
 	MAT_FLOAT GetSAVMatrix(MAT_FLOAT SAV_Zones, int num_rooms, int total_rooms);
 };

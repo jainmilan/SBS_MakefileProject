@@ -57,19 +57,16 @@ param Delta_T_SPOT_Init {1..total_rooms}; 			# Initial Temperature Change in SPO
 param SAT_Prev;
 
 # Variables
-var T {1..duration, 1..total_rooms} >= 0 default 21;				# Room Temperature
-var Delta_T_SPOT {1..duration+1, 1..total_rooms} >= 0 default 0;	# Change in Temperature of SPOT Region
-var T_SPOT {1..duration, 1..total_rooms} >= 0 default 21;			# Temperature in SPOT Region
-var Delta_T_NoSPOT {1..duration+1, 1..total_rooms} >= 0 default 0;	# Change in Temperature of No SPOT Region
-var T_NoSPOT {1..duration+1, 1..total_rooms} >= 0 default 21;		# Temperature in No-SPOT Region
-var T_Mixing_Unit {1..duration} >= 0 default 18;					# Temperature from Mixing Unit
-var T_Cooling_Unit {1..duration} >= 0 default 18;					# Temperature from Cooling Unit
-var SAT {1..duration} >= 0  default 30;								# Supply Air Temperature
-var SAV {1..duration} >= 0  default 0.5;							# Supply Air Volume
-var SPOT_Status {1..duration, 1..total_rooms} >= 0 default 0;		# SPOT State
-var Ratio {1..duration} >= 0 default 0.8;							# Mixing Ratio
-var PMV {2..duration+1, 1..total_rooms} default 0.1;				# PMV
-var Fan_Speed {1..duration, 1..total_rooms} >= 0 default 0;			# Fan Speed
+var Delta_T_SPOT {1..duration+1, 1..total_rooms} >= 0;	# Change in Temperature of SPOT Region
+var T_NoSPOT {1..duration+1, 1..total_rooms} >= 0;		# Temperature in No-SPOT Region
+var T_Mixing_Unit {1..duration} >= 0;					# Temperature from Mixing Unit
+var T_Cooling_Unit {1..duration} >= 0;					# Temperature from Cooling Unit
+var SAT {1..duration} >= 0;								# Supply Air Temperature
+var SAV {1..duration} >= 0;								# Supply Air Volume
+var SPOT_Status {1..duration, 1..total_rooms} >= 0;		# SPOT State
+var Ratio {1..duration} >= 0;							# Mixing Ratio
+var PMV {2..duration+1, 1..total_rooms};				# PMV
+var Fan_Speed {1..duration, 1..total_rooms} >= 0;		# Fan Speed
 
 # Objective
 minimize total_power : sum {t in 1..duration} (
