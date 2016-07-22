@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Objective &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/ampl.ico"/>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../../index.html" />
+    <link rel="up" title="Java API reference" href="../../reference.html" />
+    <link rel="next" title="ObjectiveInstance" href="ObjectiveInstance.html" />
+    <link rel="prev" title="ConstraintInstance" href="ConstraintInstance.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ObjectiveInstance.html" title="ObjectiveInstance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ConstraintInstance.html" title="ConstraintInstance"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" accesskey="U">Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Objective</a><ul>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ConstraintInstance.html"
+                        title="previous chapter">ConstraintInstance</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ObjectiveInstance.html"
+                        title="next chapter">ObjectiveInstance</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/com/ampl/Objective.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="objective">
+<h1>Objective<a class="headerlink" href="#objective" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="com.ampl.Objective">
+public class <code class="descname">Objective</code> extends <a class="reference internal" href="Entity.html#com.ampl.Entity" title="com.ampl.Entity">Entity</a>&lt;<a class="reference internal" href="ObjectiveInstance.html#com.ampl.ObjectiveInstance" title="com.ampl.ObjectiveInstance">ObjectiveInstance</a>&gt;<a class="headerlink" href="#com.ampl.Objective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an AMPL objective. Note that, in case of a scalar objective, all the properties (corresponding to AMPL suffixes) of the objective instance can be accessed through methods like <a class="reference internal" href="#com.ampl.Objective.value()" title="com.ampl.Objective.value()"><code class="xref java java-ref docutils literal"><span class="pre">Objective.value</span></code></a>. The methods have the same name of the corresponding AMPL suffixes. See <a class="reference external" href="http://www.ampl.com/NEW/suffbuiltin.html">http://www.ampl.com/NEW/suffbuiltin.html</a> for a list of the available suffixes.</p>
+<p>All these methods throw an <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><code class="xref java java-ref docutils literal"><span class="pre">UnsupportedOperationException</span></code></a> if called for a non scalar objective.</p>
+<p>Otherwise, use the method <a class="reference internal" href="#com.ampl.Objective.get(Tuple)" title="com.ampl.Objective.get(Tuple)"><code class="xref java java-ref docutils literal"><span class="pre">Objective.get</span></code></a> to obtain the objects of type <a class="reference internal" href="ObjectiveInstance.html#com.ampl.ObjectiveInstance" title="com.ampl.ObjectiveInstance"><code class="xref java java-ref docutils literal"><span class="pre">ObjectiveInstance</span></code></a>, from which to access all properties (see section <a class="reference internal" href="../../class-structure.html#secaccessinstancesandvalues"><span>Access to instances and values</span></a> for further information on how to access instances).</p>
+<p>To gain access to all the values in an entity (for all instances and all suffixes for that entities), see <a class="reference internal" href="Entity.html#com.ampl.Entity.getValues(String)" title="com.ampl.Entity.getValues(String)"><code class="xref java java-ref docutils literal"><span class="pre">Entity.getValues</span></code></a> and the <a class="reference internal" href="DataFrame.html#com.ampl.DataFrame" title="com.ampl.DataFrame"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame</span></code></a> class.</p>
+</dd></dl>
+
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="com.ampl.Objective.astatus()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">astatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.astatus()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the AMPL status</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the objective is not scalar</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.drop()">
+public void <code class="descname">drop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.drop()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop all instances of this objective, corresponding to the AMPL code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>drop objectiveName;
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.exitcode()">
+public int <code class="descname">exitcode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.exitcode()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exit code returned by solver after most recent solve with this objective</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the objective is not scalar</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Exit code</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.get()">
+public <a class="reference internal" href="ObjectiveInstance.html#com.ampl.ObjectiveInstance" title="com.ampl.ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.get()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the objective instance (valid for scalar objectives only).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the objective is not scalar.</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL interpreter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.get(Object)">
+public <a class="reference internal" href="ObjectiveInstance.html#com.ampl.ObjectiveInstance" title="com.ampl.ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> key</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.get(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the objective corresponding to the specified key. See <a class="reference internal" href="../../class-structure.html#secaccessinstancesandvalues"><span>Access to instances and values</span></a> for further information on how the key can be specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> &#8211; Key of the instance to be found.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if trying to access an instance with the wrong number of keys (see <a class="reference internal" href="Entity.html#com.ampl.Entity.indexarity()" title="com.ampl.Entity.indexarity()"><code class="xref java java-ref docutils literal"><span class="pre">Entity.indexarity</span></code></a>)</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL interpreter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The objective instance corresponding to the specified key. Returns <code class="docutils literal"><span class="pre">null</span></code> if the specified key is not present.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.get(Tuple)">
+public <a class="reference internal" href="ObjectiveInstance.html#com.ampl.ObjectiveInstance" title="com.ampl.ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple">Tuple</a><em> key</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.get(Tuple)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the objective instance corresponding to the specified key, expressed as a Tuple. See <a class="reference internal" href="../../class-structure.html#secaccessinstancesandvalues"><span>Access to instances and values</span></a> for further information on how the key can be specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> &#8211; The indexing Tuple of the instance to be found</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalArgumentException.html" title="java.lang.IllegalArgumentException"><strong>IllegalArgumentException</strong></a> &#8211; if trying to access an instance with the wrong indexarity (see <a class="reference internal" href="Entity.html#com.ampl.Entity.indexarity()" title="com.ampl.Entity.indexarity()"><code class="xref java java-ref docutils literal"><span class="pre">Entity.indexarity</span></code></a>)</li>
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><strong>IllegalStateException</strong></a> &#8211; if the entity has been deleted in the underlying AMPL interpreter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The objective instance corresponding to the specified key. Returns <code class="docutils literal"><span class="pre">null</span></code> if the specified key is not present.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.message()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.message()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result message returned by solver after most recent solve with this objective</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the objective is not scalar</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.restore()">
+public void <code class="descname">restore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.restore()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore all instances of this objective, corresponding to the AMPL code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>restore objectiveName;
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.result()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.result()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result string returned by solver after most recent solve with this objective</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the objective is not scalar</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.sstatus()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">sstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.sstatus()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the solver status</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the objective is not scalar</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.toString()" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representation of the objective. Equivalent to the AMPL statement</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>show objectiveName;
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.Objective.value()">
+public double <code class="descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.Objective.value()" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the entity has only one objective (usually the case), get the corresponding value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if the objective is not scalar</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Value of the objective</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ObjectiveInstance.html" title="ObjectiveInstance"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ConstraintInstance.html" title="ConstraintInstance"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" >Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

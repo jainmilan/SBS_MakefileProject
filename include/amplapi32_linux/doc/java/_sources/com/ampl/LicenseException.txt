@@ -1,0 +1,27 @@
+LicenseException
+================
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public class LicenseException extends RuntimeException
+
+   Represent an exception caused by licensing problems
+
+Constructors
+------------
+
+.. java:constructor:: public LicenseException(String message)
+   :outertype: LicenseException
+
+   Constructs a new \ ``LicenseException``\ .
+
+   :param message: The error message.
+
+.. java:constructor:: public LicenseException(Exception e)
+   :outertype: LicenseException
+
+   Constructs a new \ ``LicenseException``\  wrapping an existing exception. The existing exception will be embedded in the new one, and its message will become the default message for the \ ``LicenseException``\ .
+
+   :param e: The exception to be wrapped in a \ ``LicenseException``\ .
+

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Instance &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../index.html" />
+    <link rel="up" title="C++ API reference" href="../reference.html" />
+    <link rel="next" title="Constraint" href="constraint.html" />
+    <link rel="prev" title="EntityMap" href="entitymap.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="constraint.html" title="Constraint"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="entitymap.html" title="EntityMap"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" accesskey="U">C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="entitymap.html"
+                        title="previous chapter">EntityMap</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="constraint.html"
+                        title="next chapter">Constraint</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/classes/instance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="instance">
+<span id="ref-instance"></span><h1>Instance<a class="headerlink" href="#instance" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4ampl8InstanceE">
+<span id="ampl::Instance"></span><span class="target" id="amplapiclassampl_1_1_instance"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">Instance</code><a class="headerlink" href="#_CPPv2N4ampl8InstanceE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for instances of modelling entities. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl8Instance6entityEv">
+<span id="ampl::Instance::entity"></span><span class="target" id="amplapiclassampl_1_1_instance_1a793404f302c2950aade4ebc00682fb9e"></span><a class="reference internal" href="entity.html#_CPPv2N4ampl6EntityE" title="ampl::Entity">Entity</a> <code class="descname">entity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl8Instance6entityEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the entity that this instance is part of. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl8Instance4nameEv">
+<span id="ampl::Instance::name"></span><span class="target" id="amplapiclassampl_1_1_instance_1aa1ced705ed788cd2b5feda2bd145a318"></span>std::string <code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl8Instance4nameEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of this instance. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl8Instance8toStringEv">
+<span id="ampl::Instance::toString"></span><span class="target" id="amplapiclassampl_1_1_instance_1a70fad3ea35b7f9cba66fc3f3b05ca369"></span>std::string <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl8Instance8toStringEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representation of this instance. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">class</em> InnerInstance&gt;</dt>
+<dt id="_CPPv2N4ampl8Instance8InstanceE13BasicInstanceI13InnerInstanceE">
+<span id="ampl::Instance::Instance__BasicInstance:InnerInstance:"></span><span class="target" id="amplapiclassampl_1_1_instance_1a3fe3cd7fc8a16e83e7b0b1163cdb9ebb"></span><code class="descname">Instance</code><span class="sig-paren">(</span>BasicInstance&lt;InnerInstance&gt; <em>instance</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl8Instance8InstanceE13BasicInstanceI13InnerInstanceE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for base class conversions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">class</em> InnerInstance&gt;</dt>
+<dt id="_CPPv2N4ampl8InstanceaSE13BasicInstanceI13InnerInstanceE">
+<span id="ampl::Instance::assign-operator__BasicInstance:InnerInstance:"></span><span class="target" id="amplapiclassampl_1_1_instance_1a94df761be33c31ed0deed0fe9e06df3f"></span><a class="reference internal" href="#_CPPv2N4ampl8Instance8InstanceE13BasicInstanceI13InnerInstanceE" title="ampl::Instance::Instance">Instance</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span>BasicInstance&lt;InnerInstance&gt; <em>instance</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl8InstanceaSE13BasicInstanceI13InnerInstanceE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Operator for base class conversions. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="constraint.html" title="Constraint"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="entitymap.html" title="EntityMap"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" >C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

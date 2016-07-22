@@ -1,0 +1,20 @@
+.. highlight:: c++
+
+.. _ref::DataFrame:
+
+DataFrame
+----------
+
+.. doxygenclass:: ampl::DataFrame
+   :members:
+   :undoc-members:
+
+Row
+---
+.. doxygentypedef:: ampl::DataFrame::Row
+   
+Column
+------
+   
+ .. doxygentypedef:: ampl::DataFrame::Column
+   

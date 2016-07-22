@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Objective &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../index.html" />
+    <link rel="up" title="C++ API reference" href="../reference.html" />
+    <link rel="next" title="ObjectiveInstance" href="objectiveinstance.html" />
+    <link rel="prev" title="ConstraintInstance" href="constraintinstance.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="objectiveinstance.html" title="ObjectiveInstance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="constraintinstance.html" title="ConstraintInstance"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" accesskey="U">C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="constraintinstance.html"
+                        title="previous chapter">ConstraintInstance</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="objectiveinstance.html"
+                        title="next chapter">ObjectiveInstance</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/classes/objective.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="objective">
+<span id="ref-objective"></span><h1>Objective<a class="headerlink" href="#objective" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4ampl9ObjectiveE">
+<span id="ampl::Objective"></span><span class="target" id="amplapiclassampl_1_1_objective"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">Objective</code><a class="headerlink" href="#_CPPv2N4ampl9ObjectiveE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an AMPL objective. </p>
+<p>Note that, in case of a scalar objective, all the properties (corresponding to AMPL suffixes) of the objective instance can be accessed through methods like <a class="reference internal" href="#amplapiclassampl_1_1_objective_1a56d7edf2f0a5548ee8e8b51878de4eaf"><span>Objective::value()</span></a>. The methods have the same name of the corresponding AMPL suffixes. See <a class="reference external" href="http://www.ampl.com/NEW/suffbuiltin.html">http://www.ampl.com/NEW/suffbuiltin.html</a> for a list of the available suffixes. </p>
+<p>All these methods throw an std::logic_error if called for a non scalar objective and an std::runtime_error if called on an entity which has been deleted in the underlying intepreter. </p>
+<p>The instances, represented by the class <a class="reference internal" href="objectiveinstance.html#amplapiclassampl_1_1_objective_instance"><span>ObjectiveInstance</span></a> can be accessed via the operator Objective::operator[](), via the methods <a class="reference internal" href="variable.html#amplapiclassampl_1_1_basic_entity_1a585ebebb1e8a3c049609a6597b94fc22"><span>Objective::get()</span></a> or via the iterators provided. </p>
+<p>To gain access to all the values in an entity (for all instances and all suffixes for that entities), see Entity::getValues() and the <a class="reference internal" href="dataframe.html#amplapiclassampl_1_1_data_frame"><span>DataFrame</span></a> class. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Instance access</p>
+<p>Methods to access the instances which are part of this <a class="reference internal" href="entity.html#amplapiclassampl_1_1_entity"><span>Entity</span></a> </p>
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getEv">
+<span id="ampl::BasicEntity::get"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a585ebebb1e8a3c049609a6597b94fc22"></span><a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance corresponding to a scalar entity. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The corresponding instance. </dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">runtime_error</span></code> - <p>if the entity has been deleted in the underlying AMPL interpreter </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">logic_error</span></code> - <p>if the entity is not scalar </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE8TupleRef">
+<span id="ampl::BasicEntity::get__TupleRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a9d4f132d57c7fe69dc7f9afb9d1dae63"></span><a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="tuple.html#_CPPv2N4ampl8TupleRefE" title="ampl::TupleRef">TupleRef</a> <em>index</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE8TupleRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance with the specified index. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The corresponding instance </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">index</span></code> - <p>The tuple specifying the index </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">out_of_range</span></code> - <p>if an instance with the specified index does not exist </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">runtime_error</span></code> - <p>if the entity has been deleted in the underlying AMPL interpreter </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">logic_error</span></code> - <p>if the entity is scalar </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE10VariantRef">
+<span id="ampl::BasicEntity::get__VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a4e998ee61c31c7ec1d62f875074448db"></span><a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef">
+<span id="ampl::BasicEntity::get__VariantRef.VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a90e3cb172084a45595c996a41c9a72f2"></span><a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v2</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef10VariantRef">
+<span id="ampl::BasicEntity::get__VariantRef.VariantRef.VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1af9069276864f177388a830bc59675d0d"></span><a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v2</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v3</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef10VariantRef10VariantRef">
+<span id="ampl::BasicEntity::get__VariantRef.VariantRef.VariantRef.VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a7b593ea55e96f1710889de63454259f7"></span><a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v2</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v3</em>, <a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v4</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3getE10VariantRef10VariantRef10VariantRef10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the instance with the specified index. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The corresponding instance </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">v1</span></code> - <p>The VariantRef specifying the first element of the indexing tuple </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">v2</span></code> - <p>The VariantRef specifying the second element of the indexing tuple </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">v3</span></code> - <p>The VariantRef specifying the third element of the indexing tuple </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">v4</span></code> - <p>The VariantRef specifying the fourth element of the indexing tuple </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">out_of_range</span></code> - <p>if an instance with the specified index does not exist </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">runtime_error</span></code> - <p>if the entity has been deleted in the underlying AMPL interpreter </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">logic_error</span></code> - <p>if the entity is scalar </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntityixE8TupleRef">
+<span id="ampl::BasicEntity::subscript-operator__TupleRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a06229841ee63e892eb77d5bc24324642"></span><a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a> <code class="descname">operator[]</code><span class="sig-paren">(</span><a class="reference internal" href="tuple.html#_CPPv2N4ampl8TupleRefE" title="ampl::TupleRef">TupleRef</a> <em>index</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntityixE8TupleRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntityixE10VariantRef">
+<span id="ampl::BasicEntity::subscript-operator__VariantRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a666b0edadea35cfbba55308ac7c3b0b7"></span><a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a> <code class="descname">operator[]</code><span class="sig-paren">(</span><a class="reference internal" href="variant.html#_CPPv2N4ampl10VariantRefE" title="ampl::VariantRef">VariantRef</a> <em>v1</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntityixE10VariantRef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv2N4ampl11BasicEntity8iteratorE">
+<span id="ampl::BasicEntity::iterator"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1af07a6d71c9f2a1cf30569f1410ea1607"></span><em class="property">typedef </em>internal::CountedIterator&lt;internal::EntityWrapper&lt;<a class="reference internal" href="objectiveinstance.html#_CPPv2N4ampl17ObjectiveInstanceE" title="ampl::ObjectiveInstance">ObjectiveInstance</a>&gt;&gt; <code class="descname">iterator</code><a class="headerlink" href="#_CPPv2N4ampl11BasicEntity8iteratorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator for entities, represented by an iterator pointing to elements of type std::pair&lt;TupleRef, InstanceClass&gt; </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective5valueEv">
+<span id="ampl::Objective::value"></span><span class="target" id="amplapiclassampl_1_1_objective_1a56d7edf2f0a5548ee8e8b51878de4eaf"></span>double <code class="descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl9Objective5valueEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the objective instance. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective7astatusEv">
+<span id="ampl::Objective::astatus"></span><span class="target" id="amplapiclassampl_1_1_objective_1aeff54228ec5c426958497734098ac5e7"></span>std::string <code class="descname">astatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl9Objective7astatusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the AMPL status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective7sstatusEv">
+<span id="ampl::Objective::sstatus"></span><span class="target" id="amplapiclassampl_1_1_objective_1aa424c878deb46c22049d680affd75cb3"></span>std::string <code class="descname">sstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl9Objective7sstatusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the solver status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective8exitcodeEv">
+<span id="ampl::Objective::exitcode"></span><span class="target" id="amplapiclassampl_1_1_objective_1aae411a912c77bced82e234c7e5cbd83f"></span>int <code class="descname">exitcode</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl9Objective8exitcodeEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exit code returned by solver after most recent solve with this objective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective7messageEv">
+<span id="ampl::Objective::message"></span><span class="target" id="amplapiclassampl_1_1_objective_1aa5e763657d3b0fc8391b6043a530d66d"></span>std::string <code class="descname">message</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl9Objective7messageEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result message returned by solver after most recent solve with this objective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective6resultEv">
+<span id="ampl::Objective::result"></span><span class="target" id="amplapiclassampl_1_1_objective_1a907fc7e825a498ca6b18d47878c07c0e"></span>std::string <code class="descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl9Objective6resultEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result string returned by solver after most recent solve with this objective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective4dropEv">
+<span id="ampl::Objective::drop"></span><span class="target" id="amplapiclassampl_1_1_objective_1a2117aa9ef4b4eedc4d058a4a542ee6b8"></span>void <code class="descname">drop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl9Objective4dropEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop this objective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective7restoreEv">
+<span id="ampl::Objective::restore"></span><span class="target" id="amplapiclassampl_1_1_objective_1a7f8d242358b228e94746e2aa3a3f0ba0"></span>void <code class="descname">restore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl9Objective7restoreEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore this objective (if it had been dropped, no effect otherwise) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl9Objective12minimizationEv">
+<span id="ampl::Objective::minimization"></span><span class="target" id="amplapiclassampl_1_1_objective_1a5b2e9621e1513cf320532d70aec0fd09"></span>bool <code class="descname">minimization</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl9Objective12minimizationEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sense of this objective. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if minimize, false if maximize </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity5beginEv">
+<span id="ampl::BasicEntity::begin"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a0b89cd57bdfcd659b42d612fa8c90640"></span><a class="reference internal" href="constraint.html#_CPPv2N4ampl11BasicEntity8iteratorE" title="ampl::BasicEntity::iterator">iterator</a> <code class="descname">begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity5beginEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an iterator pointing to the first instance in this entity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity3endEv">
+<span id="ampl::BasicEntity::end"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1a8f0d7daeedaaa8e4d155ac09af78299d"></span><a class="reference internal" href="constraint.html#_CPPv2N4ampl11BasicEntity8iteratorE" title="ampl::BasicEntity::iterator">iterator</a> <code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity3endEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an iterator pointing after the last instance in this entity. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl11BasicEntity4findE8TupleRef">
+<span id="ampl::BasicEntity::find__TupleRef"></span><span class="target" id="amplapiclassampl_1_1_basic_entity_1abba6291f5bc3ebc399cb7cff8c194832"></span><a class="reference internal" href="constraint.html#_CPPv2N4ampl11BasicEntity8iteratorE" title="ampl::BasicEntity::iterator">iterator</a> <code class="descname">find</code><span class="sig-paren">(</span><a class="reference internal" href="tuple.html#_CPPv2N4ampl8TupleRefE" title="ampl::TupleRef">TupleRef</a> <em>t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl11BasicEntity4findE8TupleRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches the current entity for an instance with the specified index. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>an iterator to the wanted entity if found, otherwise an iterator to BasicEntity::end. </dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="objectiveinstance.html" title="ObjectiveInstance"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="constraintinstance.html" title="ConstraintInstance"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" >C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+.. java:import:: com.ampl Variable.Integrality
+
+VariableInstance
+================
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public class VariableInstance extends Instance<Variable>
+
+   A decision variable instance. Each member of this class belongs to a single \ :java:ref:`Variable`\ . Note that accessors available here are replicated at \ :java:ref:`Variable`\  level for ease of use when dealing with scalar variables.
+
+   All AMPL suffixes for an algebraic variable are available through methods with the same name in this class. See http://www.ampl.com/NEW/suffbuiltin.html for a list of the available suffixes.
+
+   All the accessors in this class throw a :java:ref:`IllegalStateException` if the instance has been deleted in the underlying AMPL interpreter.
+
+Methods
+-------
+
+.. java:method:: public String astatus()
+   :outertype: VariableInstance
+
+   Get the AMPL status (fixed, presolved, or substituted out)
+
+.. java:method:: public int defeqn()
+   :outertype: VariableInstance
+
+   Get the index in \ ``_con``\  of "defining constraint" used to substitute variable out
+
+.. java:method:: public double dual()
+   :outertype: VariableInstance
+
+   Get the dual value on defining constraint of variable substituted out
+
+.. java:method:: public void fix()
+   :outertype: VariableInstance
+
+   Fix this variable instance to its current value
+
+.. java:method:: public void fix(double value)
+   :outertype: VariableInstance
+
+   Fix this variable instance to the specified value
+
+.. java:method:: public double init()
+   :outertype: VariableInstance
+
+   Get the current initial guess
+
+.. java:method:: public double init0()
+   :outertype: VariableInstance
+
+   Get the original initial guess (set by \ ``:=``\  or \ ``default``\  or by a data statement)
+
+.. java:method:: public double lb()
+   :outertype: VariableInstance
+
+   Returns the current lower bound
+
+.. java:method:: public double lb0()
+   :outertype: VariableInstance
+
+   Returns the initial lower bounds, from the var declaration
+
+.. java:method:: public double lb1()
+   :outertype: VariableInstance
+
+   Returns the weaker lower bound from AMPL's presolve phase
+
+.. java:method:: public double lb2()
+   :outertype: VariableInstance
+
+   Returns the stronger lower bound from AMPL's presolve phase
+
+.. java:method:: public double lrc()
+   :outertype: VariableInstance
+
+   Returns the reduced cost at lower bound
+
+.. java:method:: public double lslack()
+   :outertype: VariableInstance
+
+   Return the slack at lower bound (\ ``val - lb``\ )
+
+.. java:method:: @Override public String name()
+   :outertype: VariableInstance
+
+   Returns the variable name with possible subscripts as printed by the \ ``display``\  statement.
+
+.. java:method:: public double rc()
+   :outertype: VariableInstance
+
+   Get the reduced cost (at the nearer bound)
+
+.. java:method:: public void setValue(double value)
+   :outertype: VariableInstance
+
+   Set the current value of this variable instance (does not fix it), equivalent to the AMPL command \ ``let``\
+
+   :param value: Value to be set
+
+.. java:method:: public double slack()
+   :outertype: VariableInstance
+
+   Returns the bound slack which is the lesser of :java:ref:`lslack` and :java:ref:`uslack`.
+
+.. java:method:: public String sstatus()
+   :outertype: VariableInstance
+
+   Solver status (basis status of variable)
+
+.. java:method:: public String status()
+   :outertype: VariableInstance
+
+   AMPL status if not \ ``in``\ , otherwise solver status
+
+.. java:method:: @Override public String toString()
+   :outertype: VariableInstance
+
+   Returns a string representation of this :java:ref:`VariableInstance` object. The format is as follows:
+
+   .. parsed-literal::
+
+      'var' name attrs ';'
+
+   where ``name`` is the string returned by the :java:ref:`VariableInstance.name()` method and ``attrs`` represent attributes similar to those used in variable declarations.
+
+   If the lower bound (``lb``) is equal to the upper bound (``ub``), the attributes contain ``'=' lb``.
+
+   If the lower bound is not equal to the upper bound and ``Double.NEGATIVE_INFINITY`` , the attributes contain ``'>=' lb``.
+
+   If the upper bound is not equal to the lower bound and ``Double.POSITIVE_INFINITY``, the attributes contain ``'<=' ub``.
+
+   If the variable is integer, the attributes contain ``'integer'``.
+
+   If the variable is binary, the attributes contain ``'binary'``.
+
+.. java:method:: public double ub()
+   :outertype: VariableInstance
+
+   Returns the current upper bound.
+
+.. java:method:: public double ub0()
+   :outertype: VariableInstance
+
+   Returns the initial upper bound, from the var declaration
+
+.. java:method:: public double ub1()
+   :outertype: VariableInstance
+
+   Returns the weaker upper bound from AMPL's presolve phase
+
+.. java:method:: public double ub2()
+   :outertype: VariableInstance
+
+   Returns the stronger upper bound from AMPL's presolve phase
+
+.. java:method:: public void unfix()
+   :outertype: VariableInstance
+
+   Unfix this variable instance
+
+.. java:method:: public double urc()
+   :outertype: VariableInstance
+
+   Returns the reduced cost at upper bound
+
+.. java:method:: public double uslack()
+   :outertype: VariableInstance
+
+   Return the slack at upper bound (\ ``ub - val``\ )
+
+.. java:method:: public double value()
+   :outertype: VariableInstance
+
+   Get the current value of this variable instance
+

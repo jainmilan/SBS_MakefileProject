@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/efficientfrontier.dir/efficientfrontier.cc.o  -o efficientfrontier -rdynamic /home/milan/Workspace/Milan/Research/Project/Waterloo/Simulator/AMPL/amplide.linux32/amplapi/lib/libampl.so -Wl,-rpath,/home/milan/Workspace/Milan/Research/Project/Waterloo/Simulator/AMPL/amplide.linux32/amplapi/examples/cpp/../../lib 

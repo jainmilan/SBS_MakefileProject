@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SetInstance &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/ampl.ico"/>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../../index.html" />
+    <link rel="up" title="Java API reference" href="../../reference.html" />
+    <link rel="next" title="Variable" href="Variable.html" />
+    <link rel="prev" title="Set" href="Set.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Variable.html" title="Variable"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Set.html" title="Set"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" accesskey="U">Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SetInstance</a><ul>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Set.html"
+                        title="previous chapter">Set</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Variable.html"
+                        title="next chapter">Variable</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/com/ampl/SetInstance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="setinstance">
+<h1>SetInstance<a class="headerlink" href="#setinstance" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="com.ampl.SetInstance">
+public class <code class="descname">SetInstance</code> extends <a class="reference internal" href="Instance.html#com.ampl.Instance" title="com.ampl.Instance">Instance</a>&lt;<a class="reference internal" href="Set.html#com.ampl.Set" title="com.ampl.Set">Set</a>&gt; implements java.<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/package-summary.html" title="java.util.package-summary">util</a>.<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Set.html" title="java.util.Set">Set</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>&gt;<a class="headerlink" href="#com.ampl.SetInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>A SetInstance object stores the information regarding a specific instance of a set. The instances can be accessed through the function <a class="reference internal" href="Set.html#com.ampl.Set.get(Tuple)" title="com.ampl.Set.get(Tuple)"><code class="xref java java-ref docutils literal"><span class="pre">Set.get</span></code></a> of the parent entity.</p>
+<p>The members of the set can be strings, double numbers or <a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple"><code class="xref java java-ref docutils literal"><span class="pre">tuples</span></code></a>.</p>
+<p>Data can be assigned using <a class="reference internal" href="Set.html#com.ampl.Set.setValues(Object)" title="com.ampl.Set.setValues(Object)"><code class="xref java java-ref docutils literal"><span class="pre">Set.setValues</span></code></a> or using <a class="reference internal" href="AMPL.html#com.ampl.AMPL.setData(DataFrame)" title="com.ampl.AMPL.setData(DataFrame)"><code class="xref java java-ref docutils literal"><span class="pre">AMPL.setData</span></code></a> and a <a class="reference internal" href="DataFrame.html#com.ampl.DataFrame" title="com.ampl.DataFrame"><code class="xref java java-ref docutils literal"><span class="pre">DataFrame</span></code></a> object.</p>
+<p>All the accessors in this class throw a <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><code class="xref java java-ref docutils literal"><span class="pre">IllegalStateException</span></code></a> if the instance has been deleted in the underlying AMPL interpreter.</p>
+</dd></dl>
+
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="com.ampl.SetInstance.add(Object)">
+public boolean <code class="descname">add</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> e</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.add(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if called.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.addAll(Collection)">
+public boolean <code class="descname">addAll</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html" title="java.util.Collection">Collection</a>&lt;? extends <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>&gt;<em> c</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.addAll(Collection)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if called.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.clear()">
+public void <code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.clear()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if called.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.contains(Object)">
+public boolean <code class="descname">contains</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> o</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.contains(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check contents of the set for members. The object to be found can be a String, a double, a <a class="reference internal" href="Tuple.html#com.ampl.Tuple" title="com.ampl.Tuple"><code class="xref java java-ref docutils literal"><span class="pre">Tuple</span></code></a> or an array. In this last case, each element in the array is considered as elements of a Tuple to be found.</p>
+<p>i.e. the following are equivalent:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>contains(new Tuple(1, &quot;abc&quot;));
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>contains(new Object[]{1, &quot;abc});
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>o</strong> &#8211; Object to be found (double, String, Tuple or Object[] with the elements of a tuple)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if the object is present.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.containsAll(Collection)">
+public boolean <code class="descname">containsAll</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html" title="java.util.Collection">Collection</a>&lt;?&gt;<em> c</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.containsAll(Collection)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the sets contains all the elements in the collection <code class="docutils literal"><span class="pre">c</span></code>. Each element in the collection can be a double, a String, a Tuple or an array. In case of arrays, each array is considered as a Tuple.</p>
+<p>Example: considering the AMPL set declared as</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>set s := {(1, &#39;abc&#39;), (&#39;def&#39;, 2)};
+</pre></div>
+</div>
+<p>the following is true:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>List&lt;Object&gt; l = new LinkedList&lt;Object&gt;();
+list.add(new Tuple(&quot;def&quot;, 2));
+list.add(new Object[] { 1, &quot;abc&quot; });
+ampl.getSet(&quot;s&quot;).get().containsAll(list);
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>c</strong> &#8211; A Collection of objects to be found. See above for the semantics of the objects.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if all the specified objects are present</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.isEmpty()">
+public boolean <code class="descname">isEmpty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.isEmpty()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if the set is empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.iterator()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html" title="java.util.Iterator">Iterator</a>&lt;<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>&gt; <code class="descname">iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.iterator()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the iterator for this set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.remove(Object)">
+public boolean <code class="descname">remove</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a><em> o</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.remove(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if called.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.removeAll(Collection)">
+public boolean <code class="descname">removeAll</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html" title="java.util.Collection">Collection</a>&lt;?&gt;<em> c</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.removeAll(Collection)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if called.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.retainAll(Collection)">
+public boolean <code class="descname">retainAll</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html" title="java.util.Collection">Collection</a>&lt;?&gt;<em> c</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.retainAll(Collection)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Throws:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><strong>UnsupportedOperationException</strong></a> &#8211; if called.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.setValues(Object)">
+public void <code class="descname">setValues</code><span class="sig-paren">(</span><a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>...<em> objects</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.setValues(Object)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign values to the this set. The values can be strings, doubles, tuples or arrays of objects (which will be converted into tuples).</p>
+<p>For example, to assign values to a set of tuples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ampl.eval(&quot;set s dimen 2;&quot;);
+Set s = ampl.getSet(&quot;s&quot;);
+Object[] data = new Object[] { new Tuple(1, &quot;abc&quot;), new Tuple(2, &quot;def&quot;) };
+s.setValues(data);
+</pre></div>
+</div>
+<p>or alternatively, using arrays of objects:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ampl.eval(&quot;set s dimen 2;&quot;);
+Set s = ampl.getSet(&quot;s&quot;);
+Object[] data = new Object[] {new Object[]{1, &quot;abc&quot;}, new Object{2, &quot;def&quot;}};
+s.setValues(data);
+</pre></div>
+</div>
+<p>An alternative way to assign values to a set of tuples of size <cite>n</cite> is to use a flattened array, in which every <cite>n</cite> elements are considered a Tuple. So, an equivalent formulation of the example above is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ampl.eval(&quot;set s dimen 2;&quot;);
+Set s = ampl.getSet(&quot;s&quot;);
+Object[] data = new Object[] { 1, &quot;abc&quot;, 2, &quot;def&quot; };
+s.setValues(data);
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> &#8211; Values to be assigned to the set</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.size()">
+public int <code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.size()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the size</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Cardinality of this set</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.toArray()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html" title="java.lang.Object">Object</a>[] <code class="descname">toArray</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.toArray()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this set to an array.</p>
+<p>Valid only for not indexed sets.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.toArray(T[])">
+public &lt;T&gt; T[] <code class="descname">toArray</code><span class="sig-paren">(</span>T[]<em> a</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.toArray(T[])" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array containing all of the elements in this set; the runtime type of the returned array is that of the specified array. If the set fits in the specified array, it is returned therein. Otherwise, a new array is allocated with the runtime type of the specified array and the size of this set.</p>
+<p>If this set fits in the specified array with room to spare (i.e., the array has more elements than this set), the element in the array immediately following the end of the set is set to null. This is useful in determining the length of this set only if the caller knows that this set does not contain any null elements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>a</strong> &#8211; An array of the desired type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.SetInstance.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.SetInstance.toString()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the set to string, showing its name, its index value and its members.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Variable.html" title="Variable"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Set.html" title="Set"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" >Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+ObjectiveInstance
+=================
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public class ObjectiveInstance extends Instance<Objective>
+
+   Represents an objective instance.
+
+   All AMPL suffixes for an objective are available through methods with the same name in this class. See http://www.ampl.com/NEW/suffbuiltin.html for a list of the available suffixes.
+
+   All the accessors in this class throw a :java:ref:`IllegalStateException` if the instance has been deleted in the underlying AMPL interpreter.
+
+Methods
+-------
+
+.. java:method:: public String astatus()
+   :outertype: ObjectiveInstance
+
+   Return the AMPL status
+
+.. java:method:: public void drop()
+   :outertype: ObjectiveInstance
+
+   Drop this objective instance
+
+.. java:method:: public int exitcode()
+   :outertype: ObjectiveInstance
+
+   Exit code returned by solver after most recent solve with this objective
+
+.. java:method:: public String message()
+   :outertype: ObjectiveInstance
+
+   Result message returned by solver after most recent solve with this objective
+
+.. java:method:: public void restore()
+   :outertype: ObjectiveInstance
+
+   Restore this objective instance (if it had been dropped, no effect otherwise)
+
+.. java:method:: public String result()
+   :outertype: ObjectiveInstance
+
+   Result string returned by solver after most recent solve with this objective
+
+.. java:method:: public String sstatus()
+   :outertype: ObjectiveInstance
+
+   Return the solver status
+
+.. java:method:: @Override public String toString()
+   :outertype: ObjectiveInstance
+
+   Returns a string representation of this instance. Returns the equivalent to the AMPL statement:
+
+   .. parsed-literal::
+
+      expand instanceName;
+
+.. java:method:: public double value()
+   :outertype: ObjectiveInstance
+
+   Get the value of the objective instance
+

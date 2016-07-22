@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ConstraintInstance &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/ampl.ico"/>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../../index.html" />
+    <link rel="up" title="Java API reference" href="../../reference.html" />
+    <link rel="next" title="Objective" href="Objective.html" />
+    <link rel="prev" title="Constraint" href="Constraint.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Objective.html" title="Objective"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Constraint.html" title="Constraint"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" accesskey="U">Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ConstraintInstance</a><ul>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Constraint.html"
+                        title="previous chapter">Constraint</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Objective.html"
+                        title="next chapter">Objective</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/com/ampl/ConstraintInstance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="constraintinstance">
+<h1>ConstraintInstance<a class="headerlink" href="#constraintinstance" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="com.ampl.ConstraintInstance">
+public class <code class="descname">ConstraintInstance</code> extends <a class="reference internal" href="Instance.html#com.ampl.Instance" title="com.ampl.Instance">Instance</a>&lt;<a class="reference internal" href="Constraint.html#com.ampl.Constraint" title="com.ampl.Constraint">Constraint</a>&gt;<a class="headerlink" href="#com.ampl.ConstraintInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represent an instance of a constraint.</p>
+<p>In general, all AMPL suffixes for a constraint are available through methods with the same name in this class. See <a class="reference external" href="http://www.ampl.com/NEW/suffbuiltin.html">http://www.ampl.com/NEW/suffbuiltin.html</a> for a list of the available suffixes.</p>
+<p>Note that, since this class represents instances of both algebraic and logical constraints, some suffixes might not be available for every instance. If a wrong suffix for the specific class of constraint is accessed, an <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/UnsupportedOperationException.html" title="java.lang.UnsupportedOperationException"><code class="xref java java-ref docutils literal"><span class="pre">UnsupportedOperationException</span></code></a> is thrown.</p>
+<p>All the accessors in this class throw a <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><code class="xref java java-ref docutils literal"><span class="pre">IllegalStateException</span></code></a> if the instance has been deleted in the underlying AMPL interpreter.</p>
+</dd></dl>
+
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.astatus()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">astatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.astatus()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current AMPL status (dropped, presolved, or substituted out)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.body()">
+public double <code class="descname">body</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.body()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Body of the constraint</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Value</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.defvar()">
+public int <code class="descname">defvar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.defvar()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index in _var of &#8220;defined variable&#8221; substituted out by the constraint</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.dinit()">
+public double <code class="descname">dinit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.dinit()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current initial guess for the constraint&#8217;s dual variable</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.dinit0()">
+public double <code class="descname">dinit0</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.dinit0()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the original initial guess for the constraint&#8217;s dual variable</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.drop()">
+public void <code class="descname">drop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.drop()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop this constraint instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.dual()">
+public double <code class="descname">dual</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.dual()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of the constraint&#8217;s dual variable.</p>
+<p>Note that dual values are often reset by the underlying AMPL interpreter by the presolve functionalities triggered by some methods. A possible workaround is to set the option <code class="docutils literal"><span class="pre">presolve</span></code> to <code class="docutils literal"><span class="pre">false</span></code> (see <a class="reference internal" href="AMPL.html#com.ampl.AMPL.setBoolOption(String, boolean)" title="com.ampl.AMPL.setBoolOption(String, boolean)"><code class="xref java java-ref docutils literal"><span class="pre">AMPL.setBoolOption</span></code></a>).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.lb()">
+public double <code class="descname">lb</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.lb()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of the constraint&#8217;s lower bound</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.lbs()">
+public double <code class="descname">lbs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.lbs()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the constraint lower bound sent to the solver (reflecting adjustment for fixed variables)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.ldual()">
+public double <code class="descname">ldual</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.ldual()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current dual value associated with the lower bound</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.lslack()">
+public double <code class="descname">lslack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.lslack()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the slack at lower bound <code class="docutils literal"><span class="pre">body</span> <span class="pre">-</span> <span class="pre">lb</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.restore()">
+public void <code class="descname">restore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.restore()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore this constraint instance (if it had been dropped, no effect otherwise)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.setDual(double)">
+public void <code class="descname">setDual</code><span class="sig-paren">(</span>double<em> dual</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.setDual(double)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the dual variable associated to this constraint.</p>
+<p>Equivalent to the AMPL statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>let c := dual;
+</pre></div>
+</div>
+<p>Note that dual values are often reset by the underlying AMPL interpreter by the presolve functionalities triggered by some methods. A possible workaround is to set the option <code class="docutils literal"><span class="pre">presolve</span></code> to <code class="docutils literal"><span class="pre">false</span></code> (see <a class="reference internal" href="AMPL.html#com.ampl.AMPL.setBoolOption(String, boolean)" title="com.ampl.AMPL.setBoolOption(String, boolean)"><code class="xref java java-ref docutils literal"><span class="pre">AMPL.setBoolOption</span></code></a>).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dual</strong> &#8211; The value to be assigned to the dual variable</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.slack()">
+public double <code class="descname">slack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.slack()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constraint slack (the lesser of lslack and uslack)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.sstatus()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">sstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.sstatus()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the solver status (basis status of constraint&#8217;s slack or artificial variable)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.status()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.status()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL status if not <code class="docutils literal"><span class="pre">in</span></code> otherwise solver status</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.toString()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representation of this instance. Returns the equivalent to the AMPL statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>expand instanceName;
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.ub()">
+public double <code class="descname">ub</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.ub()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of the constraint&#8217;s upper bound</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.ubs()">
+public double <code class="descname">ubs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.ubs()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the constraint upper bound sent to the solver (reflecting adjustment for fixed variables)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.udual()">
+public double <code class="descname">udual</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.udual()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current dual value associated with the upper bounds</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.uslack()">
+public double <code class="descname">uslack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.uslack()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the slack at upper bound <code class="docutils literal"><span class="pre">ub</span> <span class="pre">-</span> <span class="pre">body</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.ConstraintInstance.val()">
+public double <code class="descname">val</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.ConstraintInstance.val()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL val suffix. Valid only for logical constraints.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Objective.html" title="Objective"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Constraint.html" title="Constraint"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" >Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

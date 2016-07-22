@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>VariableInstance &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/ampl.ico"/>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../../index.html" />
+    <link rel="up" title="Java API reference" href="../../reference.html" />
+    <link rel="next" title="AMPLException" href="AMPLException.html" />
+    <link rel="prev" title="Variable" href="Variable.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="AMPLException.html" title="AMPLException"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Variable.html" title="Variable"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" accesskey="U">Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">VariableInstance</a><ul>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Variable.html"
+                        title="previous chapter">Variable</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="AMPLException.html"
+                        title="next chapter">AMPLException</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/com/ampl/VariableInstance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="variableinstance">
+<h1>VariableInstance<a class="headerlink" href="#variableinstance" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="com.ampl.VariableInstance">
+public class <code class="descname">VariableInstance</code> extends <a class="reference internal" href="Instance.html#com.ampl.Instance" title="com.ampl.Instance">Instance</a>&lt;<a class="reference internal" href="Variable.html#com.ampl.Variable" title="com.ampl.Variable">Variable</a>&gt;<a class="headerlink" href="#com.ampl.VariableInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decision variable instance. Each member of this class belongs to a single <a class="reference internal" href="Variable.html#com.ampl.Variable" title="com.ampl.Variable"><code class="xref java java-ref docutils literal"><span class="pre">Variable</span></code></a>. Note that accessors available here are replicated at <a class="reference internal" href="Variable.html#com.ampl.Variable" title="com.ampl.Variable"><code class="xref java java-ref docutils literal"><span class="pre">Variable</span></code></a> level for ease of use when dealing with scalar variables.</p>
+<p>All AMPL suffixes for an algebraic variable are available through methods with the same name in this class. See <a class="reference external" href="http://www.ampl.com/NEW/suffbuiltin.html">http://www.ampl.com/NEW/suffbuiltin.html</a> for a list of the available suffixes.</p>
+<p>All the accessors in this class throw a <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html" title="java.lang.IllegalStateException"><code class="xref java java-ref docutils literal"><span class="pre">IllegalStateException</span></code></a> if the instance has been deleted in the underlying AMPL interpreter.</p>
+</dd></dl>
+
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="com.ampl.VariableInstance.astatus()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">astatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.astatus()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL status (fixed, presolved, or substituted out)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.defeqn()">
+public int <code class="descname">defeqn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.defeqn()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index in <code class="docutils literal"><span class="pre">_con</span></code> of &#8220;defining constraint&#8221; used to substitute variable out</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.dual()">
+public double <code class="descname">dual</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.dual()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the dual value on defining constraint of variable substituted out</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.fix()">
+public void <code class="descname">fix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.fix()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fix this variable instance to its current value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.fix(double)">
+public void <code class="descname">fix</code><span class="sig-paren">(</span>double<em> value</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.fix(double)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fix this variable instance to the specified value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.init()">
+public double <code class="descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.init()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current initial guess</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.init0()">
+public double <code class="descname">init0</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.init0()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the original initial guess (set by <code class="docutils literal"><span class="pre">:=</span></code> or <code class="docutils literal"><span class="pre">default</span></code> or by a data statement)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.lb()">
+public double <code class="descname">lb</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.lb()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current lower bound</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.lb0()">
+public double <code class="descname">lb0</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.lb0()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the initial lower bounds, from the var declaration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.lb1()">
+public double <code class="descname">lb1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.lb1()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the weaker lower bound from AMPL&#8217;s presolve phase</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.lb2()">
+public double <code class="descname">lb2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.lb2()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the stronger lower bound from AMPL&#8217;s presolve phase</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.lrc()">
+public double <code class="descname">lrc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.lrc()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the reduced cost at lower bound</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.lslack()">
+public double <code class="descname">lslack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.lslack()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the slack at lower bound (<code class="docutils literal"><span class="pre">val</span> <span class="pre">-</span> <span class="pre">lb</span></code>)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.name()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.name()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the variable name with possible subscripts as printed by the <code class="docutils literal"><span class="pre">display</span></code> statement.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.rc()">
+public double <code class="descname">rc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.rc()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the reduced cost (at the nearer bound)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.setValue(double)">
+public void <code class="descname">setValue</code><span class="sig-paren">(</span>double<em> value</em><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.setValue(double)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the current value of this variable instance (does not fix it), equivalent to the AMPL command <code class="docutils literal"><span class="pre">let</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>value</strong> &#8211; Value to be set</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.slack()">
+public double <code class="descname">slack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.slack()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the bound slack which is the lesser of <a class="reference internal" href="Constraint.html#com.ampl.Constraint.lslack()" title="com.ampl.Constraint.lslack()"><code class="xref java java-ref docutils literal"><span class="pre">lslack</span></code></a> and <a class="reference internal" href="Constraint.html#com.ampl.Constraint.uslack()" title="com.ampl.Constraint.uslack()"><code class="xref java java-ref docutils literal"><span class="pre">uslack</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.sstatus()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">sstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.sstatus()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solver status (basis status of variable)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.status()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.status()" title="Permalink to this definition">¶</a></dt>
+<dd><p>AMPL status if not <code class="docutils literal"><span class="pre">in</span></code>, otherwise solver status</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.toString()">
+public <a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html" title="java.lang.String">String</a> <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.toString()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representation of this <a class="reference internal" href="#com.ampl.VariableInstance" title="com.ampl.VariableInstance"><code class="xref java java-ref docutils literal"><span class="pre">VariableInstance</span></code></a> object. The format is as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>&#39;var&#39; name attrs &#39;;&#39;
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">name</span></code> is the string returned by the <a class="reference internal" href="#com.ampl.VariableInstance.name()" title="com.ampl.VariableInstance.name()"><code class="xref java java-ref docutils literal"><span class="pre">VariableInstance.name()</span></code></a> method and <code class="docutils literal"><span class="pre">attrs</span></code> represent attributes similar to those used in variable declarations.</p>
+<p>If the lower bound (<code class="docutils literal"><span class="pre">lb</span></code>) is equal to the upper bound (<code class="docutils literal"><span class="pre">ub</span></code>), the attributes contain <code class="docutils literal"><span class="pre">'='</span> <span class="pre">lb</span></code>.</p>
+<p>If the lower bound is not equal to the upper bound and <code class="docutils literal"><span class="pre">Double.NEGATIVE_INFINITY</span></code> , the attributes contain <code class="docutils literal"><span class="pre">'&gt;='</span> <span class="pre">lb</span></code>.</p>
+<p>If the upper bound is not equal to the lower bound and <code class="docutils literal"><span class="pre">Double.POSITIVE_INFINITY</span></code>, the attributes contain <code class="docutils literal"><span class="pre">'&lt;='</span> <span class="pre">ub</span></code>.</p>
+<p>If the variable is integer, the attributes contain <code class="docutils literal"><span class="pre">'integer'</span></code>.</p>
+<p>If the variable is binary, the attributes contain <code class="docutils literal"><span class="pre">'binary'</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.ub()">
+public double <code class="descname">ub</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.ub()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current upper bound.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.ub0()">
+public double <code class="descname">ub0</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.ub0()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the initial upper bound, from the var declaration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.ub1()">
+public double <code class="descname">ub1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.ub1()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the weaker upper bound from AMPL&#8217;s presolve phase</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.ub2()">
+public double <code class="descname">ub2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.ub2()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the stronger upper bound from AMPL&#8217;s presolve phase</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.unfix()">
+public void <code class="descname">unfix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.unfix()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unfix this variable instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.urc()">
+public double <code class="descname">urc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.urc()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the reduced cost at upper bound</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.uslack()">
+public double <code class="descname">uslack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.uslack()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the slack at upper bound (<code class="docutils literal"><span class="pre">ub</span> <span class="pre">-</span> <span class="pre">val</span></code>)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="com.ampl.VariableInstance.value()">
+public double <code class="descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#com.ampl.VariableInstance.value()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of this variable instance</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="AMPLException.html" title="AMPLException"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Variable.html" title="Variable"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../reference.html" >Java API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

@@ -4,22 +4,22 @@ CC = g++
 CFLAGS = -O2 -g -Wall -fmessage-length=0
 
 # define any directories containing header files other than /usr/include
-INCLUDES = -I "./include/EIGENDIR" -I "./include/amplapi32/include"
+INCLUDES = -I "./include/EIGENDIR" -I "./include/amplapi64_linux/include"
 
 SRCS = SimpleBuildingSimulator.cpp Building.cpp Weather.cpp Occupancy.cpp ReadInput.cpp ThermalModel.cpp ControlBox.cpp# WriteOutput.cpp
 
 OBJS = Building.o Weather.o Occupancy.o ReadInput.o ThermalModel.o ControlBox.o# WriteOutput.o 
 
-LFLAGS = -L "./include/amplapi32/lib" 
+LFLAGS = -L "./include/amplapi64_linux/lib" 
 
-LIBS = -lampl1.2.2
+LIBS = -lampl
 
 TARGET = Simulate
 
 ALL = $(TARGET)
 
 $(TARGET):	lex.yy.c parser.tab.c parser.tab.h  $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) parser.tab.c lex.yy.c -o $(TARGET) $(OBJS) $(LFLAGS) $(LIBS) -Wl,-rpath="./include/amplapi32/bin"
+	$(CC) $(CFLAGS) $(INCLUDES) parser.tab.c lex.yy.c -o $(TARGET) $(OBJS) $(LFLAGS) $(LIBS) -Wl,-rpath="./include/amplapi64_linux/bin"
 
 parser.tab.c parser.tab.h: parser.y
 	bison -d parser.y
@@ -54,7 +54,6 @@ ControlBox.o: ControlBox.cpp ControlBox.h defs.h
 all: $(TARGET)
 
 clean:
-	find . -type f | xargs -n 5 touch
 	rm -f $(OBJS) $(TARGET) lex.yy.c simulator parser.tab.c parser.tab.h 
 	
 version:

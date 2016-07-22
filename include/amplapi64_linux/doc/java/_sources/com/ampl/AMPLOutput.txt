@@ -1,0 +1,26 @@
+AMPLOutput
+==========
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public class AMPLOutput
+
+   Captures an AMPL message together with its kind, as fetched from the underlying modelling system.
+
+Methods
+-------
+
+.. java:method:: public Kind getKind()
+   :outertype: AMPLOutput
+
+.. java:method:: public String getMessage()
+   :outertype: AMPLOutput
+
+   :return: The message
+
+.. java:method:: @Override public String toString()
+   :outertype: AMPLOutput
+
+   Get the string representation of this output, in the form: ```kind`: `message```
+

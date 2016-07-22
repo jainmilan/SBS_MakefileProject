@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ConstraintInstance &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../index.html" />
+    <link rel="up" title="C++ API reference" href="../reference.html" />
+    <link rel="next" title="Objective" href="objective.html" />
+    <link rel="prev" title="Constraint" href="constraint.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="objective.html" title="Objective"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="constraint.html" title="Constraint"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" accesskey="U">C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="constraint.html"
+                        title="previous chapter">Constraint</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="objective.html"
+                        title="next chapter">Objective</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/classes/constraintinstance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="constraintinstance">
+<h1>ConstraintInstance<a class="headerlink" href="#constraintinstance" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4ampl18ConstraintInstanceE">
+<span id="ampl::ConstraintInstance"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">ConstraintInstance</code><a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstanceE" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represent an instance of a constraint. </p>
+<p>In general, all AMPL suffixes for a constraint are available through methods with the same name in this class. See <a class="reference external" href="http://www.ampl.com/NEW/suffbuiltin.html">http://www.ampl.com/NEW/suffbuiltin.html</a> for a list of the available suffixes. </p>
+<p>Note that, since this class represents instances of both algebraic and logical constraints, some suffixes might not be available for every instance. If a wrong suffix for the specific class of constraint is accessed, an std::logic_error is thrown. </p>
+<p>All the accessors in this class throw an std::runtime_error if the instance has been deleted in the underlying AMPL interpreter. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance4dropEv">
+<span id="ampl::ConstraintInstance::drop"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a4ad2de6abaf3a99a70f8073a5f7ac4bb"></span>void <code class="descname">drop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance4dropEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop this constraint instance, corresponding to the AMPL code: <code class="docutils literal"><span class="pre">drop</span> <span class="pre">constraintname;</span></code>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance7restoreEv">
+<span id="ampl::ConstraintInstance::restore"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a6f7a4a4fb0e32163c38a0c6988b4a8fb"></span>void <code class="descname">restore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance7restoreEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore this constraint instance, corresponding to the AMPL code: <code class="docutils literal"><span class="pre">restore</span> <span class="pre">constraintname;</span></code>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance4bodyEv">
+<span id="ampl::ConstraintInstance::body"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a6e9ac501710d83e37bb9b39128bed93d"></span>double <code class="descname">body</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance4bodyEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of the constraint&#8217;s body. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance7astatusEv">
+<span id="ampl::ConstraintInstance::astatus"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a989bff97d2858e8e8785a739e966a036"></span>std::string <code class="descname">astatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance7astatusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current AMPL status (dropped, presolved, or substituted out) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance6defvarEv">
+<span id="ampl::ConstraintInstance::defvar"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a83324f942ac7202d2f7c3c012c3ac8f4"></span>int <code class="descname">defvar</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance6defvarEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index in <code class="docutils literal"><span class="pre">_var</span></code> of &#8220;defined variable&#8221; substituted out by the constraint. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance5dinitEv">
+<span id="ampl::ConstraintInstance::dinit"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a9448e3b76f4f686ee14e5c232b762032"></span>double <code class="descname">dinit</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance5dinitEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current initial guess for the constraint&#8217;s dual variable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance6dinit0Ev">
+<span id="ampl::ConstraintInstance::dinit0"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1ab6d600c61713871d37e6076e0f8d9ecc"></span>double <code class="descname">dinit0</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance6dinit0Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the original initial guess for the constraint&#8217;s dual variable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance4dualEv">
+<span id="ampl::ConstraintInstance::dual"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1aed3761afc62608bcf92c0f4776da8884"></span>double <code class="descname">dual</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance4dualEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of the constraint&#8217;s dual variable. </p>
+<p>Note that dual values are often reset by the underlying AMPL interpreter by the presolve functionalities triggered by some methods. A possible workaround is to set the option <code class="docutils literal"><span class="pre">presolve;</span></code> to <code class="docutils literal"><span class="pre">false</span></code> (see setBoolOption). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance2lbEv">
+<span id="ampl::ConstraintInstance::lb"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1ad830c503ae537a440c4df9eea98c499b"></span>double <code class="descname">lb</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance2lbEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of the constraint&#8217;s lower bound. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance2ubEv">
+<span id="ampl::ConstraintInstance::ub"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a0079cb81bb006c6f2aed155d6e83ff66"></span>double <code class="descname">ub</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance2ubEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of the constraint&#8217;s upper bound. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance3lbsEv">
+<span id="ampl::ConstraintInstance::lbs"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a253983d1d3c5d6ac3b36856986a493d6"></span>double <code class="descname">lbs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance3lbsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the constraint lower bound sent to the solver (reflecting adjustment for fixed variables) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance3ubsEv">
+<span id="ampl::ConstraintInstance::ubs"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a0c0262185254278f42bdbac5dfcb9940"></span>double <code class="descname">ubs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance3ubsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the constraint upper bound sent to the solver (reflecting adjustment for fixed variables) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance5ldualEv">
+<span id="ampl::ConstraintInstance::ldual"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1ae3f3f1e302ed7c3ea5b90768775cf32e"></span>double <code class="descname">ldual</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance5ldualEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current dual value associated with the lower bound. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance5udualEv">
+<span id="ampl::ConstraintInstance::udual"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1aa1e3c3733cefff304d8494c335b69610"></span>double <code class="descname">udual</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance5udualEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current dual value associated with the upper bounds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance6lslackEv">
+<span id="ampl::ConstraintInstance::lslack"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1accfd274c4a0d4b177a0c7c7bd806e84c"></span>double <code class="descname">lslack</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance6lslackEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the slack at lower bound <code class="docutils literal"><span class="pre">body</span> <span class="pre">-</span> <span class="pre">lb</span></code> </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance6uslackEv">
+<span id="ampl::ConstraintInstance::uslack"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a9ff0faecbf3400296b3537d22c9abf52"></span>double <code class="descname">uslack</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance6uslackEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the slack at upper bound <code class="docutils literal"><span class="pre">ub</span> <span class="pre">-</span> <span class="pre">body</span></code> </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance5slackEv">
+<span id="ampl::ConstraintInstance::slack"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a23f784cc25b599b607e5041e4c0a5e95"></span>double <code class="descname">slack</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance5slackEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="constraint.html#amplapiclassampl_1_1_constraint"><span>Constraint</span></a> slack (the lesser of lslack and uslack) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance7sstatusEv">
+<span id="ampl::ConstraintInstance::sstatus"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a652f1473f01e03448fef396a8d6650d0"></span>std::string <code class="descname">sstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance7sstatusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the solver status (basis status of constraint&#8217;s slack or artificial variable) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance6statusEv">
+<span id="ampl::ConstraintInstance::status"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a0fddbb03d6851a41465c489857b9a6a8"></span>std::string <code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance6statusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL status if not <code class="docutils literal"><span class="pre">in</span></code>, otherwise solver status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance7setDualEd">
+<span id="ampl::ConstraintInstance::setDual__double"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a50b42c32537fdd44fb376493864d658a"></span>void <code class="descname">setDual</code><span class="sig-paren">(</span>double <em>dual</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance7setDualEd" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="set.html#amplapiclassampl_1_1_set"><span>Set</span></a> the value of the dual variable associated to this constraint. </p>
+<p>Equivalent to the AMPL statement:</p>
+<p><code class="docutils literal"><span class="pre">let</span> <span class="pre">c</span> <span class="pre">:=</span> <span class="pre">dual;</span></code></p>
+<p>Note that dual values are often reset by the underlying AMPL interpreter by the presolve functionalities triggered by some methods. A possible workaround is to set the option <code class="docutils literal"><span class="pre">presolve</span></code> to <code class="docutils literal"><span class="pre">false</span></code> (see setBoolOption).</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">dual</span></code> - <p>The value to be assigned to the dual variable </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl18ConstraintInstance3valEv">
+<span id="ampl::ConstraintInstance::val"></span><span class="target" id="amplapiclassampl_1_1_constraint_instance_1a414eca23196329c93347d487f743699c"></span>double <code class="descname">val</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl18ConstraintInstance3valEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the <a class="reference internal" href="ampl.html#amplapiclassampl_1_1_a_m_p_l"><span>AMPL</span></a> val suffix. </p>
+<p>Valid only for logical constraints. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="objective.html" title="Objective"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="constraint.html" title="Constraint"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" >C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>VariableInstance &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../index.html" />
+    <link rel="up" title="C++ API reference" href="../reference.html" />
+    <link rel="next" title="AMPLException" href="amplexception.html" />
+    <link rel="prev" title="Variable" href="variable.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="amplexception.html" title="AMPLException"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="variable.html" title="Variable"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" accesskey="U">C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="variable.html"
+                        title="previous chapter">Variable</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="amplexception.html"
+                        title="next chapter">AMPLException</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/classes/variableinstance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="variableinstance">
+<span id="ref-variableinstance"></span><h1>VariableInstance<a class="headerlink" href="#variableinstance" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4ampl16VariableInstanceE">
+<span id="ampl::VariableInstance"></span><span class="target" id="amplapiclassampl_1_1_variable_instance"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">VariableInstance</code><a class="headerlink" href="#_CPPv2N4ampl16VariableInstanceE" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decision variable instance. </p>
+<p>Each member of this class belongs to a single <a class="reference internal" href="variable.html#amplapiclassampl_1_1_variable"><span>Variable</span></a>. Note that accessors available here are replicated at <a class="reference internal" href="variable.html#amplapiclassampl_1_1_variable"><span>Variable</span></a> level for ease of use when dealing with scalar variables. </p>
+<p>All AMPL suffixes for an algebraic variable are available through methods with the same name in this class. See <a class="reference external" href="http://www.ampl.com/NEW/suffbuiltin.html">http://www.ampl.com/NEW/suffbuiltin.html</a> for a list of the available suffixes. </p>
+<p>All the accessors in this class throw an std::runtime_error if the instance has been deleted in the underlying AMPL interpreter. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance5valueEv">
+<span id="ampl::VariableInstance::value"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a282a63de26d675ab3be1666c643f1e77"></span>double <code class="descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance5valueEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current value of this variable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3fixEv">
+<span id="ampl::VariableInstance::fix"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1ac34228e8e8457e1ccbaf516706cd5055"></span>void <code class="descname">fix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3fixEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fix all instances of this variable to their current value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3fixEd">
+<span id="ampl::VariableInstance::fix__double"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1ac257afe3dc4f5108251dde8c8bca3ee8"></span>void <code class="descname">fix</code><span class="sig-paren">(</span>double <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3fixEd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fix all instances of this variable to the specified value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance5unfixEv">
+<span id="ampl::VariableInstance::unfix"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1afc8f73fba642842e5adb695454c031c8"></span>void <code class="descname">unfix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl16VariableInstance5unfixEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unfix this variable instances. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance8setValueEd">
+<span id="ampl::VariableInstance::setValue__double"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a0ed4715adb225f6d8894a379ba4eb5b8"></span>void <code class="descname">setValue</code><span class="sig-paren">(</span>double <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4ampl16VariableInstance8setValueEd" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="set.html#amplapiclassampl_1_1_set"><span>Set</span></a> the current value of this variable (does not fix it), equivalent to the AMPL command <code class="docutils literal"><span class="pre">let</span></code> </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">value</span></code> - <p>Value to be set </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance7astatusEv">
+<span id="ampl::VariableInstance::astatus"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1ab370cfb45cd1089ec88fc6807eba716b"></span>std::string <code class="descname">astatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance7astatusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AMPL status (fixed, presolved, or substituted out) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance6defeqnEv">
+<span id="ampl::VariableInstance::defeqn"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1ad5e6e22fe55408b436f0b76de1008a25"></span>int <code class="descname">defeqn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance6defeqnEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index in <code class="docutils literal"><span class="pre">_con</span></code> of &#8220;defining constraint&#8221; used to substitute variable out. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance4dualEv">
+<span id="ampl::VariableInstance::dual"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1aab4b339e9e33f146d2d8df7a639887c9"></span>double <code class="descname">dual</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance4dualEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the dual value on defining constraint of variable substituted out. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance4initEv">
+<span id="ampl::VariableInstance::init"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1ac484440cdd757cb53a70e229ca36ae80"></span>double <code class="descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance4initEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current initial guess. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance5init0Ev">
+<span id="ampl::VariableInstance::init0"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a637d40fa371c14937ba2bbfe6240441e"></span>double <code class="descname">init0</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance5init0Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the original initial guess (set by <code class="docutils literal"><span class="pre">:=</span></code> or<code class="docutils literal"><span class="pre">default</span></code> or by a data statement) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance2lbEv">
+<span id="ampl::VariableInstance::lb"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a3329e95e7cabfa6455b80f41439dee53"></span>double <code class="descname">lb</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance2lbEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current lower bound. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance2ubEv">
+<span id="ampl::VariableInstance::ub"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1afb19cbed8b451a8ba805a4760d5849df"></span>double <code class="descname">ub</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance2ubEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current upper bound. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3lb0Ev">
+<span id="ampl::VariableInstance::lb0"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1aa2c0d148c327f1fc07d998990ecfe97d"></span>double <code class="descname">lb0</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3lb0Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the initial lower bounds, from the var declaration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3ub0Ev">
+<span id="ampl::VariableInstance::ub0"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a629e0d0ab14d80e8dfe596e288663fe2"></span>double <code class="descname">ub0</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3ub0Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the initial upper bound, from the var declaration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3lb1Ev">
+<span id="ampl::VariableInstance::lb1"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a4a3267241ec6743c1e3ca489f2d6f146"></span>double <code class="descname">lb1</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3lb1Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the weaker lower bound from AMPL&#8217;s presolve phase. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3ub1Ev">
+<span id="ampl::VariableInstance::ub1"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a8185369914c97dbf70dd407ac818fb4e"></span>double <code class="descname">ub1</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3ub1Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the weaker upper bound from AMPL&#8217;s presolve phase. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3lb2Ev">
+<span id="ampl::VariableInstance::lb2"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a8e6ecce2410697b47e82f0652f7cf6e2"></span>double <code class="descname">lb2</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3lb2Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the stronger lower bound from AMPL&#8217;s presolve phase. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3ub2Ev">
+<span id="ampl::VariableInstance::ub2"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1ac9dfc9f50321b38590f7e976b6cb3bc1"></span>double <code class="descname">ub2</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3ub2Ev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the stronger upper bound from AMPL&#8217;s presolve phase. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3lrcEv">
+<span id="ampl::VariableInstance::lrc"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1ad260fdb4427c76cb7a2b01ab2e1d1395"></span>double <code class="descname">lrc</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3lrcEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the reduced cost at lower bound. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance3urcEv">
+<span id="ampl::VariableInstance::urc"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1aa4a6ddb0737cfe09c74bb4eb2c113b8a"></span>double <code class="descname">urc</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance3urcEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the reduced cost at upper bound. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance6lslackEv">
+<span id="ampl::VariableInstance::lslack"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a7dc4b1a591522e3e89c55e83e46f1e8d"></span>double <code class="descname">lslack</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance6lslackEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the slack at lower bound (<code class="docutils literal"><span class="pre">val</span> <span class="pre">-</span> <span class="pre">lb</span></code>) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance6uslackEv">
+<span id="ampl::VariableInstance::uslack"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a525d5f48a3cc1e7fc8ff005c9d022592"></span>double <code class="descname">uslack</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance6uslackEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the slack at upper bound (<code class="docutils literal"><span class="pre">ub</span> <span class="pre">-</span> <span class="pre">val</span></code>) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance2rcEv">
+<span id="ampl::VariableInstance::rc"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1af6636a2f90e7cda39bd638d75189c2cd"></span>double <code class="descname">rc</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance2rcEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the reduced cost (at the nearer bound) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance5slackEv">
+<span id="ampl::VariableInstance::slack"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1aee851b991f54fdbd4c75b51940991bd8"></span>double <code class="descname">slack</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance5slackEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the bound slack which is the lesser of <a class="reference internal" href="#amplapiclassampl_1_1_variable_instance_1a7dc4b1a591522e3e89c55e83e46f1e8d"><span>lslack()</span></a> and <a class="reference internal" href="#amplapiclassampl_1_1_variable_instance_1a525d5f48a3cc1e7fc8ff005c9d022592"><span>uslack()</span></a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance7sstatusEv">
+<span id="ampl::VariableInstance::sstatus"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a095229c6ffab3ee2157354d6c7f4b463"></span>std::string <code class="descname">sstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance7sstatusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solver status (basis status of variable) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance6statusEv">
+<span id="ampl::VariableInstance::status"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a729128638736877ae945571423ec7dad"></span>std::string <code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance6statusEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>AMPL status if not <code class="docutils literal"><span class="pre">in</span></code>, otherwise solver status </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4ampl16VariableInstance8toStringEv">
+<span id="ampl::VariableInstance::toString"></span><span class="target" id="amplapiclassampl_1_1_variable_instance_1a4683e90dbf2ada7ebd949b04c1cf7dfc"></span>std::string <code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N4ampl16VariableInstance8toStringEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representation of this <a class="reference internal" href="#amplapiclassampl_1_1_variable_instance"><span>VariableInstance</span></a> object. </p>
+<p>The format is as follows:  where <code class="docutils literal"><span class="pre">name</span></code> is the string returned by the <a class="reference internal" href="instance.html#amplapiclassampl_1_1_instance_1aa1ced705ed788cd2b5feda2bd145a318"><span>VariableInstance::name()</span></a> method and <code class="docutils literal"><span class="pre">attrs</span></code> represent attributes similar to those used in variable declarations. </p>
+<p>If the lower bound (<code class="docutils literal"><span class="pre">lb</span></code>) is equal to the upper bound (<code class="docutils literal"><span class="pre">ub</span></code>), the attributes contain <code class="docutils literal"><span class="pre">'='</span> <span class="pre">lb</span></code>. </p>
+<p>If the lower bound is not equal to the upper bound and <code class="docutils literal"><span class="pre">Double.NEGATIVE_INFINITY</span></code> , the attributes contain <code class="docutils literal"><span class="pre">'&gt;='</span> <span class="pre">lb</span></code>. </p>
+<p>If the upper bound is not equal to the lower bound and <code class="docutils literal"><span class="pre">Double.POSITIVE_INFINITY</span></code>, the attributes contain <code class="docutils literal"><span class="pre">'&lt;='</span> <span class="pre">ub</span></code>.</p>
+<p>If the variable is integer, the attributes contain <code class="docutils literal"><span class="pre">'integer'</span></code>. </p>
+<p>If the variable is binary, the attributes contain <code class="docutils literal"><span class="pre">'binary'</span></code>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="amplexception.html" title="AMPLException"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="variable.html" title="Variable"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" >C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

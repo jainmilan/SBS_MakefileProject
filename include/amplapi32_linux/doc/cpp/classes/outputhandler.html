@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OutputHandler &mdash; AMPL API 1.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="AMPL API 1.2.2 documentation" href="../index.html" />
+    <link rel="up" title="C++ API reference" href="../reference.html" />
+    <link rel="next" title="Runnable" href="runnable.html" />
+    <link rel="prev" title="Optional" href="optional.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="runnable.html" title="Runnable"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="optional.html" title="Optional"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" accesskey="U">C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optional.html"
+                        title="previous chapter">Optional</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="runnable.html"
+                        title="next chapter">Runnable</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/classes/outputhandler.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="outputhandler">
+<span id="ref-outputhandler"></span><h1>OutputHandler<a class="headerlink" href="#outputhandler" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N4ampl13OutputHandlerE">
+<span id="ampl::OutputHandler"></span><span class="target" id="amplapiclassampl_1_1_output_handler"></span><em class="property">class </em><code class="descclassname">ampl::</code><code class="descname">OutputHandler</code><a class="headerlink" href="#_CPPv2N4ampl13OutputHandlerE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement this interface to handle the outputs from the calls to any function that causes the underlying AMPL interpreter to display a message. </p>
+<p>Note that errors and warnings are not passed through this interface, see <a class="reference internal" href="errorhandler.html#amplapiclassampl_1_1_error_handler"><span>ampl::ErrorHandler</span></a> for more information. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4ampl13OutputHandler6outputEN6output4KindEPKc">
+<span id="ampl::OutputHandler::output__output::Kind.cCP"></span>virtual <span class="target" id="amplapiclassampl_1_1_output_handler_1aaf46efa418fb39c1dee2783bc8d40483"></span>void <code class="descname">output</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4ampl13OutputHandler6outputEN6output4KindEPKc" title="ampl::OutputHandler::output">output</a>::<a class="reference internal" href="#_CPPv2N4ampl6output4KindE" title="ampl::output::Kind">Kind</a> <em>kind</em>, <em class="property">const</em> char *<em>output</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv2N4ampl13OutputHandler6outputEN6output4KindEPKc" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is called when AMPL sends some output derived from executing a statement. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">kind</span></code> - <p>kind of the output of the AMPL interpreter </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">output</span></code> - <p>text of the output by the AMPL interpreter </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N4ampl6output4KindE">
+<span id="ampl::output::Kind"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612c"></span><em class="property">enum </em><code class="descclassname">ampl::output::</code><code class="descname">Kind</code><a class="headerlink" href="#_CPPv2N4ampl6output4KindE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents the type of the output coming from the interpreter </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv2N4ampl6output7WAITINGE">
+<span id="ampl::output::WAITING"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca4910ad773f2c336dcb30d7fe40fb6c17"></span><code class="descname">WAITING</code><a class="headerlink" href="#_CPPv2N4ampl6output7WAITINGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">prompt2</span></code>, returned when incomplete statements are interpreted. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output5BREAKE">
+<span id="ampl::output::BREAK"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca61de7e988be8793852d922a37cec2e8f"></span><code class="descname">BREAK</code><a class="headerlink" href="#_CPPv2N4ampl6output5BREAKE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">break</span></code>, displayed when an operation is interrupted with SIGINT. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output2CDE">
+<span id="ampl::output::CD"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612cab74183fb6c6974c6728cd352857e4754"></span><code class="descname">CD</code><a class="headerlink" href="#_CPPv2N4ampl6output2CDE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">cd</span></code>, returned by the <code class="docutils literal"><span class="pre">cd</span></code> function. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output7DISPLAYE">
+<span id="ampl::output::DISPLAY"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca1070924f6e4cd7abfa36fb35010ee3d7"></span><code class="descname">DISPLAY</code><a class="headerlink" href="#_CPPv2N4ampl6output7DISPLAYE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">display</span></code>, returned by the <code class="docutils literal"><span class="pre">display</span></code> function. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output4EXITE">
+<span id="ampl::output::EXIT"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca17c40551b6ce622e0378cf4c188cb9cb"></span><code class="descname">EXIT</code><a class="headerlink" href="#_CPPv2N4ampl6output4EXITE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">exit</span></code>, returned as last message from AMPL before exiting the interpreter. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output6EXPANDE">
+<span id="ampl::output::EXPAND"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca76ee0ec210b25cc0e5f7d785731ece37"></span><code class="descname">EXPAND</code><a class="headerlink" href="#_CPPv2N4ampl6output6EXPANDE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">expand</span></code>, returned by the <code class="docutils literal"><span class="pre">expand</span></code> function. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output4LOADE">
+<span id="ampl::output::LOAD"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca6eceab2e9a2849813a6b568e0dacd3a8"></span><code class="descname">LOAD</code><a class="headerlink" href="#_CPPv2N4ampl6output4LOADE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">load</span></code>, returned by the <code class="docutils literal"><span class="pre">load</span></code> function when loading a library. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output6OPTIONE">
+<span id="ampl::output::OPTION"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca87a4dcce855ec035f478806915200b0e"></span><code class="descname">OPTION</code><a class="headerlink" href="#_CPPv2N4ampl6output6OPTIONE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">option</span></code>, returned by the <code class="docutils literal"><span class="pre">option</span></code> function when getting the value of an option. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output5PRINTE">
+<span id="ampl::output::PRINT"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca45df77d31eebb920bf658705a5ae6deb"></span><code class="descname">PRINT</code><a class="headerlink" href="#_CPPv2N4ampl6output5PRINTE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">print</span></code>, returned by the <code class="docutils literal"><span class="pre">print</span></code> function when printing values from AMPL command line. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output6PROMPTE">
+<span id="ampl::output::PROMPT"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca6ae2b996c250da9cef78f0603989522d"></span><code class="descname">PROMPT</code><a class="headerlink" href="#_CPPv2N4ampl6output6PROMPTE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">prompt1</span></code>, normal AMPL prompt. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output5SOLVEE">
+<span id="ampl::output::SOLVE"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca22f74df7c9ffc10412f61e9b4c90824a"></span><code class="descname">SOLVE</code><a class="headerlink" href="#_CPPv2N4ampl6output5SOLVEE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">solve</span></code>, returned by the <code class="docutils literal"><span class="pre">solve</span></code> function, contains the solver message. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output4SHOWE">
+<span id="ampl::output::SHOW"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca99f072514fd6e58f63fa66110fbce503"></span><code class="descname">SHOW</code><a class="headerlink" href="#_CPPv2N4ampl6output4SHOWE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">show</span></code>, returned by the <code class="docutils literal"><span class="pre">show</span></code> function. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output4XREFE">
+<span id="ampl::output::XREF"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612caa2ed507e70964397c0003b53f47f66e8"></span><code class="descname">XREF</code><a class="headerlink" href="#_CPPv2N4ampl6output4XREFE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">xref</span></code>, returned by the <code class="docutils literal"><span class="pre">xref</span></code> function. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output12SHELL_OUTPUTE">
+<span id="ampl::output::SHELL_OUTPUT"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612caa84c307d2effcdb63bdf951d450405de"></span><code class="descname">SHELL_OUTPUT</code><a class="headerlink" href="#_CPPv2N4ampl6output12SHELL_OUTPUTE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output of the AMPL command <code class="docutils literal"><span class="pre">shell</span></code> </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output13SHELL_MESSAGEE">
+<span id="ampl::output::SHELL_MESSAGE"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612caf2174eeff8a0e91f9351a6d9b357722e"></span><code class="descname">SHELL_MESSAGE</code><a class="headerlink" href="#_CPPv2N4ampl6output13SHELL_MESSAGEE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Messages from the command <code class="docutils literal"><span class="pre">shell</span></code> </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output4MISCE">
+<span id="ampl::output::MISC"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca2dbd16305cba29186225387c13151377"></span><code class="descname">MISC</code><a class="headerlink" href="#_CPPv2N4ampl6output4MISCE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <code class="docutils literal"><span class="pre">misc</span></code> </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4ampl6output11WRITE_TABLEE">
+<span id="ampl::output::WRITE_TABLE"></span><span class="target" id="amplapinamespaceampl_1_1output_1a81582056e7ff6638a03c93a2235f612ca72d5e187b7c4b8cd3192a243c709a1bb"></span><code class="descname">WRITE_TABLE</code><a class="headerlink" href="#_CPPv2N4ampl6output11WRITE_TABLEE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Messages from the command <code class="docutils literal"><span class="pre">write</span> <span class="pre">table</span></code> </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="runnable.html" title="Runnable"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="optional.html" title="Optional"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AMPL API 1.2.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../reference.html" >C++ API reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013-2015, AMPL Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3+.
+    </div>
+  </body>
+</html>

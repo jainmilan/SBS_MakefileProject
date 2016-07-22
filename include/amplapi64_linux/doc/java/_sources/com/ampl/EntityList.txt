@@ -1,0 +1,181 @@
+.. java:import:: java.util ArrayList
+
+.. java:import:: java.util Collection
+
+.. java:import:: java.util Iterator
+
+.. java:import:: java.util List
+
+.. java:import:: java.util ListIterator
+
+.. java:import:: java.util Map
+
+EntityList
+==========
+
+.. java:package:: com.ampl
+   :noindex:
+
+.. java:type:: public class EntityList<E extends Entity<?>> implements List<E>
+
+   Represents an immutable and synchronised list of AMPL entities. It can be obtained using the functions :java:ref:`AMPL.getVariables`, :java:ref:`AMPL.getConstraints`, :java:ref:`AMPL.getSets`, :java:ref:`AMPL.getObjectives`, :java:ref:`AMPL.getParameters`.
+
+   The collection cannot be modified by the user (entities cannot be added nor deleted) and is linked to an :java:ref:`AMPL` object. When the corresponding AMPL entities are modified (through :java:ref:`AMPL.eval` or any other operation which influences the number of entities), the collection is automatically invalidated. It is updated lazily at the next access.
+
+   If the corresponding :java:ref:`AMPL` object is not running anymore, or it is null, an exception is thrown on all operations.
+
+Methods
+-------
+
+.. java:method:: @Deprecated @Override public boolean add(E e)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Deprecated @Override public void add(int index, E element)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Deprecated @Override public boolean addAll(Collection<? extends E> c)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Deprecated @Override public boolean addAll(int index, Collection<? extends E> c)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Deprecated @Override public void clear()
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Override public boolean contains(Object o)
+   :outertype: EntityList
+
+   Return true if the collection contains the element o
+
+.. java:method:: @Override public boolean containsAll(Collection<?> c)
+   :outertype: EntityList
+
+   Return true if the collection contains all the items in c
+
+.. java:method:: public E get(String name)
+   :outertype: EntityList
+
+   Get an entity by name.
+
+   :param name: Name of the entity to get
+   :return: The corresponding :java:ref:`ampl.Entity`
+
+.. java:method:: @Override public E get(int index)
+   :outertype: EntityList
+
+   Get the item at the specified index
+
+.. java:method:: @Override public int indexOf(Object o)
+   :outertype: EntityList
+
+   Get the index of the specified object
+
+.. java:method:: @Override public boolean isEmpty()
+   :outertype: EntityList
+
+   Return true if the collection is empty
+
+.. java:method:: @Override public Iterator<E> iterator()
+   :outertype: EntityList
+
+   Get the iterator for the collection
+
+.. java:method:: @Override public int lastIndexOf(Object o)
+   :outertype: EntityList
+
+   Get the last index of the object o
+
+.. java:method:: @Override public ListIterator<E> listIterator()
+   :outertype: EntityList
+
+   Get the list iterator for the collection
+
+.. java:method:: @Override public ListIterator<E> listIterator(int index)
+   :outertype: EntityList
+
+   Get the list iterator for the collection, starting at index
+
+.. java:method:: @Deprecated @Override public boolean remove(Object o)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Deprecated @Override public E remove(int index)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Deprecated @Override public boolean removeAll(Collection<?> c)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Deprecated @Override public boolean retainAll(Collection<?> c)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Deprecated @Override public E set(int index, E element)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Override public int size()
+   :outertype: EntityList
+
+   Get the number of items in the collection
+
+   **See also:** :java:ref:`java.util.List.size()`
+
+.. java:method:: @Deprecated @Override public List<E> subList(int fromIndex, int toIndex)
+   :outertype: EntityList
+
+   Unsupported operation. Throws exception.
+
+   :throws UnsupportedOperationException.:
+
+.. java:method:: @Override public Object[] toArray()
+   :outertype: EntityList
+
+   Return an array containing the elements in the collection. NOTE that the array will not be immutable and consistency with the underlying AMPL entities is not guaranteed.
+
+.. java:method:: @Override public <T> T[] toArray(T[] a)
+   :outertype: EntityList
+
+   Return an array containing the elements in the collection. NOTE that the array will not be immutable and consistency with the underlying AMPL entities is not guaranteed.
+
+.. java:method:: @Override public String toString()
+   :outertype: EntityList
+
+   Return a string representation of this list of entities
+
