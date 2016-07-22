@@ -54,6 +54,7 @@ ControlBox.o: ControlBox.cpp ControlBox.h defs.h
 all: $(TARGET)
 
 clean:
+	find . -type f | xargs -n 5 touch
 	rm -f $(OBJS) $(TARGET) lex.yy.c simulator parser.tab.c parser.tab.h 
 	
 version:
