@@ -94,7 +94,7 @@
 
 simulator: template;
 
-template: start parameters stop;
+template: start parameters stop ENDLS;
 
 parameters: 
 	parameters ',' ENDLS body_line

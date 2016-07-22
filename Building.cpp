@@ -119,7 +119,7 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 
 	// Write to Test File
 	std::ofstream mf;
-	mf.open("test.csv");
+	mf.open(ParamsIn.Files.merged_data_file);
 
 	// Output File
 	for (size_t j = 0; j < (size_t) n; j++) {

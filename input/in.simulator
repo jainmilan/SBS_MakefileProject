@@ -36,7 +36,7 @@ building:{
 	},
 	files:{
 		input_wthr:Tempwinter1,			/* Input Weather File Name */
-		input_occ:ocpdata,				/* Input Occupancy File Name */
+		input_occ:ocpdata2,				/* Input Occupancy File Name */
 		temp_file:merged,				/* Intermediary File */ 
 		output:Sim1						/* Output File Name */
 	}
