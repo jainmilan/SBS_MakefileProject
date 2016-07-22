@@ -225,7 +225,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 	MAT_FLOAT SPOT_State = MAT_FLOAT::Zero(n, total_rooms);
 	SPOT_State.row(k) = CV.SPOT_CurrentState;
 
-	T.row(k) = Eigen::VectorXf::Ones(total_rooms) * 21;
+	T.row(k) = Eigen::VectorXf::Ones(total_rooms) * 22;
 	TR1.row(k) = T.row(k) + DeltaTR1.row(k);
 	TR2.row(k) = T.row(k) + DeltaTR2.row(k);
 
@@ -242,6 +242,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 	df[k].power = PowerAHU(k);
 	df[k].r = r(k);
 	df[k].tmix = MixedAirTemperature(k);
+	df[k].response = response;
 
 	for (size_t room = 0; room < (size_t) total_rooms; room++) {
 		df[k].ppv[room] = PPV(k, room);
@@ -347,6 +348,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 		df[k].power = PowerAHU(k);
 		df[k].r = r(k);
 		df[k].tmix = MixedAirTemperature(k);
+		df[k].response = response;
 
 		for (size_t room = 0; room < (size_t) total_rooms; room++) {
 			df[k].ppv[room] = PPV(k, room);

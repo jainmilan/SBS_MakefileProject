@@ -45,6 +45,7 @@ typedef struct df_format {
 			float power;
 			float r;
 			float tmix;
+			float response;
 		} DF_OUTPUT;
 
 typedef Eigen::MatrixXf MAT_FLOAT;

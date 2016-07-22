@@ -113,6 +113,7 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 		df[j].power = 0.0f;
 		df[j].r = 0.0f;
 		df[j].tmix = 0.0f;
+		df[j].response = 0.0f;
 
 		df[j].occ = new int[total_rooms];
 		df[j].ppv = new float[total_rooms];
@@ -166,7 +167,7 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	ff.open(ParamsIn.Files.output_file.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
 
 	// Titles for file
-	ff << "Timestamp, T_ext, Power, Ratio, T_mix";
+	ff << "Response, Timestamp, T_ext, Power, Ratio, T_mix";
 	for (size_t room = 0; room < (size_t) total_rooms; room++) {
 		ff << ", Occ_" << room + 1;
 		ff << ", PPV_" << room + 1;
@@ -176,7 +177,7 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	}
 	ff << "\n";
 	for (size_t j = 0; j < (size_t) n; j++) {
-		ff << df[j].t << "," << df[j].weather << "," << df[j].power << "," << df[j].r << "," << df[j].tmix;
+		ff << df[j].response << "," << df[j].t << "," << df[j].weather << "," << df[j].power << "," << df[j].r << "," << df[j].tmix;
 		for (size_t room = 0; room < (size_t) total_rooms; room++) {
 			ff << "," << df[j].occ[room];
 			ff << "," << df[j].ppv[room];
