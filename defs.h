@@ -38,6 +38,13 @@ typedef struct df_format {
 			time_t t;
 			float weather;
 			int *occ;
+			float *tspot;
+			float *tnospot;
+			float *ppv;
+			int *spot_status;
+			float power;
+			float r;
+			float tmix;
 		} DF_OUTPUT;
 
 typedef Eigen::MatrixXf MAT_FLOAT;

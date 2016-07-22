@@ -110,18 +110,34 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	for (time_t i = start_t; i <= stop_t; i = i + time_step) {
 		df[j].t = i;						// Epoch Time
 		df[j].weather = df_weather[i];		// External Temperature
+		df[j].power = 0.0f;
+		df[j].r = 0.0f;
+		df[j].tmix = 0.0f;
+
 		df[j].occ = new int[total_rooms];
+		df[j].ppv = new float[total_rooms];
+		df[j].tspot = new float[total_rooms];
+		df[j].tnospot = new float[total_rooms];
+		df[j].spot_status = new int[total_rooms];
+
 		for (size_t room = 0; room < (size_t) total_rooms; room++) {
 			df[j].occ[room] = df_occupancy[i][room];		// Occupancy in the Room
+			df[j].ppv[room] = 0.0f;
+			df[j].tspot[room] = 0.0f;
+			df[j].tnospot[room] = 0.0f;
+			df[j].spot_status[room] = 0;
 		}
 		j = j + 1;
 	}
 
-	// Write to Test File
+	if( remove( ParamsIn.Files.merged_data_file.c_str() ) != 0 )
+		perror( "Error deleting file" );
+	else
+		  puts( "File successfully deleted" );
+
+	// Write to Intermediate File
 	std::fstream mf;
 	mf.open(ParamsIn.Files.merged_data_file.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
-
-	// Output File
 	for (size_t j = 0; j < (size_t) n; j++) {
 		mf << df[j].t << "," << df[j].weather;
 		for (size_t room = 0; room < (size_t) total_rooms; room++) {
@@ -129,9 +145,6 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 		}
 		mf << "\n";
 	}
-
-	// Test Print
-	// std::cout << start_t << "\t" << stop_t << "\n";
 	mf.close();
 
 	// Convert DataFrame format to Matrix format for computations
@@ -143,6 +156,37 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 
 	MPCModel.SimulateModel(df, T_ext, O, ParamsIn, time_step, total_rooms, n, control_type, horizon);
 
+	// Write to Output File
+	if( remove( ParamsIn.Files.output_file.c_str() ) != 0 )
+		perror( "Error deleting file" );
+	else
+		  puts( "File successfully deleted" );
+
+	std::fstream ff;
+	ff.open(ParamsIn.Files.output_file.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
+
+	// Titles for file
+	ff << "Timestamp, T_ext, Power, Ratio, T_mix";
+	for (size_t room = 0; room < (size_t) total_rooms; room++) {
+		ff << ", Occ_" << room + 1;
+		ff << ", PPV_" << room + 1;
+		ff << ", T_SPOT_" << room + 1;
+		ff << ", T_NoSPOT_" << room + 1;
+		ff << ", SPOT_" << room + 1;
+	}
+	ff << "\n";
+	for (size_t j = 0; j < (size_t) n; j++) {
+		ff << df[j].t << "," << df[j].weather << "," << df[j].power << "," << df[j].r << "," << df[j].tmix;
+		for (size_t room = 0; room < (size_t) total_rooms; room++) {
+			ff << "," << df[j].occ[room];
+			ff << "," << df[j].ppv[room];
+			ff << "," << df[j].tspot[room];
+			ff << "," << df[j].tnospot[room];
+			ff << "," << df[j].spot_status[room];
+		}
+		ff << "\n";
+	}
+	ff.close();
 
 	//WriteOutput writer;
 	//writer.WriteOutputCSV(duration, time_step, num_zones_, num_rooms_, T, TR1,

@@ -56,7 +56,6 @@ void Occupants::ParseOccupancyData(DF_INT2& theData, const int& total_rooms, con
 		const int& time_step, const int& skip_lines) {
 
 	ReadCSV csv;													// Call CSV Reader
-
 	std::ifstream in(filename.c_str());								// Pointer to Input File
 	if (in.fail()) { std::cout << "File not found" << std::endl; }  // File Reading - Error Control
 

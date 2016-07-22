@@ -238,6 +238,19 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 	PowerAHU.row(k) << GetAHUPower(MixedAirTemperature.row(k).value(),
 			CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Zones, ParamsIn);
 
+	/* Update Output Frame */
+	df[k].power = PowerAHU(k);
+	df[k].r = r(k);
+	df[k].tmix = MixedAirTemperature(k);
+
+	for (size_t room = 0; room < (size_t) total_rooms; room++) {
+		df[k].ppv[room] = PPV(k, room);
+		df[k].tspot[room] = TR1(k, room);
+		df[k].tnospot[room] = TR2(k, room);
+		df[k].spot_status[room] = SPOT_State(k, room);
+	}
+	std::cout << "Room: \n";
+
 	for(size_t k = 1; k <= (size_t) (n - step_size); k = k + 1) {
 		start_time = df[k-1].t;
 
@@ -329,6 +342,19 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 			PowerAHU.row(k) << GetAHUPower(MixedAirTemperature.row(k).value(),
 						CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Zones, ParamsIn);
 		}
+
+		/* Update Output Frame */
+		df[k].power = PowerAHU(k);
+		df[k].r = r(k);
+		df[k].tmix = MixedAirTemperature(k);
+
+		for (size_t room = 0; room < (size_t) total_rooms; room++) {
+			df[k].ppv[room] = PPV(k, room);
+			df[k].tspot[room] = TR1(k, room);
+			df[k].tnospot[room] = TR2(k, room);
+			df[k].spot_status[room] = SPOT_State(k, room);
+		}
+
 		//		std::cout << "TR2: " << TR2.row(k) << "\n";
 		//		std::cout << "Delta_TR1: " << DeltaTR1.row(k) << "\n";
 		// std::cout << "SAT Prev: " << CV.SAT_Value << "\n";
