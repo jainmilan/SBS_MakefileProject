@@ -19,7 +19,7 @@ TARGET = Simulate
 ALL = $(TARGET)
 
 $(TARGET):	lex.yy.c parser.tab.c parser.tab.h  $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) parser.tab.c lex.yy.c -o $(TARGET) $(OBJS) $(LFLAGS) $(LIBS) -Wl,-rpath="./include/amplapi64_linux/bin"
+	$(CC) $(CFLAGS) $(INCLUDES) parser.tab.c lex.yy.c -o $(TARGET) $(OBJS) $(LFLAGS) $(LIBS) -Wl,-rpath="./include/amplapi64_linux/lib"
 
 parser.tab.c parser.tab.h: parser.y
 	bison -d parser.y
