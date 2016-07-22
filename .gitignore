@@ -2,6 +2,13 @@
 /Building.o
 /ControlBox.o
 /Occupancy.o
+/ThermalModel.o
+/ReadInput.o
+/WriteOutput.o
 /SimpleBuildingSimulator.o
 /Weather.o
 /Default/
+/output/
+/*.stackdump
+/*.yy.c
+/*.tab.*

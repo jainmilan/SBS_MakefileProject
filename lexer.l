@@ -45,6 +45,7 @@
 	
 "input_wthr"			{ return INWFILE; }
 "input_occ"				{ return INOFILE; }
+"temp_file"				{ return OUTTFILE; }
 "output"				{ return OUTFILE; } 
 
 "b_params" 				{ return BPARAMS; }

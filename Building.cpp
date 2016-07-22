@@ -60,6 +60,7 @@ Building::Building() {
 	/* Files */
 	ParamsIn.Files.weather_file = "";				// Input File to Read Weather Data (-)
 	ParamsIn.Files.occupancy_file = "";				// Input File to Read Occupancy Data (-)
+	ParamsIn.Files.merged_data_file = "";				// Input File to Read Occupancy Data (-)
 	ParamsIn.Files.output_file = "";				// Output File Created by the Program (-)
 
 	/* Other Parameters */

@@ -90,6 +90,7 @@ typedef struct Input {
 		struct File_Names {
 			std::string weather_file;	// Input File to Read Weather Data (-)
 			std::string occupancy_file;	// Input File to Read Occupancy Data (-)
+			std::string merged_data_file;	// Input File to Read Occupancy Data (-)
 			std::string output_file;	// Output File Created by the Program (-)
 		} Files;
 	} PARAMS;

@@ -80,6 +80,7 @@
 
 %token INWFILE
 %token INOFILE
+%token OUTTFILE
 %token OUTFILE
 
 %token BPARAMS
@@ -141,6 +142,7 @@ body_line:
 	| TEXT ':' FLOAT						{ dc.ParamsIn.CommonErrors.err_text = $3; }
 	| INWFILE ':' STRING					{ dc.ParamsIn.Files.weather_file = in_dir + std::string($3) + file_type; }
 	| INOFILE ':' STRING					{ dc.ParamsIn.Files.occupancy_file = in_dir + std::string($3) + file_type; }
+	| OUTTFILE ':' STRING					{ dc.ParamsIn.Files.merged_data_file = out_dir + std::string($3) + file_type; }
 	| OUTFILE ':' STRING					{ dc.ParamsIn.Files.output_file = out_dir + std::string($3) + file_type; }
 	| STRING ':' STRING						{ std::cout << $3 << std::endl; }
 	;
