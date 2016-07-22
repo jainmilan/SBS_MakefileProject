@@ -118,8 +118,8 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	}
 
 	// Write to Test File
-	std::ofstream mf;
-	mf.open(ParamsIn.Files.merged_data_file);
+	std::fstream mf;
+	mf.open(ParamsIn.Files.merged_data_file.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
 
 	// Output File
 	for (size_t j = 0; j < (size_t) n; j++) {
