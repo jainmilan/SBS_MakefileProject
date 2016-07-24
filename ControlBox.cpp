@@ -443,11 +443,12 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		// std::cout << "Delta_T_SPOT_Init: " << DeltaTSPOTInit << "\n";
 
 		int current_seed, i, j = 0;
+		double vSATInit = gen_random(12, 35);
 
 		/* Initial Guess */
 		for(i = 1; i < 17; i++) {
 			current_seed = current_seed + i;
-
+			int Time_IH_Temp = Time_IH;
 			for(j = 0; j < tinstances; ++j) {
 				current_seed = current_seed + 1;
 				// srand(current_seed);
@@ -461,7 +462,12 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 
 				current_seed = current_seed + 1;
 				// srand(current_seed);
-				double vSATInit = gen_random(12, 35);
+
+				std::cout << Time_IH << std::endl;
+				if (Time_IH_Temp%6 == 0) {
+					vSATInit = gen_random(12, 35);
+				}
+				Time_IH_Temp = (Time_IH_Temp + 1) % 6;
 				ampl.eval("let SAT[" + IntToString(j + 1) + "] := " + DoubleToString(vSATInit) + ";");
 
 				current_seed = current_seed + 1;
@@ -514,6 +520,8 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 				double vTNoSPOTInit = gen_random(18, 28);
 				ampl.eval("let T_NoSPOT[" + IntToString(j + 1) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vTNoSPOTInit) + ";");
 			}
+
+			ampl.eval("display SAT;");
 
 			// Resolve and display objective
 			ampl.solve();

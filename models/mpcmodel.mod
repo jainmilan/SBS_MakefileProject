@@ -96,7 +96,7 @@ subject to Mixed_Air_Temperature {t in 1..duration}:
 		T_Mixing_Unit[t] = ( Ratio[t] * ( sum{k in 1..total_rooms} T_NoSPOT[t, k] ) / total_rooms  ) + 
 							( 1 - Ratio[t] ) * ( T_Outside[t] );
 
-subject to PMV_Constraint {t in 2..duration+1, k in 1..total_rooms}:
+subject to PMV_Constraint {t in 2..duration + 1, k in 1..total_rooms}:
 		PMV[t, k] = Occupancy[t-1, k] * ( pmv_p1 * ( T_NoSPOT[t, k] + Delta_T_SPOT[t, k] - 
 		CoRC_CiR1T * Delta_T_SPOT[t-1, k] ) + ( pmv_p3 * Fan_Speed[t-1, k] * Fan_Speed[t-1, k] ) - 
 		( pmv_p2 * Fan_Speed[t-1, k] ) - pmv_p4);
