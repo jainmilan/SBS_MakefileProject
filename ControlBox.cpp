@@ -442,60 +442,78 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		pDeltaTSPOTInit.setValues(pDeltaTSPOTInitA, total_rooms);
 		// std::cout << "Delta_T_SPOT_Init: " << DeltaTSPOTInit << "\n";
 
-		int current_seed, i = 0;
+		int current_seed, i, j = 0;
 
 		/* Initial Guess */
-		for(i = 2; i < 18; i++) {
-			current_seed = i + current_index * 10;
+		for(i = 1; i < 17; i++) {
+			current_seed = current_seed + i;
 
-			srand(current_seed);
-			double vDeltaTSPOTInit = gen_random(0, 4);
-			ampl.eval("let {i in 1..duration+1, j in 1..total_rooms} Delta_T_SPOT[i, j] := " + DoubleToString(vDeltaTSPOTInit) + ";");
+			for(j = 0; j < tinstances; ++j) {
+				current_seed = current_seed + 1;
+				// srand(current_seed);
+				double vTMixingUnitInit = gen_random(2, 25);
+				ampl.eval("let T_Mixing_Unit[" + IntToString(j + 1) + "] := " + DoubleToString(vTMixingUnitInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vTNoSPOTInit = gen_random(18, 28);
-			ampl.eval("let {i in 1..duration+1, j in 1..total_rooms} T_NoSPOT[i, j] := " + DoubleToString(vTNoSPOTInit) + ";");
+				current_seed = current_seed + 1;
+				// srand(current_seed);
+				double vTCoolingUnitInit = gen_random(2, 25);
+				ampl.eval("let T_Cooling_Unit[" + IntToString(j + 1) + "] := " + DoubleToString(vTCoolingUnitInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vTMixingUnitInit = gen_random(2, 25);
-			ampl.eval("let {i in 1..duration} T_Mixing_Unit[i] := " + DoubleToString(vTMixingUnitInit) + ";");
+				current_seed = current_seed + 1;
+				// srand(current_seed);
+				double vSATInit = gen_random(12, 35);
+				ampl.eval("let SAT[" + IntToString(j + 1) + "] := " + DoubleToString(vSATInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vTCoolingUnitInit = gen_random(2, 25);
-			ampl.eval("let {i in 1..duration} T_Cooling_Unit[i] := " + DoubleToString(vTCoolingUnitInit) + ";");
+				current_seed = current_seed + 1;
+				// srand(current_seed);
+				double vSAVInit = gen_random(0.2, 4, 1);
+				ampl.eval("let SAV[" + IntToString(j + 1) + "] := " + DoubleToString(vSAVInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vSATInit = gen_random(12, 35);
-			ampl.eval("let {i in 1..duration} SAT[i] := " + DoubleToString(vSATInit) + ";");
+				current_seed = current_seed + 1;
+				// srand(current_seed);
+				double vRatioInit = gen_random(0, 0.8, 1);
+				ampl.eval("let Ratio[" + IntToString(j + 1) + "] := " + DoubleToString(vRatioInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vSAVInit = gen_random(0.2, 4, 1);
-			ampl.eval("let {i in 1..duration} SAV[i] := " + DoubleToString(vSAVInit) + ";");
+				for(int k = 0; k < total_rooms; k++) {
+					current_seed = current_seed + 1;
+					// srand(current_seed);
+					double vDeltaTSPOTInit = gen_random(0, 4);
+					ampl.eval("let Delta_T_SPOT[" + IntToString(j + 1) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vDeltaTSPOTInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vSPOTStatusInit = gen_random(0, 1, 1);
-			ampl.eval("let {i in 1..duration, j in 1..total_rooms} SPOT_Status[i, j] := " + DoubleToString(vSPOTStatusInit) + ";");
+					current_seed = current_seed + 1;
+					// srand(current_seed);
+					double vTNoSPOTInit = gen_random(18, 28);
+					ampl.eval("let T_NoSPOT[" + IntToString(j + 1) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vTNoSPOTInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vRatioInit = gen_random(0, 0.8, 1);
-			ampl.eval("let {i in 1..duration} Ratio[i] := " + DoubleToString(vRatioInit) + ";");
+					current_seed = current_seed + 1;
+					// srand(current_seed);
+					double vSPOTStatusInit = gen_random(0, 1, 1);
+					ampl.eval("let SPOT_Status[" + IntToString(j + 1) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vSPOTStatusInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vPMVInit = gen_random(-0.29, 0.23, 2);
-			ampl.eval("let {i in 2..duration+1, j in 1..total_rooms} PMV[i, j] := " + DoubleToString(vPMVInit) + ";");
+					current_seed = current_seed + 1;
+					// srand(current_seed);
+					double vPMVInit = gen_random(-0.29, 0.23, 2);
+					ampl.eval("let PMV[" + IntToString(j + 2) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vPMVInit) + ";");
 
-			current_seed = current_seed + 1;
-			srand(current_seed);
-			double vFanSpeedInit = 0.0;
-			ampl.eval("let {i in 1..duration, j in 1..total_rooms} Fan_Speed[i, j] := " + DoubleToString(vFanSpeedInit) + ";");
+					current_seed = current_seed + 1;
+					// srand(current_seed);
+					double vFanSpeedInit = 0.0;
+					ampl.eval("let Fan_Speed[" + IntToString(j + 1) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vFanSpeedInit) + ";");
+				}
+
+			}
+
+			for(int k = 0; k < total_rooms; k++) {
+				current_seed = current_seed + 1;
+				// srand(current_seed);
+				double vDeltaTSPOTInit = gen_random(0, 4);
+				ampl.eval("let Delta_T_SPOT[" + IntToString(j + 1) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vDeltaTSPOTInit) + ";");
+
+				current_seed = current_seed + 1;
+				// srand(current_seed);
+				double vTNoSPOTInit = gen_random(18, 28);
+				ampl.eval("let T_NoSPOT[" + IntToString(j + 1) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vTNoSPOTInit) + ";");
+			}
 
 			// Resolve and display objective
 			ampl.solve();
@@ -512,7 +530,7 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 				continue;
 			}
 
-			std::cout << "vDeltaTSPOTInit: " << vDeltaTSPOTInit << "\n";
+/*			std::cout << "vDeltaTSPOTInit: " << vDeltaTSPOTInit << "\n";
 			std::cout << "vTNoSPOTInit: " << vTNoSPOTInit << "\n";
 			std::cout << "vTMixingUnitInit: " << vTMixingUnitInit << "\n";
 			std::cout << "vTCoolingUnitInit: " << vTCoolingUnitInit << "\n";
@@ -521,11 +539,11 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 			std::cout << "vSPOTStatusInit: " << vSPOTStatusInit << "\n";
 			std::cout << "vRatioInit: " << vRatioInit << "\n";
 			std::cout << "vPMVInit: " << vPMVInit << "\n";
-			std::cout << "vFanSpeedInit: " << vFanSpeedInit << "\n";
+			std::cout << "vFanSpeedInit: " << vFanSpeedInit << "\n"; */
 			break;
 		}
 
-		std::cout << "Selected Seed: " << current_seed << " at: " << i << "\n";
+		// std::cout << "Selected Seed: " << current_seed << " at: " << i << "\n";
 
 		// Get final value of Supply Air Temperature (SAT)
 		ampl::Variable vSAT = ampl.getVariable("SAT");

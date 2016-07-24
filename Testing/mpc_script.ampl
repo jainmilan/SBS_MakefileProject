@@ -88,7 +88,8 @@ for {time_slot in 1..7 }
 	
 	#option presolve 0;
 	
-	#let {i in 1..duration, j in 1..total_rooms} SPOT_Status[i, j];
+	let SPOT_Status[1, 1] := 2;
+	display SPOT_Status;
 	
 	option solver minos;
 	solve;
