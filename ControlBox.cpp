@@ -462,8 +462,6 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 
 				current_seed = current_seed + 1;
 				// srand(current_seed);
-
-				std::cout << Time_IH << std::endl;
 				if (Time_IH_Temp%6 == 0) {
 					vSATInit = gen_random(12, 35);
 				}
@@ -521,8 +519,6 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 				ampl.eval("let T_NoSPOT[" + IntToString(j + 1) + ", " + IntToString(k + 1) + "] := " + DoubleToString(vTNoSPOTInit) + ";");
 			}
 
-			ampl.eval("display SAT;");
-
 			// Resolve and display objective
 			ampl.solve();
 			ampl::Objective totalcost = ampl.getObjective("total_power");
@@ -532,7 +528,6 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 			// Get final value of response
 			ampl::Parameter response = ampl.getParameter("response");
 			res_val = response.get().dbl();
-			std::cout << res_val << "\n";
 
 			if (res_val >= 199) {
 				continue;
@@ -564,9 +559,8 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		ampl::Variable vR = ampl.getVariable("Ratio");
 		ampl::DataFrame dfR = vR.getValues();
 
-		// std::cout << dfR.toString() << std::endl;
 		CV.r = dfR.getRowByIndex(0)[1].dbl();
-		// std::cout << "SAT Values Are: " << cv.SAT << std::endl;
+		// std::cout << dfR.toString() << std::endl;
 
 		// BUG: Model returns single value of SAV, however it should be for each zone
 		// Get final value of Supply Air Volume (SAV)
@@ -579,9 +573,6 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		// std::cout << "SAV Values Are: " << cv.SAV_Matrix << std::endl;
 
 		// Get final value of SPOT Status
-		// std::string command = "{j in 1.." + IntToString(total_rooms) + "} SPOT_Status[1,j]";
-		// ampl::DataFrame dfSPOTStatusNew = ampl.getData(command.c_str());
-
 		ampl::Variable vSPOTStatus = ampl.getVariable("SPOT_Status");
 		ampl::DataFrame dfSPOTStatus = vSPOTStatus.getValues();
 		// std::cout << dfSPOTStatusNew.toString() << "\n";
@@ -593,7 +584,7 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 			CV.SPOT_CurrentState(0, i) = dfSPOTStatus.getRowByIndex(i)[2].dbl(); // 2 is the column of returned dataframe
 		}
 		// std::cout << "SPOT Status: " << CV.SPOT_CurrentState << std::endl;
-		// std::cout << "Objective Is: " << totalcost.value() << std::endl;
+
 	} catch (const std::exception &exc) {
 		std::cerr << "Solver Not Working!!";
 		std::cerr << exc.what();
