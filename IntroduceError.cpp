@@ -25,18 +25,23 @@ MAT_FLOAT ErrorInWeather(MAT_FLOAT T_ext, float error) {
 		return T_ext;
 	}
 
+	size_t nRows = ext_temperature.rows();
+	size_t nCols = ext_temperature.cols();
+
 	// Matrix of size (n x total_rooms) to assign external temperature equal to 5
-	MAT_FLOAT ext_temperature = T_ext;
+	MAT_FLOAT ext_temperature = MAT_FLOAT::Ones(nRows, nCols);
+
+	float max_err = error * 100.0;				// Max Error Possible
+	float min_err = error * 100.0 * (-1.0);		// Minimum Error Possible
+
 	// Assign error (randomaly distributed) to each element
-	for (size_t i = 1, nRows = ext_temperature.rows(), nCols = ext_temperature.cols(); i < nRows; ++i) {
+	for (size_t i = 0; i < nRows; ++i) {
 		for (size_t j = 0; j < nCols; ++j) {
-			float max_err = error * 100.0;				// Max Error Possible
-			float min_err = error * 100.0 * (-1.0);		// Minimum Error Possible
 			// Random Error
 			float rand_err = (float) (rand() % (int) (max_err - min_err + 1.0f)
 					+ min_err) / 100.0;
 			// Final Value of External Temperature
-			ext_temperature(i, j) = T_ext(i, j) + (T_ext(i, j) * rand_err);
+			ext_temperature(i, j) = T_ext(i, j) * (1 + rand_err);
 		}
 	}
 	return ext_temperature;		// Return Matrix*/

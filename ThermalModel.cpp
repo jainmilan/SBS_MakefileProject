@@ -304,7 +304,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 
 			// Impact of Weather
 			WI_CRT = TR2.row(k-1) * CoWI_CRT_Matrix;
-			WI_OAT = T_ext_blk.row(0) * CoWI_OAT_Matrix;
+			WI_OAT = T_ext.row(k-1) * CoWI_OAT_Matrix;
 
 			// Impact of HVAC
 			HI_CRT = TR2.row(k-1) * CV.SAV_Matrix * CoHI_CRT_Matrix;
