@@ -118,6 +118,7 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	for (time_t i = start_t; i <= stop_t; i = i + time_step) {
 		df[j].t = i;						// Epoch Time
 		df[j].weather = df_weather[i];		// External Temperature
+		df[j].weather_err = df_weather[i];		// External Temperature
 		df[j].power = 0.0f;
 		df[j].r = 0.0f;
 		df[j].tmix = 0.0f;
