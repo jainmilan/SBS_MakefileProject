@@ -9,6 +9,7 @@
 #include "Building.h"
 #include "Occupancy.h"
 #include "ThermalModel.h"
+#include "IntroduceError.h"
 //#include "WriteOutput.h"
 
 #include<stdio.h>
@@ -85,6 +86,10 @@ Building::~Building() {
  * */
 void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 		const int& control_type, const int& horizon) {
+
+	ErrorInParams(ParamsIn, ParamsIn.CommonErrors.err_bparams);
+	std::cout << ParamsIn.CommonRoom.C << std::endl;
+
 	// Total number of rooms to simulate
 	int total_rooms = ParamsIn.CommonBuilding.num_zones_ * ParamsIn.CommonBuilding.num_rooms_;
 

@@ -49,9 +49,9 @@ else
 endif
 
 
-SRCS = SimpleBuildingSimulator.cpp Building.cpp Weather.cpp Occupancy.cpp ReadInput.cpp ThermalModel.cpp ControlBox.cpp# WriteOutput.cpp
+SRCS = SimpleBuildingSimulator.cpp Building.cpp Weather.cpp Occupancy.cpp ReadInput.cpp ThermalModel.cpp ControlBox.cpp IntroduceError.cpp# WriteOutput.cpp
 
-OBJS = Building.o Weather.o Occupancy.o ReadInput.o ThermalModel.o ControlBox.o# WriteOutput.o 
+OBJS = Building.o Weather.o Occupancy.o ReadInput.o ThermalModel.o ControlBox.o IntroduceError.o # WriteOutput.o 
 
 TARGET = Simulate
 
@@ -69,7 +69,7 @@ lex.yy.c: lexer.l parser.tab.h
 SimpleBuildingSimulator.o: SimpleBuildingSimulator.cpp defs.h Building.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c SimpleBuildingSimulator.cpp
 	
-Building.o: Building.cpp Building.h defs.h Weather.h Occupancy.h ThermalModel.h
+Building.o: Building.cpp Building.h defs.h IntroduceError.h Weather.h Occupancy.h ThermalModel.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c Building.cpp
 
 Weather.o: Weather.cpp Weather.h ReadInput.h defs.h
@@ -86,6 +86,9 @@ ThermalModel.o: ThermalModel.cpp ThermalModel.h ControlBox.h defs.h
 
 ControlBox.o: ControlBox.cpp ControlBox.h defs.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c ControlBox.cpp
+
+IntroduceError.o: IntroduceError.cpp IntroduceError.h defs.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c IntroduceError.cpp
 
 #WriteOutput.o: WriteOutput.cpp WriteOutput.h defs.h
 #	$(CC) $(CFLAGS) $(INCLUDES) -c WriteOutput.cpp

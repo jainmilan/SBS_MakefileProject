@@ -10,6 +10,7 @@
 
 #include "ThermalModel.h"
 #include "ControlBox.h"
+#include "IntroduceError.h"
 
 using namespace SimpleBuildingSimulator;
 
@@ -217,7 +218,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 	struct tm *date = gmtime(&start_time);
 	int Time_IH = (date->tm_min)/10;
 
-	T_ext_blk = T_ext.block(k, 0, step_size, 1);
+	T_ext_blk = ErrorInWeather(T_ext.block(k, 0, step_size, 1), ParamsIn.CommonErrors.err_text);
 	O_blk = O.block(k, 0, step_size, total_rooms);
 
 	ControlBox cb;
@@ -240,6 +241,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 			CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Zones, ParamsIn);
 
 	/* Update Output Frame */
+	df[k].weather = T_ext_blk(0);		// External Temperature
 	df[k].power = PowerAHU(k);
 	df[k].r = r(k);
 	df[k].tmix = MixedAirTemperature(k);
@@ -346,6 +348,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 		}
 
 		/* Update Output Frame */
+		df[k-1].weather = T_ext_blk(0);		// External Temperature
 		df[k-1].power = PowerAHU(k-1);
 		df[k-1].r = r(k-1);
 		df[k-1].tmix = MixedAirTemperature(k-1);
