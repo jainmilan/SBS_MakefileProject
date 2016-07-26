@@ -34,6 +34,8 @@ MAT_FLOAT ErrorInWeather(MAT_FLOAT T_ext, float error) {
 	float max_err = error * 100.0;				// Max Error Possible
 	float min_err = error * 100.0 * (-1.0);		// Minimum Error Possible
 
+	ext_temperature.row(0) = T_ext.row(0);
+
 	// Assign error (randomaly distributed) to each element
 	for (size_t i = 1; i < nRows; ++i) {
 		for (size_t j = 0; j < nCols; ++j) {
