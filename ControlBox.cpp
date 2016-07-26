@@ -146,8 +146,8 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 	float density = ParamsIn.CommonAir.density;
 	float specific_heat = ParamsIn.CommonAir.specific_heat;
 
-	int buffer1 = 0;
-	int buffer2 = 0;
+	int buffer1 = 1;
+	int buffer2 = 1;
 
 	// Limits on Variables
 	float SAT_ll = 12;
@@ -196,7 +196,7 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		pTimeIH.setValues(pTimeIHA, 1);
 
 		if (Time_IH > 0) {
-			buffer1 = 1;
+			buffer1 = 0;
 			buffer2 = Time_IH;
 		}
 
@@ -211,7 +211,7 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		pBuffer2.setValues(pBuffer2A, 1);
 
 		ampl::Parameter pSATPrev = ampl.getParameter("SAT_Prev");
-		double pSATPrevv = (double) round(CV.SAT_Value * 100) / 100;
+		double pSATPrevv = (double) CV.SAT_Value;
 		double pSATPrevA[] = { pSATPrevv };
 		pSATPrev.setValues(pSATPrevA, 1);
 		// std::cout << "SAT_Prev: " << pSATPrevv << "\n";
@@ -258,13 +258,13 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 
 		ampl::Parameter pCoHICRT = ampl.getParameter("CoHI_CRT");
 		double pCoHICRTv = (-1 * tau * density * specific_heat)
-				/ (ParamsIn.CommonBuilding.num_rooms_ * C);
+				/ (C);
 		double pCoHICRTA[] = { pCoHICRTv };
 		pCoHICRT.setValues(pCoHICRTA, 1);
 		// std::cout << "CoHI_CRT: " << pCoHICRTv << "\n";
 
 		ampl::Parameter pCoHISAT = ampl.getParameter("CoHI_SAT");
-		double pCoHISATv = (tau * density * specific_heat) / (ParamsIn.CommonBuilding.num_rooms_ * C);
+		double pCoHISATv = (tau * density * specific_heat) / (C);
 		double pCoHISATA[] = { pCoHISATv };
 		pCoHISAT.setValues(pCoHISATA, 1);
 		// std::cout << "CoHI_SAT: " << pCoHISATv << "\n";
@@ -445,7 +445,7 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		int current_seed, i, j = 0;
 		double vSATInit = gen_random(12, 35);
 
-		/* Initial Guess */
+		// Initial Guess
 		for(i = 1; i < 17; i++) {
 			current_seed = current_seed + i;
 			int Time_IH_Temp = Time_IH;
@@ -520,6 +520,8 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 			}
 
 			// Resolve and display objective
+			ampl.eval("option presolve_eps 1e-06;");
+			ampl.eval("option solver snopt;");
 			ampl.solve();
 			ampl::Objective totalcost = ampl.getObjective("total_power");
 
@@ -546,23 +548,21 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 			break;
 		}
 
-		// std::cout << "Selected Seed: " << current_seed << " at: " << i << "\n";
-
 		// Get final value of Supply Air Temperature (SAT)
 		ampl::Variable vSAT = ampl.getVariable("SAT");
 		ampl::DataFrame dfSAT = vSAT.getValues();
+		// std::cout << dfSAT.toString() << std::endl;
 
 		CV.SAT_Value = dfSAT.getRowByIndex(0)[1].dbl();
 		CV.SAT = Eigen::MatrixXf::Ones(1, total_rooms) * CV.SAT_Value;
 
-		// Get final value of Supply Air Volume (SAV)
+		// Get final value of Ratio
 		ampl::Variable vR = ampl.getVariable("Ratio");
 		ampl::DataFrame dfR = vR.getValues();
-
-		CV.r = dfR.getRowByIndex(0)[1].dbl();
 		// std::cout << dfR.toString() << std::endl;
 
-		// BUG: Model returns single value of SAV, however it should be for each zone
+		CV.r = dfR.getRowByIndex(0)[1].dbl();
+
 		// Get final value of Supply Air Volume (SAV)
 		ampl::Variable vSAV = ampl.getVariable("SAV");
 		ampl::DataFrame dfSAV = vSAV.getValues();

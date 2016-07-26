@@ -70,8 +70,8 @@ void Occupants::ParseOccupancyData(DF_INT2& theData, const int& total_rooms, con
     time_t current_ftime = 0;				// Current time read from the file
     time_t last_ftime = 0;					// Last time read from the file
 
-    float current_freading = 0.0f;			// Current data read from the file
-    float last_freading = 0.0f;				// Last data read from the file
+    float *current_freading = new float[total_rooms];			// Current data read from the file
+    float *last_freading = new float[total_rooms];				// Last data read from the file
 
     while(in.good()) {						// While file is valid
     	std::vector<std::string> row = csv.csv_read_row(in, ',');				// Read CSV row-wise
@@ -86,7 +86,9 @@ void Occupants::ParseOccupancyData(DF_INT2& theData, const int& total_rooms, con
         	}
         	else {																// Valid data
         		current_ftime = mktime(&tm);
-        		current_freading = atof(row[1].c_str());
+        		for (size_t room = 0; room < (size_t) total_rooms; room++) {
+                	current_freading[room] = atof(row[room + 1].c_str());
+        		}
         		if (current_ftime > end_t) {									// Data doesn't exist in mentioned range
         			break;
         		} else if (current_ftime < start_t) {							// Skip till start time is encountered
@@ -95,17 +97,21 @@ void Occupants::ParseOccupancyData(DF_INT2& theData, const int& total_rooms, con
         			ptr = current_ftime;
         			start_t = current_ftime;
         			last_ftime = current_ftime;
-        			last_freading = current_freading;
+        			for (size_t room = 0; room < (size_t) total_rooms; room++) {
+        	        	last_freading[room] = current_freading[room];
+        			}
         			counter++;
         		} else {
         			while (ptr != current_ftime) {									// Till ptr reaches current reading (Interpolation)
         				for (size_t room = 0; room < (size_t) total_rooms; room++) {
-        					theData[ptr][room] = last_freading;
+        					theData[ptr][room] = last_freading[room];
         				}
         				ptr = ptr + time_step;
         			}
         			last_ftime = current_ftime;
-        			last_freading = current_freading;
+        			for (size_t room = 0; room < (size_t) total_rooms; room++) {
+        	        	last_freading[room] = current_freading[room];
+        			}
         			counter++;
         		}
         	} // End of If Statement Validating Datetime Format
@@ -116,7 +122,7 @@ void Occupants::ParseOccupancyData(DF_INT2& theData, const int& total_rooms, con
     	end_t = ptr;
     }
 	for (size_t room = 0; room < (size_t) total_rooms; room++) {
-		theData[ptr][room] = last_freading;
+		theData[ptr][room] = last_freading[room];
 	}
     in.close();
 } // End of ParseWeatherData

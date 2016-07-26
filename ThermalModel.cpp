@@ -6,6 +6,7 @@
  */
 
 #include "time.h"
+#include <algorithm>
 
 #include "ThermalModel.h"
 #include "ControlBox.h"
@@ -30,7 +31,7 @@ MAT_FLOAT ModelRachel::Create_CoWI_OAT_Matrix(const int& time_step, const int& t
 
 MAT_FLOAT ModelRachel::Create_CoHI_CRT_Matrix(const int& time_step, const int& total_rooms, const PARAMS& ParamsIn) {
 	float CoHI_CRT = (-1 * time_step * ParamsIn.CommonAir.density
-			* ParamsIn.CommonAir.specific_heat) / (ParamsIn.CommonBuilding.num_rooms_ * ParamsIn.CommonRoom.C);
+			* ParamsIn.CommonAir.specific_heat) / (ParamsIn.CommonRoom.C);
 
 	MAT_FLOAT CoHI_CRT_Matrix = MAT_FLOAT::Identity(total_rooms, total_rooms) * CoHI_CRT;
 
@@ -39,7 +40,7 @@ MAT_FLOAT ModelRachel::Create_CoHI_CRT_Matrix(const int& time_step, const int& t
 
 MAT_FLOAT ModelRachel::Create_CoHI_SAT_Matrix(const int& time_step, const int& total_rooms, const PARAMS& ParamsIn) {
 	float CoHI_SAT = (time_step * ParamsIn.CommonAir.density * ParamsIn.CommonAir.specific_heat)
-			/ (ParamsIn.CommonBuilding.num_rooms_ * ParamsIn.CommonRoom.C);
+			/ (ParamsIn.CommonRoom.C);
 
 	MAT_FLOAT CoHI_SAT_Matrix = MAT_FLOAT::Identity(total_rooms, total_rooms) * CoHI_SAT;
 
@@ -100,7 +101,7 @@ float ModelRachel::GetMixedAirTemperature(MAT_FLOAT TR2, MAT_FLOAT T_ext, float 
 }
 
 float ModelRachel::GetAHUPower(float MixedAirTemperature, MAT_FLOAT SPOT_CurrentState,
-		float SAT_Value, MAT_FLOAT SAV_Zones, const PARAMS& ParamsIn) {
+		float SAT_Value, MAT_FLOAT SAV_Matrix, const PARAMS& ParamsIn) {
 	float AHUPower = 0.0f;
 
 	// Properties of Air
@@ -120,11 +121,11 @@ float ModelRachel::GetAHUPower(float MixedAirTemperature, MAT_FLOAT SPOT_Current
 			/ CoolingEfficiency;
 	float CoefficientFanPower = ParamsIn.CommonRoom.fan_coef;          // kW.s.s / Kg.Kg
 
-	float HeatingPower = SAV_Zones.sum()
+	float HeatingPower = SAV_Matrix.sum()
 			* (CoefficientHeatingPower * (SupplyAirTemperature - T_c));
-	float CoolingPower = SAV_Zones.sum()
+	float CoolingPower = SAV_Matrix.sum()
 			* (CoefficientCoolingPower * (MixedAirTemperature - T_c));
-	float FanPower = CoefficientFanPower * SAV_Zones.sum() * SAV_Zones.sum();
+	float FanPower = CoefficientFanPower * SAV_Matrix.sum() * SAV_Matrix.sum();
 	float SPOTPower = Q_s * SPOT_CurrentState.sum();
 
 	//std::cout << "SAV_Zones: " << SAV_Zones << "\nCoefficientHeatingPower: " << CoefficientHeatingPower << "\n";
@@ -225,14 +226,14 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 	MAT_FLOAT SPOT_State = MAT_FLOAT::Zero(n, total_rooms);
 	SPOT_State.row(k) = CV.SPOT_CurrentState;
 
-	T.row(k) = Eigen::VectorXf::Ones(total_rooms) * 22;
+	T.row(k) = Eigen::VectorXf::Ones(total_rooms) * 21;
 	TR1.row(k) = T.row(k) + DeltaTR1.row(k);
 	TR2.row(k) = T.row(k) + DeltaTR2.row(k);
 
-	PPV.row(k) = (ParamsIn.PMV_Params.P1 * TR1.row(k))
-			- (ParamsIn.PMV_Params.P2 * MAT_FLOAT::Zero(1, total_rooms))
-			+ (ParamsIn.PMV_Params.P3 * MAT_FLOAT::Zero(1, total_rooms))
-			- (ParamsIn.PMV_Params.P4 * MAT_FLOAT::Ones(1, total_rooms));
+	PPV.row(k) = O.row(k).array() * ((ParamsIn.PMV_Params.P1 * TR1.row(k))
+					- (ParamsIn.PMV_Params.P2 * MAT_FLOAT::Zero(1, total_rooms))
+					+ (ParamsIn.PMV_Params.P3 * MAT_FLOAT::Zero(1, total_rooms))
+					- (ParamsIn.PMV_Params.P4 * MAT_FLOAT::Ones(1, total_rooms))).array();
 
 	MixedAirTemperature.row(k) << GetMixedAirTemperature(TR2.row(k), T_ext.row(k), r.row(k).value());
 	PowerAHU.row(k) << GetAHUPower(MixedAirTemperature.row(k).value(),
@@ -296,8 +297,8 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 		}
 		else {
 
-			SPOT_State.row(k) = CV.SPOT_CurrentState;
-			r.row(k) << CV.r;
+			SPOT_State.row(k-1) = CV.SPOT_CurrentState;
+			r.row(k-1) << CV.r;
 
 			// Impact of Weather
 			WI_CRT = TR2.row(k-1) * CoWI_CRT_Matrix;
@@ -318,7 +319,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 			RC_CiRT = DeltaTR1.row(k-1) * CoRC_CiRT_Matrix;
 
 			// Impact of SPOT
-			SI_SCS = SPOT_State.row(k) * CoSI_SCS_Matrix; // CV.SPOT_CurrentState * CoSI_SCS_Matrix;
+			SI_SCS = SPOT_State.row(k-1) * CoSI_SCS_Matrix; // CV.SPOT_CurrentState * CoSI_SCS_Matrix;
 
 			// Impact of Occupants
 			OI_OHL = O.row(k-1) * CoOI_OHL_Matrix;
@@ -334,27 +335,27 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 			DeltaTR2.row(k) = RC_CiR1T;
 			TR2.row(k) = T.row(k) + DeltaTR2.row(k);
 
-			PPV.row(k) = (ParamsIn.PMV_Params.P1 * TR1.row(k))
+			PPV.row(k) = O.row(k-1).array() * ((ParamsIn.PMV_Params.P1 * TR1.row(k))
 				- (ParamsIn.PMV_Params.P2 * MAT_FLOAT::Zero(1, total_rooms))
 				+ (ParamsIn.PMV_Params.P3 * MAT_FLOAT::Zero(1, total_rooms))
-				- (ParamsIn.PMV_Params.P4 * MAT_FLOAT::Ones(1, total_rooms));
+				- (ParamsIn.PMV_Params.P4 * MAT_FLOAT::Ones(1, total_rooms))).array();
 
-			MixedAirTemperature.row(k) << GetMixedAirTemperature(TR2.row(k), T_ext.row(k), r.row(k).value());
-			PowerAHU.row(k) << GetAHUPower(MixedAirTemperature.row(k).value(),
-						CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Zones, ParamsIn);
+			MixedAirTemperature.row(k-1) << GetMixedAirTemperature(TR2.row(k-1), T_ext.row(k-1), r.row(k-1).value());
+			PowerAHU.row(k-1) << GetAHUPower(MixedAirTemperature.row(k-1).value(),
+						CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Matrix, ParamsIn);
 		}
 
 		/* Update Output Frame */
-		df[k].power = PowerAHU(k);
-		df[k].r = r(k);
-		df[k].tmix = MixedAirTemperature(k);
+		df[k-1].power = PowerAHU(k-1);
+		df[k-1].r = r(k-1);
+		df[k-1].tmix = MixedAirTemperature(k-1);
 		df[k].response = response;
 
 		for (size_t room = 0; room < (size_t) total_rooms; room++) {
 			df[k].ppv[room] = PPV(k, room);
 			df[k].tspot[room] = TR1(k, room);
 			df[k].tnospot[room] = TR2(k, room);
-			df[k].spot_status[room] = SPOT_State(k, room);
+			df[k-1].spot_status[room] = SPOT_State(k-1, room);
 		}
 
 		//		std::cout << "TR2: " << TR2.row(k) << "\n";

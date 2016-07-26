@@ -57,16 +57,16 @@ param Delta_T_SPOT_Init {1..total_rooms}; 			# Initial Temperature Change in SPO
 param SAT_Prev;
 
 # Variables
-var Delta_T_SPOT {1..duration+1, 1..total_rooms} >= 0;	# Change in Temperature of SPOT Region
-var T_NoSPOT {1..duration+1, 1..total_rooms} >= 0;		# Temperature in No-SPOT Region
-var T_Mixing_Unit {1..duration} >= 0;					# Temperature from Mixing Unit
-var T_Cooling_Unit {1..duration} >= 0;					# Temperature from Cooling Unit
-var SAT {1..duration} >= 0;								# Supply Air Temperature
-var SAV {1..duration} >= 0;								# Supply Air Volume
-var SPOT_Status {1..duration, 1..total_rooms} >= 0;		# SPOT State
-var Ratio {1..duration} >= 0;							# Mixing Ratio
-var PMV {2..duration+1, 1..total_rooms};				# PMV
-var Fan_Speed {1..duration, 1..total_rooms} >= 0;		# Fan Speed
+var Delta_T_SPOT {1..duration+1, 1..total_rooms} >= 0, default 0;	# Change in Temperature of SPOT Region
+var T_NoSPOT {1..duration+1, 1..total_rooms} >= 0, default 22;		# Temperature in No-SPOT Region
+var T_Mixing_Unit {1..duration} >= 0, default 25;					# Temperature from Mixing Unit
+var T_Cooling_Unit {1..duration} >= 0, default 25;					# Temperature from Cooling Unit
+var SAT {1..duration} >= 0, default 35;								# Supply Air Temperature
+var SAV {1..duration} >= 0, default 0.236;							# Supply Air Volume
+var SPOT_Status {1..duration, 1..total_rooms} >= 0, default 0;		# SPOT State
+var Ratio {1..duration} >= 0, default 0.8;							# Mixing Ratio
+var PMV {2..duration+1, 1..total_rooms}, default 0;					# PMV
+var Fan_Speed {1..duration, 1..total_rooms} >= 0, default 0;		# Fan Speed
 
 # Objective
 minimize total_power : sum {t in 1..duration} (
@@ -107,7 +107,7 @@ subject to PMV_upper_limit {t in 2..duration+1, k in 1..total_rooms}: PMV[t, k] 
 subject to T_NoSPOT_lower_limit {t in 2..duration+1, k in 1..total_rooms}: T_NoSPOT[t, k] >= T_NoSPOT_ll;
 subject to T_NoSPOT_upper_limit {t in 2..duration+1, k in 1..total_rooms}: T_NoSPOT[t, k] <= T_NoSPOT_ul;
 
-subject to SAV_lower_limit {t in 1..duration}: SAV[t] >= SAV_ll;
+subject to SAV_lower_limit {t in 1..duration}: SAV[t] >= 0;
 subject to SAV_upper_limit {t in 1..duration}: SAV[t] <= SAV_ul;
 
 subject to SAT_lower_limit {t in 1..duration}: SAT[t] >= SAT_ll;
@@ -115,7 +115,7 @@ subject to SAT_upper_limit {t in 1..duration}: SAT[t] <= SAT_ul;
 
 subject to Ratio_lower_limit {t in 1..duration}: Ratio[t] <= 0.8;
 
-subject to T_Cooling_Unit_lower_limit_1 {t in 1..duration}: T_Cooling_Unit[t] <= SAT[t];
+subject to T_Cooling_Unit_lower_limit_1 {t in 1..duration}: SAT[t] >= T_Cooling_Unit[t];
 subject to T_Cooling_Unit_lower_limit_2 {t in 1..duration} : T_Cooling_Unit[t] <= T_Mixing_Unit[t];
 
 subject to SPOT_Status_Constraint {t in 1..duration, k in 1..total_rooms}: SPOT_Status[t, k] <= Occupancy[t, k];
@@ -129,8 +129,8 @@ subject to IPCons4 {i in (Nhorizon - 1)..(Nhorizon - 1), j in 0..(buffer2 - 1)}:
 				Time_IH * SAT[6*(i+1) - buffer2 + 1] = Time_IH * SAT[6*(i+1) - buffer2 + 1 + j];
 subject to IPCons5: Time_IH * SAT[1] = Time_IH * SAT_Prev;
 
+subject to voclt {t in 1..duration}: (sum{k in 1..total_rooms} Occupancy[t, k]) * SAV[t] >= (sum{k in 1..total_rooms} Occupancy[t, k]) * SAV_ll;
+
 ##### Yet To Implement - Need Help
 #subject to pmvlt3 {t in 2..T+1,k in  n1+1..n1+n2} :O[6*(l1-1)+l2+t-1,k]*P[k,t] >=O[6*(l1-1)+l2+t-1,k]*betalim11;
 #subject to pmvlt4 {t in 2..T+1,k in n1+1..n1+n2} :O[6*(l1-1)+l2+t-1,k]*P[k,t] <=O[6*(l1-1)+l2+t-1,k]*betalim12;
-
-#subject to voclt {t in 1..T} : (sum{k in I}O[6*(l1-1)+l2+t,k])*v[t] >= (sum{k in I}O[6*(l1-1)+l2+t,k])*volim1;
