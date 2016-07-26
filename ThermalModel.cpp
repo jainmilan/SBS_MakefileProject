@@ -262,7 +262,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 		struct tm *date = gmtime(&start_time);
 		Time_IH = (date -> tm_min)/10;
 
-		T_ext_blk = T_ext.block(k-1, 0, step_size, 1);
+		T_ext_blk = ErrorInWeather(T_ext.block(k-1, 0, step_size, 1), ParamsIn.CommonErrors.err_text);
 		O_blk = O.block(k-1, 0, step_size, total_rooms);
 
 		switch (control_type) {
@@ -304,7 +304,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 
 			// Impact of Weather
 			WI_CRT = TR2.row(k-1) * CoWI_CRT_Matrix;
-			WI_OAT = T_ext.row(k-1) * CoWI_OAT_Matrix;
+			WI_OAT = T_ext_blk.row(0) * CoWI_OAT_Matrix;
 
 			// Impact of HVAC
 			HI_CRT = TR2.row(k-1) * CV.SAV_Matrix * CoHI_CRT_Matrix;
@@ -342,10 +342,12 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 				+ (ParamsIn.PMV_Params.P3 * MAT_FLOAT::Zero(1, total_rooms))
 				- (ParamsIn.PMV_Params.P4 * MAT_FLOAT::Ones(1, total_rooms))).array();
 
-			MixedAirTemperature.row(k-1) << GetMixedAirTemperature(TR2.row(k-1), T_ext.row(k-1), r.row(k-1).value());
+			MixedAirTemperature.row(k-1) << GetMixedAirTemperature(TR2.row(k-1), T_ext_blk.row(0), r.row(k-1).value());
 			PowerAHU.row(k-1) << GetAHUPower(MixedAirTemperature.row(k-1).value(),
 						CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Matrix, ParamsIn);
 		}
+
+		std::cout << T_ext(k-1) << " => " << T_ext_blk(0) << std::endl;
 
 		/* Update Output Frame */
 		df[k-1].weather = T_ext_blk(0);		// External Temperature

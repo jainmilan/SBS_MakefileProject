@@ -88,7 +88,10 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 		const int& control_type, const int& horizon) {
 
 	ErrorInParams(ParamsIn, ParamsIn.CommonErrors.err_bparams);
-	std::cout << ParamsIn.CommonRoom.C << std::endl;
+	std::cout << "C: " << ParamsIn.CommonRoom.C << std::endl;
+	std::cout << "C_: " << ParamsIn.CommonRoom.C_ << std::endl;
+	std::cout << "alpha_o: " << ParamsIn.CommonRoom.alpha_o << std::endl;
+	std::cout << "alpha_r: " << ParamsIn.CommonRoom.alpha_r << std::endl;
 
 	// Total number of rooms to simulate
 	int total_rooms = ParamsIn.CommonBuilding.num_zones_ * ParamsIn.CommonBuilding.num_rooms_;
