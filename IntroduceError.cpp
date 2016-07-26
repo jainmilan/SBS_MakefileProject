@@ -25,8 +25,8 @@ MAT_FLOAT ErrorInWeather(MAT_FLOAT T_ext, float error) {
 		return T_ext;
 	}
 
-	size_t nRows = ext_temperature.rows();
-	size_t nCols = ext_temperature.cols();
+	size_t nRows = T_ext.rows();
+	size_t nCols = T_ext.cols();
 
 	// Matrix of size (n x total_rooms) to assign external temperature equal to 5
 	MAT_FLOAT ext_temperature = MAT_FLOAT::Ones(nRows, nCols);
