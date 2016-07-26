@@ -37,6 +37,7 @@ typedef std::map< time_t, std::map<int, int> > DF_INT2;
 typedef struct df_format {
 			time_t t;
 			float weather;
+			float weather_err;
 			int *occ;
 			float *tspot;
 			float *tnospot;
