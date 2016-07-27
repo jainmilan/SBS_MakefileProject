@@ -183,7 +183,13 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 		const int& time_step, const int& total_rooms, int time_instances, const int& control_type,
 		const int& horizon) {
 
+	int k = 0;
+	float response = 0;
 	int n = time_instances;
+
+	PARAM ParamsErr;
+	ParamsErr = ErrorInParams(ParamsIn, ParamsIn.CommonErrors.err_bparams);
+
 	ComputeCoefficients(time_step, total_rooms, ParamsIn);
 
 	/* Output of the Program */
@@ -206,12 +212,11 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 	Eigen::MatrixXf PowerAHU = Eigen::MatrixXf::Zero(n, 1);
 
 	// Initialization
-	int k = 0;
-	float response = 0;
 	size_t step_size = (horizon * 60 * 60) / time_step;
 	// std::cout << duration << "\n" << horizon << "\n" << n << "\n" << step_size << "\n";
 
 	MAT_FLOAT T_ext_blk = MAT_FLOAT::Ones(step_size, 1);
+	MAT_FLOAT T_ext_eblk = MAT_FLOAT::Ones(step_size, 1);
 	MAT_FLOAT O_blk = MAT_FLOAT::Ones(step_size, 1);
 
 	time_t start_time = df[k].t;
@@ -273,8 +278,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 			CV = cb.ReactiveControl(total_rooms, TR1.row(k-1), O.row(k-1), k-1, SPOT_State.row(k-1), ParamsIn);
 			break;
 		case 3:
-			MAT_FLOAT T_ext_eblk = ErrorInWeather(T_ext_blk, ParamsIn.CommonErrors.err_text);
-			PARAM ParamsErr = ErrorInParams(ParamsIn, ParamsIn.CommonErrors.err_bparams);
+			T_ext_eblk = ErrorInWeather(T_ext_blk, ParamsIn.CommonErrors.err_text);
 			std::cout << "C: " << ParamsErr.CommonRoom.C << std::endl;
 			std::cout << "C_: " << ParamsErr.CommonRoom.C_ << std::endl;
 			std::cout << "alpha_o: " << ParamsErr.CommonRoom.alpha_o << std::endl;
