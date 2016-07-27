@@ -187,7 +187,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 	float response = 0;
 	int n = time_instances;
 
-	PARAM ParamsErr;
+	PARAMS ParamsErr;
 	ParamsErr = ErrorInParams(ParamsIn, ParamsIn.CommonErrors.err_bparams);
 
 	ComputeCoefficients(time_step, total_rooms, ParamsIn);
