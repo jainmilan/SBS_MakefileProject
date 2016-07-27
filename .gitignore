@@ -1,14 +1,7 @@
-/SimpleBuildingSimulator.exe
-/Building.o
-/ControlBox.o
-/Occupancy.o
-/ThermalModel.o
-/ReadInput.o
-/WriteOutput.o
-/SimpleBuildingSimulator.o
-/Weather.o
+/*.exe
+/*.o
 /Default/
-/output/
+/output/*
 /*.stackdump
 /*.yy.c
 /*.tab.*
