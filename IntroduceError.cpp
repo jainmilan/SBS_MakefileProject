@@ -10,14 +10,54 @@
 
 #include "IntroduceError.h"
 
-void ErrorInParams(PARAMS& ParamsIn, float error) {
+PARAMS ErrorInParams(PARAMS& ParamsIn, float error) {
+	PARAMS ParamsErr;
+
 	/* Thermal Capacities */
-	ParamsIn.CommonRoom.C = ParamsIn.CommonRoom.C * (1 + error);					// Thermal Capacity of Room (kJ/K)
-	ParamsIn.CommonRoom.C_ = ParamsIn.CommonRoom.C_ * (1 + error);					// Thermal Capacity of SPOT Region (kJ/K)
+	ParamsErr.CommonRoom.C = ParamsIn.CommonRoom.C * (1 + error);					// Thermal Capacity of Room (kJ/K)
+	ParamsErr.CommonRoom.C_ = ParamsIn.CommonRoom.C_ * (1 + error);					// Thermal Capacity of SPOT Region (kJ/K)
 
 	/* Heat Transfer Coefficients */
-	ParamsIn.CommonRoom.alpha_o = ParamsIn.CommonRoom.alpha_o * (1 + error);		// Heat Transfer Coefficient for Outside (kJ/K.s)
-	ParamsIn.CommonRoom.alpha_o = ParamsIn.CommonRoom.alpha_o * (1 + error);		// Heat Transfer Coefficient for Regions (kJ/K.s)
+	ParamsErr.CommonRoom.alpha_o = ParamsIn.CommonRoom.alpha_o * (1 + error);		// Heat Transfer Coefficient for Outside (kJ/K.s)
+	ParamsErr.CommonRoom.alpha_o = ParamsIn.CommonRoom.alpha_o * (1 + error);		// Heat Transfer Coefficient for Regions (kJ/K.s)
+
+	/* Heat Loads */
+	ParamsErr.CommonRoom.Q_l = ParamsIn.CommonRoom.Q_l;								// Heat Load Due to Lightening and Equipments (kW)
+	ParamsErr.CommonRoom.Q_h = ParamsIn.CommonRoom.Q_h;								// Heat Load Due to Presence of Occupants (kW)
+	ParamsErr.CommonRoom.Q_s = ParamsIn.CommonRoom.Q_s;								// Heat Load of SPOT Unit (kW)
+
+	/* Impact of Fan */
+	ParamsErr.CommonRoom.fan_coef = ParamsIn.CommonRoom.fan_coef;					// Coefficient of Fan Power Consumption (-)
+
+	/* Parameters for Air */
+	ParamsErr.CommonAir.density = ParamsIn.CommonAir.density;						// Density of Air (kg/m3)
+	ParamsErr.CommonAir.specific_heat = ParamsIn.CommonAir.specific_heat;			// Specific Heat Capacity of Air (J/Kg-K)
+
+	/* PMV Parameters */
+	ParamsErr.PMV_Params.P1 = ParamsIn.PMV_Params.P1;								// 1st Coefficient of Learned PMV Equation (-)
+	ParamsErr.PMV_Params.P2 = ParamsIn.PMV_Params.P2;								// 2nd Coefficient of Learned PMV Equation (-)
+	ParamsErr.PMV_Params.P3 = ParamsIn.PMV_Params.P3;								// 3rd Coefficient of Learned PMV Equation (-)
+	ParamsErr.PMV_Params.P4 = ParamsIn.PMV_Params.P4;								// 4th Coefficient of Learned PMV Equation (-)
+
+	/* AHU Efficiencies */
+	ParamsErr.CommonAHU.HeatingEfficiency = ParamsIn.CommonAHU.HeatingEfficiency;	// Heating Efficiency of AHU (-)
+	ParamsErr.CommonAHU.CoolingEfficiency = ParamsIn.CommonAHU.CoolingEfficiency;	// Cooling Efficiency of AHU (-)
+
+	/* Error Values */
+	ParamsErr.CommonErrors.err_bparams = ParamsIn.CommonErrors.err_bparams;			// Error in Building Parameters (-)
+	ParamsErr.CommonErrors.err_text = ParamsIn.CommonErrors.err_text;				// Error in Weather Conditions (-)
+
+	/* Files */
+	ParamsErr.Files.weather_file = ParamsIn.Files.weather_file;						// Input File to Read Weather Data (-)
+	ParamsErr.Files.occupancy_file = ParamsIn.Files.occupancy_file;					// Input File to Read Occupancy Data (-)
+	ParamsErr.Files.merged_data_file = ParamsIn.Files.merged_data_file;				// Input File to Read Occupancy Data (-)
+	ParamsErr.Files.output_file = ParamsIn.Files.output_file;						// Output File Created by the Program (-)
+
+	/* Other Parameters */
+	ParamsErr.CommonBuilding.num_zones_ = ParamsIn.CommonBuilding.num_zones_;		// Number of VAV Zones in the Building (-)
+	ParamsErr.CommonBuilding.num_rooms_ = ParamsIn.CommonBuilding.num_rooms_;		// Number of Rooms in each VAV Zone (-)
+
+	return ParamsErr;
 }
 
 MAT_FLOAT ErrorInWeather(MAT_FLOAT T_ext, float error) {

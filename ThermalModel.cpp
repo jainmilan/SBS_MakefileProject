@@ -8,8 +8,8 @@
 #include "time.h"
 #include <algorithm>
 
-#include "ThermalModel.h"
 #include "ControlBox.h"
+#include "ThermalModel.h"
 #include "IntroduceError.h"
 
 using namespace SimpleBuildingSimulator;
@@ -218,7 +218,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 	struct tm *date = gmtime(&start_time);
 	int Time_IH = (date->tm_min)/10;
 
-	T_ext_blk = ErrorInWeather(T_ext.block(k, 0, step_size, 1), ParamsIn.CommonErrors.err_text);
+	T_ext_blk = T_ext.block(k, 0, step_size, 1);
 	O_blk = O.block(k, 0, step_size, total_rooms);
 
 	ControlBox cb;
@@ -262,7 +262,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 		struct tm *date = gmtime(&start_time);
 		Time_IH = (date -> tm_min)/10;
 
-		T_ext_blk = ErrorInWeather(T_ext.block(k-1, 0, step_size, 1), ParamsIn.CommonErrors.err_text);
+		T_ext_blk = T_ext.block(k-1, 0, step_size, 1);
 		O_blk = O.block(k-1, 0, step_size, total_rooms);
 
 		switch (control_type) {
@@ -273,8 +273,17 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, co
 			CV = cb.ReactiveControl(total_rooms, TR1.row(k-1), O.row(k-1), k-1, SPOT_State.row(k-1), ParamsIn);
 			break;
 		case 3:
-			response = cb.MPCControl(df, step_size, time_step, T_ext_blk, O_blk, TR2.row(k-1),
-					DeltaTR1.row(k-1), ParamsIn, horizon, Time_IH, CV, k-1);
+			MAT_FLOAT T_ext_eblk = ErrorInWeather(T_ext_blk, ParamsIn.CommonErrors.err_text);
+			PARAM ParamsErr = ErrorInParams(ParamsIn, ParamsIn.CommonErrors.err_bparams);
+			std::cout << "C: " << ParamsErr.CommonRoom.C << std::endl;
+			std::cout << "C_: " << ParamsErr.CommonRoom.C_ << std::endl;
+			std::cout << "alpha_o: " << ParamsErr.CommonRoom.alpha_o << std::endl;
+			std::cout << "alpha_r: " << ParamsErr.CommonRoom.alpha_r << std::endl;
+			std::cout << T_ext_blk << std::endl;
+			std::cout << T_ext_eblk << std::endl;
+
+			response = cb.MPCControl(df, step_size, time_step, T_ext_eblk, O_blk, TR2.row(k-1),
+					DeltaTR1.row(k-1), ParamsErr, horizon, Time_IH, CV, k-1);
 			break;
 		default:
 			break;

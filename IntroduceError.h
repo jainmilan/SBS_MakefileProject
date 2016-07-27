@@ -10,7 +10,7 @@
 
 #include "defs.h"
 
-void ErrorInParams(PARAMS& ParamsIn, float error);
+PARAMS ErrorInParams(PARAMS& ParamsIn, float error);
 MAT_FLOAT ErrorInWeather(MAT_FLOAT T_ext, float error);
 
 #endif /* INTRODUCEERROR_H_ */
