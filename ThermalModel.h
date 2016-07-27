@@ -13,7 +13,7 @@
 namespace SimpleBuildingSimulator {
 	class ModelRachel {
 	public:
-		void SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, const PARAMS& ParamsIn,
+		void SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, PARAMS& ParamsIn,
 				const int& time_step, const int& total_rooms, int time_instances, const int& control_type,
 				const int& horizon);
 
