@@ -279,12 +279,12 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, PA
 			break;
 		case 3:
 			T_ext_eblk = ErrorInWeather(T_ext_blk, ParamsIn.CommonErrors.err_text);
-			std::cout << "C: " << ParamsErr.CommonRoom.C << std::endl;
-			std::cout << "C_: " << ParamsErr.CommonRoom.C_ << std::endl;
-			std::cout << "alpha_o: " << ParamsErr.CommonRoom.alpha_o << std::endl;
-			std::cout << "alpha_r: " << ParamsErr.CommonRoom.alpha_r << std::endl;
-			std::cout << T_ext_blk << std::endl;
-			std::cout << T_ext_eblk << std::endl;
+			std::cout << "C: " << ParamsIn.CommonRoom.C << " >> " << ParamsErr.CommonRoom.C << std::endl;
+			std::cout << "C_: " << ParamsErr.CommonRoom.C_ << " >> " << ParamsErr.CommonRoom.C_ << std::endl;
+			std::cout << "alpha_o: " << ParamsErr.CommonRoom.alpha_o << " >> " << ParamsErr.CommonRoom.alpha_o << std::endl;
+			std::cout << "alpha_r: " << ParamsErr.CommonRoom.alpha_r << " >> " << ParamsErr.CommonRoom.alpha_r << std::endl;
+			//std::cout << T_ext_blk << std::endl;
+			//std::cout << T_ext_eblk << std::endl;
 
 			response = cb.MPCControl(df, step_size, time_step, T_ext_eblk, O_blk, TR2.row(k-1),
 					DeltaTR1.row(k-1), ParamsErr, horizon, Time_IH, CV, k-1);
