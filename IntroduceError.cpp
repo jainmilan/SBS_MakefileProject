@@ -19,7 +19,7 @@ PARAMS ErrorInParams(PARAMS& ParamsIn, float error) {
 
 	/* Heat Transfer Coefficients */
 	ParamsErr.CommonRoom.alpha_o = ParamsIn.CommonRoom.alpha_o * (1 + error);		// Heat Transfer Coefficient for Outside (kJ/K.s)
-	ParamsErr.CommonRoom.alpha_o = ParamsIn.CommonRoom.alpha_o * (1 + error);		// Heat Transfer Coefficient for Regions (kJ/K.s)
+	ParamsErr.CommonRoom.alpha_r = ParamsIn.CommonRoom.alpha_r * (1 + error);		// Heat Transfer Coefficient for Regions (kJ/K.s)
 
 	/* Heat Loads */
 	ParamsErr.CommonRoom.Q_l = ParamsIn.CommonRoom.Q_l;								// Heat Load Due to Lightening and Equipments (kW)

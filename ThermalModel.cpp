@@ -280,9 +280,9 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext, MAT_FLOAT O, PA
 		case 3:
 			T_ext_eblk = ErrorInWeather(T_ext_blk, ParamsIn.CommonErrors.err_text);
 			std::cout << "C: " << ParamsIn.CommonRoom.C << " >> " << ParamsErr.CommonRoom.C << std::endl;
-			std::cout << "C_: " << ParamsErr.CommonRoom.C_ << " >> " << ParamsErr.CommonRoom.C_ << std::endl;
-			std::cout << "alpha_o: " << ParamsErr.CommonRoom.alpha_o << " >> " << ParamsErr.CommonRoom.alpha_o << std::endl;
-			std::cout << "alpha_r: " << ParamsErr.CommonRoom.alpha_r << " >> " << ParamsErr.CommonRoom.alpha_r << std::endl;
+			std::cout << "C_: " << ParamsIn.CommonRoom.C_ << " >> " << ParamsErr.CommonRoom.C_ << std::endl;
+			std::cout << "alpha_o: " << ParamsIn.CommonRoom.alpha_o << " >> " << ParamsErr.CommonRoom.alpha_o << std::endl;
+			std::cout << "alpha_r: " << ParamsIn.CommonRoom.alpha_r << " >> " << ParamsErr.CommonRoom.alpha_r << std::endl;
 			//std::cout << T_ext_blk << std::endl;
 			//std::cout << T_ext_eblk << std::endl;
 
