@@ -23,7 +23,7 @@ namespace SimpleBuildingSimulator
 		~Building();
 
 		// Simulate within Time Limits
-		void Simulate(time_t &start_t, time_t &stop_t, const int& time_step, const int& control_type, const int& horizon);
+		void Simulate(time_t &start_t, time_t &stop_t, const int& time_step_mpc, const int& time_step_spot, const int& control_type, const int& horizon);
 	};
 } // namespace SimpleBuildingSimulator
 

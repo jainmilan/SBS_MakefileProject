@@ -83,7 +83,7 @@ Building::~Building() {
  * 		3 - MPC Based Control
  * 5. Horizon - Predictions will be done only for Horizon Interval.
  * */
-void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
+void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step_mpc, const int& time_step_spot,
 		const int& control_type, const int& horizon) {
 
 	// Total number of rooms to simulate
@@ -94,24 +94,37 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	Occupants occupancy;
 
 	// Parse Weather and Occupancy Data from Input Files
-	DF_FLOAT df_weather;
-	weather.ParseWeatherData(df_weather, ParamsIn.Files.weather_file, start_t, stop_t, time_step, skip_lines);
+	DF_FLOAT df_weather_mpc;
+	weather.ParseWeatherData(df_weather_mpc, ParamsIn.Files.weather_file, start_t, stop_t, time_step_mpc, skip_lines);
 
-	DF_INT2 df_occupancy;
-	occupancy.ParseOccupancyData(df_occupancy, total_rooms, ParamsIn.Files.occupancy_file, start_t, stop_t, time_step, skip_lines);
+	DF_FLOAT df_weather_spot;
+	weather.ParseWeatherData(df_weather_spot, ParamsIn.Files.weather_file, start_t, stop_t, time_step_spot, skip_lines);
+
+	DF_INT2 df_occupancy_mpc;
+	occupancy.ParseOccupancyData(df_occupancy_mpc, total_rooms, ParamsIn.Files.occupancy_file, start_t, stop_t, time_step_mpc, skip_lines);
+
+	DF_INT2 df_occupancy_spot;
+	occupancy.ParseOccupancyData(df_occupancy_spot, total_rooms, ParamsIn.Files.occupancy_file, start_t, stop_t, time_step_spot, skip_lines);
+
+	std::cout << "Start: " << start_t << ", Stop: " << stop_t << "\n";
 
 	// Use updated start and stop time to compute duration and number of time instances (n)
 	long int duration = stop_t - start_t;
-	long int n = (duration / time_step) + 1;
+	int time_step_ratio = time_step_mpc / time_step_spot;
+
+	long int n_mpc = (duration / time_step_mpc) + 1;
+	long int n_spot = (duration / time_step_spot) + 1;
+
+	std::cout << "Duration: " << duration << ", #MPC: " << n_mpc << ", #SPOT: " << n_spot << "\n";
 
 	// Output of the Simulation
-	DF_OUTPUT df[n];
+	DF_OUTPUT df[n_spot];
 
 	size_t j = 0;		// Index for each time stamp
-	for (time_t i = start_t; i <= stop_t; i = i + time_step) {
+	for (time_t i = start_t; i <= stop_t; i = i + time_step_spot) {
 		df[j].t = i;						// Epoch Time
-		df[j].weather = df_weather[i];		// External Temperature
-		df[j].weather_err = df_weather[i];		// External Temperature
+		df[j].weather = df_weather_spot[i];		// External Temperature
+		df[j].weather_err = df_weather_spot[i];		// External Temperature
 		df[j].power = 0.0f;
 		df[j].r = 0.0f;
 		df[j].tmix = 0.0f;
@@ -124,7 +137,7 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 		df[j].spot_status = new int[total_rooms];
 
 		for (size_t room = 0; room < (size_t) total_rooms; room++) {
-			df[j].occ[room] = df_occupancy[i][room];		// Occupancy in the Room
+			df[j].occ[room] = df_occupancy_spot[i][room];		// Occupancy in the Room
 			df[j].ppv[room] = 0.0f;
 			df[j].tspot[room] = 0.0f;
 			df[j].tnospot[room] = 0.0f;
@@ -133,15 +146,17 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 		j = j + 1;
 	}
 
+	std::cout << "Value of j: " << j << "\n";
+
 	if( remove( ParamsIn.Files.merged_data_file.c_str() ) != 0 )
 		perror( "Error deleting file" );
 	else
-		  puts( "File successfully deleted" );
+		puts( "File successfully deleted" );
 
 	// Write to Intermediate File
 	std::fstream mf;
 	mf.open(ParamsIn.Files.merged_data_file.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
-	for (size_t j = 0; j < (size_t) n; j++) {
+	for (size_t j = 0; j < (size_t) n_spot; j++) {
 		mf << df[j].t << "," << df[j].weather;
 		for (size_t room = 0; room < (size_t) total_rooms; room++) {
 				mf << "," << df[j].occ[room];
@@ -151,13 +166,17 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	mf.close();
 
 	// Convert DataFrame format to Matrix format for computations
-	MAT_FLOAT T_ext = weather.GetWeatherMatrix(df, n, total_rooms);
-	MAT_FLOAT O = occupancy.GetOccupancyMatrix(df, n, total_rooms).cast<float>();
+	MAT_FLOAT T_ext_mpc = weather.GetWeatherMatrix(df, n_mpc, total_rooms);
+	MAT_FLOAT T_ext_spot = weather.GetWeatherMatrix(df, n_spot, total_rooms);
+
+	MAT_FLOAT O_mpc = occupancy.GetOccupancyMatrix(df, n_mpc, total_rooms).cast<float>();
+	MAT_FLOAT O_spot = occupancy.GetOccupancyMatrix(df, n_spot, total_rooms).cast<float>();
 
 	// Simulate as per Thermal Model
 	ModelRachel MPCModel;
 
-	MPCModel.SimulateModel(df, T_ext, O, ParamsIn, time_step, total_rooms, n, control_type, horizon);
+	MPCModel.SimulateModel(df, T_ext_mpc, T_ext_spot, O_mpc, O_spot, ParamsIn, time_step_mpc, time_step_spot,
+			total_rooms, n_mpc, n_spot, control_type, horizon);
 
 	// Write to Output File
 	if( remove( ParamsIn.Files.output_file.c_str() ) != 0 )
@@ -178,7 +197,7 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 		ff << ",SPOT_" << room + 1;
 	}
 	ff << "\n";
-	for (size_t j = 0; j < (size_t) n; j++) {
+	for (size_t j = 0; j < (size_t) n_spot; j++) {
 		ff << df[j].response << "," << df[j].t << "," << df[j].weather << "," << df[j].weather_err << "," <<
 				df[j].power << "," << df[j].r << "," << df[j].tmix;
 		for (size_t room = 0; room < (size_t) total_rooms; room++) {
@@ -197,5 +216,3 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step,
 	//		TR2, DeltaTR1, DeltaTR2, PPV, MixedAirTemperature, PowerAHU, O,
 	//		T_ext, SPOT_State, CommonRoom, CommonAHU, CommonAir, PMV_Params, Files.output_file);
 }
-
-

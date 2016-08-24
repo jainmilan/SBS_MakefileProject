@@ -4,7 +4,8 @@ building:{
 	start:20160101T0000,				/* Start Time (Format: yyyymmddThhmm) */
 	stop:20160102T0400,					/* Stop Time (Format: yyyymmddThhmm) */
 	horizon:4,							/* Horizon for simulation */
-	time_step:600,						/* Time Step */
+	time_step_mpc:600,					/* Time Step for MPC (In seconds) */
+	time_step_spot:30,					/* Time Step for SPOT (In seconds) */
 	control:3,							/* Control Type: 1 (No Control), 2 (Reactive), 3 (MPC) */
 	ahu:{						
 		h_eff:0.9,						/* Heating Efficiency */

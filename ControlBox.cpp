@@ -120,7 +120,7 @@ struct ControlVariables ControlBox::ReactiveControl(const int& total_rooms, MAT_
 	return cv;
 }
 
-float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const int& time_step, MAT_FLOAT T_Outside,
+float ControlBox::MPCControl(const long int& tinstances, const int& time_step, MAT_FLOAT T_Outside,
 		MAT_FLOAT Occupancy, MAT_FLOAT TNoSPOTInit,	MAT_FLOAT DeltaTSPOTInit, const PARAMS& ParamsIn, const int& horizon,
 		const int& Time_IH,	ControlVariables& CV, int current_index) {
 
@@ -551,7 +551,7 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		// Get final value of Supply Air Temperature (SAT)
 		ampl::Variable vSAT = ampl.getVariable("SAT");
 		ampl::DataFrame dfSAT = vSAT.getValues();
-		// std::cout << dfSAT.toString() << std::endl;
+		std::cout << dfSAT.toString() << std::endl;
 
 		CV.SAT_Value = dfSAT.getRowByIndex(0)[1].dbl();
 		CV.SAT = Eigen::MatrixXf::Ones(1, total_rooms) * CV.SAT_Value;
@@ -559,7 +559,7 @@ float ControlBox::MPCControl(DF_OUTPUT df[], const long int& tinstances, const i
 		// Get final value of Ratio
 		ampl::Variable vR = ampl.getVariable("Ratio");
 		ampl::DataFrame dfR = vR.getValues();
-		// std::cout << dfR.toString() << std::endl;
+		std::cout << dfR.toString() << std::endl;
 
 		CV.r = dfR.getRowByIndex(0)[1].dbl();
 

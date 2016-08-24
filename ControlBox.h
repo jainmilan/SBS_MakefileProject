@@ -31,7 +31,7 @@ public:
 	struct ControlVariables DefaultControl(const int& total_rooms, const PARAMS& ParamsIn);
 	struct ControlVariables ReactiveControl(const int& total_rooms, MAT_FLOAT TR1, MAT_FLOAT O,
 			int k, MAT_FLOAT SPOT_PreviousState, const PARAMS& ParamsIn);
-	float MPCControl(DF_OUTPUT df[], const long int& tinstances, const int& time_step, MAT_FLOAT T_Outside,
+	float MPCControl(const long int& tinstances, const int& time_step, MAT_FLOAT T_Outside,
 			MAT_FLOAT Occupancy, MAT_FLOAT TNoSPOTInit,	MAT_FLOAT DeltaTSPOTInit, const PARAMS& ParamsIn, const int& horizon,
 			const int& Time_IH,	ControlVariables& CV, int current_index);
 private:

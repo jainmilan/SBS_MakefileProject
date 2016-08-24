@@ -29,7 +29,7 @@
 	std::string start_str, stop_str; 
 	
 	int MIN2SEC = 60;
-	int time_step, control_type, horizon, start, stop;	
+	int time_step_mpc, time_step_spot, control_type, horizon, start, stop;	
 
 	// Load defined simulator
 	using namespace SimpleBuildingSimulator;
@@ -58,7 +58,8 @@
 %token START
 %token STOP
 %token HORIZON
-%token TIMESTEP
+%token TIMESTEPMPC
+%token TIMESTEPSPOT
 %token CONTROL
 
 %token HEFF
@@ -120,7 +121,8 @@ body_line:
 	| START ':' STRING						{ start_str = std::string($3); }
 	| STOP ':' STRING						{ stop_str = std::string($3); }
 	| HORIZON ':' INT						{ horizon = $3; }
-	| TIMESTEP ':' INT						{ time_step = $3; }
+	| TIMESTEPMPC ':' INT					{ time_step_mpc = $3; }
+	| TIMESTEPSPOT ':' INT					{ time_step_spot = $3; }
 	| CONTROL ':' INT						{ control_type = $3; }
 	| HEFF ':' FLOAT						{ dc.ParamsIn.CommonAHU.HeatingEfficiency = $3; }
 	| CEFF ':' FLOAT						{ dc.ParamsIn.CommonAHU.CoolingEfficiency = $3; }
@@ -192,7 +194,7 @@ int main( int argc, char *argv[] ) {
 		if (strptime(stop_str.c_str(), "%Y%m%dT%H%M", &tm)) {
 			stop_t = mktime(&tm);
 		}
-		dc.Simulate(start_t, stop_t, time_step, control_type, horizon);
+		dc.Simulate(start_t, stop_t, time_step_mpc, time_step_spot, control_type, horizon);
 
 	    return 0;
 	}

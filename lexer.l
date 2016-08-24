@@ -22,7 +22,8 @@
 "start"					{ return START; }
 "stop"	     			{ return STOP; }
 "horizon"				{ return HORIZON; }
-"time_step"				{ return TIMESTEP; }
+"time_step_mpc"			{ return TIMESTEPMPC; }
+"time_step_spot"		{ return TIMESTEPSPOT; }
 "control"	 			{ return CONTROL; }
 	
 "h_eff" 				{ return HEFF; }
