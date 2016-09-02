@@ -575,7 +575,7 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 		// Get final value of SPOT Status
 		ampl::Variable vSPOTStatus = ampl.getVariable("SPOT_Status");
 		ampl::DataFrame dfSPOTStatus = vSPOTStatus.getValues();
-		std::cout << dfSPOTStatusNew.toString() << "\n";
+		std::cout << dfSPOTStatus.toString() << "\n";
 
 		size_t nRows = dfSPOTStatus.getNumRows();
 		CV.SPOT_CurrentState = Eigen::MatrixXf::Ones(1, total_rooms);
