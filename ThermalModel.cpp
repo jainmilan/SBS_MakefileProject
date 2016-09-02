@@ -411,7 +411,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 
 		for(size_t j = 1; j < time_step_ratio; j = j + 1) {
 			/* Update Output Frame */
-			df[k_spot-1+j].weather_err = T_ext_blk(k_spot-1);		// External Temperature
+			df[k_spot-1+j].weather_err = T_ext_blk(0);		// External Temperature
 			df[k_spot-1+j].power = PowerAHU(k_spot-1);
 			df[k_spot-1+j].r = r(k_spot-1);
 			df[k_spot-1+j].tmix = MixedAirTemperature(k_spot-1);
