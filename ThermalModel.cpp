@@ -311,76 +311,59 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 		}
 
 		/* Temperature Change in the Room Due to HVAC */
-		if (response == 299) {
-			SPOT_State.row(k_spot) = SPOT_State.row(k_spot - 1);	// Every time step of SPOT
-			r.row(k_spot) << r.row(k_spot-1);						// Every time step of SPOT
+		SPOT_State.row(k_spot_prev) = CV.SPOT_CurrentState;
+		r.row(k_spot_prev) << CV.r;
 
-			T.row(k_spot) = T.row(k_spot-1);						// Every time step of SPOT
+		// Impact of Weather
+		WI_CRT = TR2.row(k_spot-1) * CoWI_CRT_Matrix;
+		WI_OAT = T_ext_mpc.row(k-1) * CoWI_OAT_Matrix;
 
-			TR1.row(k_spot) = TR1.row(k_spot-1);					// Every time step of SPOT
-			TR2.row(k_spot) = TR2.row(k_spot-1);					// Every time step of SPOT
+		// Impact of HVAC
+		HI_CRT = TR2.row(k_spot-1) * CV.SAV_Matrix * CoHI_CRT_Matrix;
+		HI_SAT = CV.SAT * CV.SAV_Matrix * CoHI_SAT_Matrix;
 
-			DeltaTR1.row(k_spot) = DeltaTR1.row(k_spot-1);		// Every time step of SPOT
-			DeltaTR2.row(k_spot) = DeltaTR2.row(k_spot-1);		// Every time step of SPOT
+		// Impact of Equipments
+		EI_OLEL = O_mpc.row(k-1) * CoEI_OLEL_Matrix;
 
-			PPV.row(k_spot) = PPV.row(k_spot-1);					// Every time step of SPOT
-			MixedAirTemperature.row(k_spot) = MixedAirTemperature.row(k_spot-1); // Every time step of SPOT
-			PowerAHU.row(k_spot) = PowerAHU.row(k_spot-1);		// Every time step of SPOT
-		}
-		else {
+		T.row(k_spot) = WI_CRT + WI_OAT + HI_CRT + HI_SAT + EI_OLEL;
 
-			SPOT_State.row(k_spot_prev) = CV.SPOT_CurrentState;
-			r.row(k_spot_prev) << CV.r;
+		exit(1);
 
-			// Impact of Weather
-			WI_CRT = TR2.row(k_spot-1) * CoWI_CRT_Matrix;
-			WI_OAT = T_ext_mpc.row(k-1) * CoWI_OAT_Matrix;
+		/* Temperature Change in SPOT Region*/
 
-			// Impact of HVAC
-			HI_CRT = TR2.row(k_spot-1) * CV.SAV_Matrix * CoHI_CRT_Matrix;
-			HI_SAT = CV.SAT * CV.SAV_Matrix * CoHI_SAT_Matrix;
+		// Impact of Region Coupling
+		RC_CiRT = DeltaTR1.row(k_spot-1) * CoRC_CiRT_Matrix;
 
-			// Impact of Equipments
-			EI_OLEL = O_mpc.row(k-1) * CoEI_OLEL_Matrix;
+		// Impact of SPOT
+		SI_SCS = SPOT_State.row(k_spot_prev) * CoSI_SCS_Matrix; // CV.SPOT_CurrentState * CoSI_SCS_Matrix;
 
-			T.row(k_spot) = WI_CRT + WI_OAT + HI_CRT + HI_SAT + EI_OLEL;
+		// Impact of Occupants
+		OI_OHL = O_mpc.row(k-1) * CoOI_OHL_Matrix;
 
-			/* Temperature Change in SPOT Region*/
+		DeltaTR1.row(k_spot) = RC_CiRT + SI_SCS + OI_OHL;
+		TR1.row(k_spot) = T.row(k_spot) + DeltaTR1.row(k_spot);
 
-			// Impact of Region Coupling
-			RC_CiRT = DeltaTR1.row(k_spot-1) * CoRC_CiRT_Matrix;
+		/* Temperature Change in Non-SPOT Region*/
 
-			// Impact of SPOT
-			SI_SCS = SPOT_State.row(k_spot_prev) * CoSI_SCS_Matrix; // CV.SPOT_CurrentState * CoSI_SCS_Matrix;
+		// Impact of Region Coupling
+		RC_CiR1T = DeltaTR1.row(k_spot-1) * CoRC_CiR1T_Matrix;
 
-			// Impact of Occupants
-			OI_OHL = O_mpc.row(k-1) * CoOI_OHL_Matrix;
+		DeltaTR2.row(k_spot) = RC_CiR1T;
+		TR2.row(k_spot) = T.row(k_spot) + DeltaTR2.row(k_spot);
 
-			DeltaTR1.row(k_spot) = RC_CiRT + SI_SCS + OI_OHL;
-			TR1.row(k_spot) = T.row(k_spot) + DeltaTR1.row(k_spot);
+		PPV.row(k_spot) = O_mpc.row(k-1).array() * ((ParamsIn.PMV_Params.P1 * TR1.row(k_spot))
+			- (ParamsIn.PMV_Params.P2 * MAT_FLOAT::Zero(1, total_rooms))
+			+ (ParamsIn.PMV_Params.P3 * MAT_FLOAT::Zero(1, total_rooms))
+			- (ParamsIn.PMV_Params.P4 * MAT_FLOAT::Ones(1, total_rooms))).array();
 
-			/* Temperature Change in Non-SPOT Region*/
+		MixedAirTemperature.row(k_spot_prev) << GetMixedAirTemperature(TR2.row(k_spot-1), T_ext_mpc.row(k-1), r.row(k_spot_prev).value());
+		PowerAHU.row(k_spot_prev) << GetAHUPower(MixedAirTemperature.row(k_spot_prev).value(),
+					CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Matrix, ParamsIn);
 
-			// Impact of Region Coupling
-			RC_CiR1T = DeltaTR1.row(k_spot-1) * CoRC_CiR1T_Matrix;
-
-			DeltaTR2.row(k_spot) = RC_CiR1T;
-			TR2.row(k_spot) = T.row(k_spot) + DeltaTR2.row(k_spot);
-
-			PPV.row(k_spot) = O_mpc.row(k-1).array() * ((ParamsIn.PMV_Params.P1 * TR1.row(k_spot))
-				- (ParamsIn.PMV_Params.P2 * MAT_FLOAT::Zero(1, total_rooms))
-				+ (ParamsIn.PMV_Params.P3 * MAT_FLOAT::Zero(1, total_rooms))
-				- (ParamsIn.PMV_Params.P4 * MAT_FLOAT::Ones(1, total_rooms))).array();
-
-			MixedAirTemperature.row(k_spot_prev) << GetMixedAirTemperature(TR2.row(k_spot-1), T_ext_blk.row(0), r.row(k_spot).value());
-			PowerAHU.row(k_spot_prev) << GetAHUPower(MixedAirTemperature.row(k_spot_prev).value(),
-						CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Matrix, ParamsIn);
-		}
-
-		std::cout << T_ext_spot(k_spot_prev) << " => " << T_ext_blk(0) << std::endl;
+		std::cout << T_ext_mpc(k-1) << " => " << T_ext_blk(0) << std::endl;
 
 		/* Update Output Frame */
-		df[k_spot_prev].weather_err = T_ext_blk(0);		// External Temperature
+		df[k_spot_prev].weather_err = T_ext_mpc(k-1);		// External Temperature
 		df[k_spot_prev].power = PowerAHU(k_spot_prev);
 		df[k_spot_prev].r = r(k_spot_prev);
 		df[k_spot_prev].tmix = MixedAirTemperature(k_spot_prev);
@@ -411,7 +394,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 
 		for(size_t j = 1; j < time_step_ratio; j = j + 1) {
 			/* Update Output Frame */
-			df[k_spot_prev+j].weather_err = T_ext_blk(0);		// External Temperature
+			df[k_spot_prev+j].weather_err = T_ext_mpc(k-1);		// External Temperature
 			df[k_spot_prev+j].power = PowerAHU(k_spot_prev);
 			df[k_spot_prev+j].r = r(k_spot_prev);
 			df[k_spot_prev+j].tmix = MixedAirTemperature(k_spot_prev);
