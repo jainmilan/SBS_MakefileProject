@@ -273,6 +273,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 			df[k_spot-1+j].spot_status[room] = SPOT_State(k_spot, room);
 		}
 	}
+
 	for(size_t k = 1; k <= (size_t) (n_mpc - step_size_mpc); k = k + 1) {
 		k_spot_prev = (k-1) * time_step_ratio;	// Converting MPC previous index to SPOT index
 		k_spot = k * time_step_ratio;		// Converting MPC current index to SPOT index
@@ -406,6 +407,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 		//std::cout << "T_ext: " << T_ext_blk.row(k) << "\n";
 
 		std::cout << "Power AHU: " << PowerAHU.row(k_spot-1) << "\n";
+		std::cout << "Current Value of K SPOT: " << k_spot << "\n";
 
 		for(size_t j = 1; j < time_step_ratio; j = j + 1) {
 			/* Update Output Frame */
