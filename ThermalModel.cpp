@@ -258,6 +258,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 	int k_spot_prev = k * time_step_ratio;	// Converting MPC previous index to SPOT index
 	int k_spot = k * time_step_ratio;		// Converting MPC current index to SPOT index
 
+	std::cout << TR2(k_spot) << "\n";
 	for(size_t j = 1; j < time_step_ratio; j = j + 1) {
 		/* Update Output Frame */
 		df[k_spot_prev+j].weather_err = T_ext_blk(k_spot_prev);		// External Temperature
@@ -275,8 +276,8 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 	}
 
 	for(size_t k = 1; k <= (size_t) (n_mpc - step_size_mpc); k = k + 1) {
-		k_spot_prev = (k-1) * time_step_ratio;	// Converting MPC previous index to SPOT index
 		k_spot = k * time_step_ratio;		// Converting MPC current index to SPOT index
+		k_spot_prev = (k-1) * time_step_ratio;	// Converting MPC previous index to SPOT index
 
 		start_time = df[k_spot_prev].t;	// Previous MPC Index
 
@@ -287,6 +288,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 		T_ext_blk = T_ext_mpc.block(k-1, 0, step_size_mpc, 1);		// Previous MPC Index
 		O_blk = O_mpc.block(k-1, 0, step_size_mpc, total_rooms);	// Every Time Step of MPC
 
+		std::cout << TR2(k_spot-1) << "\n";
 		switch (control_type) {
 		case 1:
 			CV = cb.DefaultControl(total_rooms, ParamsIn);
