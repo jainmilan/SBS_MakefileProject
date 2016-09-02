@@ -570,7 +570,7 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 		CV.SAV_Zones = Eigen::MatrixXf::Ones(ParamsIn.CommonBuilding.num_zones_, 1)
 				* (dfSAV.getRowByIndex(0)[1].dbl() / total_rooms);
 		CV.SAV_Matrix = GetSAVMatrix(CV.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
-		std::cout << "SAV Values Are: " << cv.SAV_Matrix << std::endl;
+		std::cout << "SAV Values Are: " << CV.SAV_Matrix << std::endl;
 
 		// Get final value of SPOT Status
 		ampl::Variable vSPOTStatus = ampl.getVariable("SPOT_Status");
