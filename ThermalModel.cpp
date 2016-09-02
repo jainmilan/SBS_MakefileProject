@@ -327,6 +327,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 
 		T.row(k_spot) = WI_CRT + WI_OAT + HI_CRT + HI_SAT + EI_OLEL;
 
+		std::cout << "1: " << WI_CRT << ", 2: " << WI_OAT << ", 3: " << HI_CRT << ", 4: " << HI_SAT << ", 5: " << EI_OLEL << "\n";
 		exit(1);
 
 		/* Temperature Change in SPOT Region*/
