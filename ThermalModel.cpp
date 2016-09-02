@@ -258,7 +258,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 	int k_spot_prev = k * time_step_ratio;	// Converting MPC previous index to SPOT index
 	int k_spot = k * time_step_ratio;		// Converting MPC current index to SPOT index
 
-	std::cout << TR2(k_spot) << "\n";
+	std::cout << TR2.row(k_spot) << "\n";
 	for(size_t j = 1; j < time_step_ratio; j = j + 1) {
 		/* Update Output Frame */
 		df[k_spot_prev+j].weather_err = T_ext_blk(k_spot_prev);		// External Temperature
@@ -272,6 +272,17 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 			df[k_spot+j].tspot[room] = TR1(k_spot, room);
 			df[k_spot+j].tnospot[room] = TR2(k_spot, room);
 			df[k_spot_prev+j].spot_status[room] = SPOT_State(k_spot_prev, room);
+		}
+
+		PowerAHU(k_spot_prev+j) = PowerAHU(k_spot_prev);
+		r(k_spot_prev+j) = r(k_spot_prev);
+		MixedAirTemperature(k_spot_prev+j) = MixedAirTemperature(k_spot_prev);
+
+		for (size_t room = 0; room < (size_t) total_rooms; room++) {
+			PPV(k_spot+j, room) = PPV(k_spot, room);
+			TR1(k_spot+j, room) = TR1(k_spot, room);
+			TR2(k_spot+j, room) = TR2(k_spot, room);
+			SPOT_State(k_spot_prev+j, room) = SPOT_State(k_spot_prev, room);
 		}
 	}
 
@@ -409,6 +420,17 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 				df[k_spot+j].tspot[room] = TR1(k_spot, room);
 				df[k_spot+j].tnospot[room] = TR2(k_spot, room);
 				df[k_spot_prev+j].spot_status[room] = SPOT_State(k_spot_prev, room);
+			}
+
+			PowerAHU(k_spot_prev+j) = PowerAHU(k_spot_prev);
+			r(k_spot_prev+j) = r(k_spot_prev);
+			MixedAirTemperature(k_spot_prev+j) = MixedAirTemperature(k_spot_prev);
+
+			for (size_t room = 0; room < (size_t) total_rooms; room++) {
+				PPV(k_spot+j, room) = PPV(k_spot, room);
+				TR1(k_spot+j, room) = TR1(k_spot, room);
+				TR2(k_spot+j, room) = TR2(k_spot, room);
+				SPOT_State(k_spot_prev+j, room) = SPOT_State(k_spot_prev, room);
 			}
 		}
 	}
