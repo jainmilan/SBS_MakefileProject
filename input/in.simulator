@@ -32,8 +32,8 @@ building:{
 		p4:5.4668						/* PMV Parameter - 4th Coefficient */
 	},
 	error:{
-		b_params:0.02,					/* Error in Building Parameters */
-		t_ext:0.02						/* Error in Weather Forecast */ 
+		b_params:0.0,					/* Error in Building Parameters */
+		t_ext:0.0						/* Error in Weather Forecast */ 
 	},
 	files:{
 		input_wthr:Tempwinter1,			/* Input Weather File Name */
