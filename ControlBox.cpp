@@ -122,7 +122,7 @@ struct ControlVariables ControlBox::ReactiveControl(const int& total_rooms, MAT_
 
 float ControlBox::MPCControl(const long int& tinstances, const int& time_step, MAT_FLOAT T_Outside,
 		MAT_FLOAT Occupancy, MAT_FLOAT TNoSPOTInit,	MAT_FLOAT DeltaTSPOTInit, const PARAMS& ParamsIn, const int& horizon,
-		const int& Time_IH,	ControlVariables& CV, int current_index) {
+		const int& Time_IH,	ControlVariables& CV) {
 
 	// Initialize AMPL and Control Variables
 	ampl::AMPL ampl;

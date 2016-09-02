@@ -304,7 +304,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 			//std::cout << T_ext_eblk << std::endl;
 
 			response = cb.MPCControl(step_size_mpc, time_step_mpc, T_ext_eblk, O_blk, TR2.row(k_spot - 1),
-					DeltaTR1.row(k_spot - 1), ParamsErr, horizon, Time_IH, CV, k-1); // Every time step of SPOT except last argument
+					DeltaTR1.row(k_spot - 1), ParamsErr, horizon, Time_IH, CV); // Every time step of SPOT except last argument
 			break;
 		default:
 			break;
