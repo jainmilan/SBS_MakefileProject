@@ -214,7 +214,7 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 		double pSATPrevv = (double) CV.SAT_Value;
 		double pSATPrevA[] = { pSATPrevv };
 		pSATPrev.setValues(pSATPrevA, 1);
-		// std::cout << "SAT_Prev: " << pSATPrevv << "\n";
+		std::cout << "SAT_Prev: " << pSATPrevv << "\n";
 
 		// Initialize Parameters -Parameters for Objective Function
 		ampl::Parameter pCoHP = ampl.getParameter("Coefficient_Heating_Power");
@@ -555,6 +555,7 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 
 		CV.SAT_Value = dfSAT.getRowByIndex(0)[1].dbl();
 		CV.SAT = Eigen::MatrixXf::Ones(1, total_rooms) * CV.SAT_Value;
+		std::cout << CV.SAT_Value << std::endl;
 
 		// Get final value of Ratio
 		ampl::Variable vR = ampl.getVariable("Ratio");
@@ -566,12 +567,12 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 		// Get final value of Supply Air Volume (SAV)
 		ampl::Variable vSAV = ampl.getVariable("SAV");
 		ampl::DataFrame dfSAV = vSAV.getValues();
-		std::cout << dfSAV.toString() << std::endl;
+		// std::cout << dfSAV.toString() << std::endl;
 
 		CV.SAV_Zones = Eigen::MatrixXf::Ones(ParamsIn.CommonBuilding.num_zones_, 1)
 				* (dfSAV.getRowByIndex(0)[1].dbl() / total_rooms);
 		CV.SAV_Matrix = GetSAVMatrix(CV.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
-		// std::cout << "SAV Values Are: " << CV.SAV_Matrix << std::endl;
+		std::cout << "SAV Values Are: " << CV.SAV_Matrix << std::endl;
 
 		// Get final value of SPOT Status
 		ampl::Variable vSPOTStatus = ampl.getVariable("SPOT_Status");
