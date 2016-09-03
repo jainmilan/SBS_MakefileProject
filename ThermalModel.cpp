@@ -224,7 +224,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 	MAT_FLOAT T_ext_blk = MAT_FLOAT::Ones(step_size_mpc, 1);
 	MAT_FLOAT T_ext_eblk = MAT_FLOAT::Ones(step_size_mpc, 1);
 
-	MAT_FLOAT O_blk = MAT_FLOAT::Ones(step_size_mpc, 1);
+	MAT_FLOAT O_blk = MAT_FLOAT::Ones(step_size_mpc, total_rooms);
 
 	time_t start_time = df[k].t;
 	struct tm *date = gmtime(&start_time);
