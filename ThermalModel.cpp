@@ -375,7 +375,7 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 		PowerAHU.row(k_spot_prev) << GetAHUPower(MixedAirTemperature.row(k_spot_prev).value(),
 					CV.SPOT_CurrentState, CV.SAT_Value, CV.SAV_Matrix, ParamsIn);
 
-		std::cout << T_ext_mpc(k-1) << " => " << T_ext_blk(0) << std::endl;
+		std::cout << T_ext_mpc(k-1) << " => " << df[k_spot_prev].weather << std::endl;
 
 		/* Update Output Frame */
 		df[k_spot_prev].weather_err = T_ext_mpc(k-1);		// External Temperature
