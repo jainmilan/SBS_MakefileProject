@@ -521,7 +521,7 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 
 			// Resolve and display objective
 			ampl.eval("option presolve_eps 1e-06;");
-			ampl.eval("option solver snopt;");
+			ampl.eval("option solver minos;");
 			ampl.solve();
 			ampl::Objective totalcost = ampl.getObjective("total_power");
 
