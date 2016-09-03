@@ -555,7 +555,7 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 
 		CV.SAT_Value = dfSAT.getRowByIndex(0)[1].dbl();
 		CV.SAT = Eigen::MatrixXf::Ones(1, total_rooms) * CV.SAT_Value;
-		std::cout << CV.SAT_Value << std::endl;
+		// std::cout << CV.SAT_Value << std::endl;
 
 		// Get final value of Ratio
 		ampl::Variable vR = ampl.getVariable("Ratio");
@@ -572,7 +572,7 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 		CV.SAV_Zones = Eigen::MatrixXf::Ones(ParamsIn.CommonBuilding.num_zones_, 1)
 				* (dfSAV.getRowByIndex(0)[1].dbl() / total_rooms);
 		CV.SAV_Matrix = GetSAVMatrix(CV.SAV_Zones, ParamsIn.CommonBuilding.num_rooms_, total_rooms);
-		std::cout << "SAV Values Are: " << CV.SAV_Matrix << std::endl;
+		// std::cout << "SAV Values Are: " << CV.SAV_Matrix << std::endl;
 
 		// Get final value of SPOT Status
 		ampl::Variable vSPOTStatus = ampl.getVariable("SPOT_Status");
@@ -587,11 +587,11 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 		}
 		// std::cout << "SPOT Status: " << CV.SPOT_CurrentState << std::endl;
 
-		// Get final value of SPOT Status
-		ampl::Variable vT_NoSPOT = ampl.getVariable("T_NoSPOT");
+		// Get final value of Temperature in No SPOT region
+		/* ampl::Variable vT_NoSPOT = ampl.getVariable("T_NoSPOT");
 		ampl::DataFrame dfT_NoSPOT = vT_NoSPOT.getValues();
 
-		std::cout << dfT_NoSPOT.toString() << "\n";
+		std::cout << dfT_NoSPOT.toString() << "\n";*/
 
 	} catch (const std::exception &exc) {
 		std::cerr << "Solver Not Working!!";
