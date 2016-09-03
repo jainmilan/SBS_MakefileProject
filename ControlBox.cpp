@@ -587,6 +587,12 @@ float ControlBox::MPCControl(const long int& tinstances, const int& time_step, M
 		}
 		// std::cout << "SPOT Status: " << CV.SPOT_CurrentState << std::endl;
 
+		// Get final value of SPOT Status
+		ampl::Variable vT_NoSPOT = ampl.getVariable("T_NoSPOT");
+		ampl::DataFrame dfT_NoSPOT = vT_NoSPOT.getValues();
+
+		std::cout << dfT_NoSPOT.toString() << "\n";
+
 	} catch (const std::exception &exc) {
 		std::cerr << "Solver Not Working!!";
 		std::cerr << exc.what();
