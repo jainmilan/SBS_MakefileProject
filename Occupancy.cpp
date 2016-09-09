@@ -149,6 +149,3 @@ MAT_FLOAT Occupants::GetOccupancyMatrix(DF_INT2& df, time_t &start_t, const long
 	}
 	return occupancy;	// Return Matrix
 }
-
-
-

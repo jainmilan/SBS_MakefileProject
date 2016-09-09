@@ -299,7 +299,6 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 		T_ext_blk = T_ext_mpc.block(k-1, 0, step_size_mpc, 1);		// Previous MPC Index
 		O_blk = O_mpc.block(k-1, 0, step_size_mpc, total_rooms);	// Every Time Step of MPC
 
-		std::cout << TR2(k_spot-1) << "\n";
 		switch (control_type) {
 		case 1:
 			CV = cb.DefaultControl(total_rooms, ParamsIn);

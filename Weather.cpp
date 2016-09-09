@@ -160,7 +160,6 @@ MAT_FLOAT Weather::GetWeatherMatrix(DF_FLOAT& df, time_t &start_t, const long in
 
 	// Assign value from the data frame to the Matrix
 	for (size_t i = 0; i < (size_t) n; i++) {
-		std::cout << df[t_counter] << "\n";
 		for (size_t j = 0; j < (size_t) total_rooms; j++) {
 			ext_temperature(i, j) = df[t_counter];
 		}
