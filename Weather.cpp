@@ -151,7 +151,7 @@ void Weather::ParseWeatherData(DF_FLOAT& theData, const std::string& filename,
  * 2. n - Total duration of simulation
  * 3. total_rooms - Total number of rooms in the building
  */
-MAT_FLOAT Weather::GetWeatherMatrix(DF_OUTPUT df[], const long int& n,
+MAT_FLOAT Weather::GetWeatherMatrix(DF_FLOAT& df, const long int& n,
 		const int& total_rooms) {
 
 	// Create Matrix Object
@@ -160,7 +160,7 @@ MAT_FLOAT Weather::GetWeatherMatrix(DF_OUTPUT df[], const long int& n,
 	// Assign value from the data frame to the Matrix
 	for (size_t i = 0; i < (size_t) n; i++) {
 		for (size_t j = 0; j < (size_t) total_rooms; j++) {
-			ext_temperature(i, j) = df[i].weather;
+			ext_temperature(i, j) = df[i];
 		}
 	}
 	return ext_temperature;	// Return Matrix
