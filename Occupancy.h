@@ -23,7 +23,7 @@ namespace SimpleBuildingSimulator {
 		void ParseOccupancyData(DF_INT2& theData, const int& total_rooms, const std::string& filename, time_t &start_t, time_t &end_t,
 						const int& time_step, const int& skip_lines);
 		/* Convert Dataframe to Matrix for Computation */
-		MAT_FLOAT GetOccupancyMatrix(DF_INT2& df, const long int& n, const int& total_rooms);
+		MAT_FLOAT GetOccupancyMatrix(DF_INT2& df, time_t &start_t, const long int& n, const int& time_step, const int& total_rooms);
 	private:
 
 	};

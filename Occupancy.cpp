@@ -133,16 +133,19 @@ void Occupants::ParseOccupancyData(DF_INT2& theData, const int& total_rooms, con
  * 2. n - Total duration of simulation
  * 3. total_rooms - Total number of rooms in the building
  */
-MAT_FLOAT Occupants::GetOccupancyMatrix(DF_INT2& df, const long int& n, const int& total_rooms) {
+MAT_FLOAT Occupants::GetOccupancyMatrix(DF_INT2& df, time_t &start_t, const long int& n, const int& time_step, const int& total_rooms) {
 
 	// Create Matrix Object
 	MAT_FLOAT occupancy = MAT_FLOAT::Ones(n, total_rooms);
 
+	time_t t_counter = start_t;
+
 	// Assign value from the data frame to the Matrix
 	for (size_t i = 0; i < (size_t) n; i++) {
 		for (size_t j = 0; j < (size_t) total_rooms; j++) {
-			occupancy(i, j) = df[i][j];
+			occupancy(i, j) = df[t_counter][j];
 		}
+		t_counter = t_counter + time_step;
 	}
 	return occupancy;	// Return Matrix
 }

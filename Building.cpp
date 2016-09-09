@@ -166,11 +166,11 @@ void Building::Simulate(time_t &start_t, time_t &stop_t, const int& time_step_mp
 	mf.close();
 
 	// Convert DataFrame format to Matrix format for computations
-	MAT_FLOAT T_ext_mpc = weather.GetWeatherMatrix(df_weather_mpc, n_mpc, total_rooms);
-	MAT_FLOAT T_ext_spot = weather.GetWeatherMatrix(df_weather_spot, n_spot, total_rooms);
+	MAT_FLOAT T_ext_mpc = weather.GetWeatherMatrix(df_weather_mpc, start_t, n_mpc, time_step_mpc, total_rooms);
+	MAT_FLOAT T_ext_spot = weather.GetWeatherMatrix(df_weather_spot, start_t, n_spot, time_step_spot, total_rooms);
 
-	MAT_FLOAT O_mpc = occupancy.GetOccupancyMatrix(df_occupancy_mpc, n_mpc, total_rooms).cast<float>();
-	MAT_FLOAT O_spot = occupancy.GetOccupancyMatrix(df_occupancy_spot, n_spot, total_rooms).cast<float>();
+	MAT_FLOAT O_mpc = occupancy.GetOccupancyMatrix(df_occupancy_mpc, start_t, n_mpc, time_step_mpc, total_rooms).cast<float>();
+	MAT_FLOAT O_spot = occupancy.GetOccupancyMatrix(df_occupancy_spot, start_t, n_spot, time_step_spot, total_rooms).cast<float>();
 
 	// Simulate as per Thermal Model
 	ModelRachel MPCModel;
