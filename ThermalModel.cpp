@@ -407,6 +407,8 @@ void ModelRachel::SimulateModel(DF_OUTPUT df[], MAT_FLOAT T_ext_mpc, MAT_FLOAT T
 		std::cout << "Current Value of K SPOT: " << k_spot << "\n";
 
 		for(size_t j = 1; j < time_step_ratio; j = j + 1) {
+			CV = cb.ReactiveControl(total_rooms, TR1.row(k-1), O_mpc.row(k-1), k-1, SPOT_State.row(k-1), ParamsIn);
+
 			/* Update Output Frame */
 			df[k_spot_prev+j].weather_err = T_ext_mpc(k-1);		// External Temperature
 			df[k_spot_prev+j].power = PowerAHU(k_spot_prev);
